@@ -186,3 +186,43 @@ footer nav ul {
 	margin: 2em
 }
 
+/*Filtres*/
+
+.filtres {display: flex;
+	align-items: center;
+justify-content: center;}
+
+.filtre{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: #1D6154;
+	background-color: white;
+	margin : 2em auto ;
+	text-align: center;
+	border-color:#1D6154;
+	border-radius: 60px ;
+}
+.filtre:active{
+	background-color: #1D6154;
+	color: white;
+
+}
+.filtre:hover{
+	background-color: #1D6154;
+	color: white;
+
+}
+
+/*Modale*/
+
+.modal {display: flex;
+	align-items: center;
+justify-content: center;
+position:sticky;
+height:400px;
+width:300px;
+color:red;
+background-color: pink;
+border-radius:20px;
+font-size:50px;}
+

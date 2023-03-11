@@ -1,10 +1,10 @@
-const myImage = document.querySelector('img');
+fetch
 
-fetch('flowers.jpg')
-.then(function(response) {
-  return response.blob();
-})
-.then(function(myBlob) {
-  const objectURL = URL.createObjectURL(myBlob);
-  myImage.src = objectURL;
-});
+/*pour récupérer les données*/
+
+getAll 
+/*pour récupérer les projets avec le id*/
+
+getCategorie
+/*pour récupérer les projets avec les id*/
+

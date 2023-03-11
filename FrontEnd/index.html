@@ -16,8 +16,8 @@
 	<nav>
 		<ul>
 			<li>Projets</li>
-			<li>contact</li>
-			<li>login</li>
+			<li>Contact</li>
+			<li><a href="login.html">Login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -34,9 +34,23 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+
+
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
+		<div class="filtres">
+			<input class = "filtre" type="button" value="Tous">
+			<input class = "filtre" type="button" value="Objets">
+			<input class = "filtre" type="button" value="Appartements">
+			<input class = "filtre" type="button" value="Hôtels & restaurants">
+
+			
+		</div>
+
 		<div class="gallery">
+
+			
+
 			<figure>
 				<img id ="1" alt="Abajour Tahina">
 				<!-- <img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">-->
@@ -108,6 +122,11 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+
+	<aside class = "modal">
+		<div>Modale</div>
+	</aside>
+
 </main>
 
 <footer>
@@ -118,6 +137,7 @@
 	</nav>
 </footer>
 <script src="index.js"></script>
+<script src="modal.js"></script>
 
 </body>
 </html>
