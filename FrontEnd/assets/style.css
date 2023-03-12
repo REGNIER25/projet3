@@ -186,6 +186,13 @@ footer nav ul {
 	margin: 2em
 }
 
+/*Projets*/
+
+.projets {display: flex;
+	align-items: center;
+justify-content: center;
+flex-direction: row;}
+
 /*Filtres*/
 
 .filtres {display: flex;
@@ -213,16 +220,43 @@ justify-content: center;}
 
 }
 
+/*Bandeau*/
+
+.bandeau {background-color: black;
+	color:white;
+height: 30px;
+}
+
+.inputbandeau{
+color:black;
+background-color: white;
+border-radius:20px;}
+
+
+
 /*Modale*/
 
-.modal {display: flex;
+.modal {box-sizing: border-box;
+	z-index: 1;
+	position:fixed;
+display: flex;
 	align-items: center;
 justify-content: center;
-position:sticky;
-height:400px;
-width:300px;
-color:red;
-background-color: pink;
+top:0;
+left:0;
+right:0;
+bottom:0;
+width:50%;
+height:50%;
+background: white;
 border-radius:20px;
-font-size:50px;}
+font-size:50px;
+border:5px solid red}
+
+.modal-wrapper{
+width:500px;
+max-width: calc(100vb - 20px);
+max-height: calc(100vb - 20px);
+padding:20px;
+}
 

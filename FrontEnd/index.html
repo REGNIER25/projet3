@@ -8,9 +8,11 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<script src="https://kit.fontawesome.com/f2f15ec12b.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
+	<aside class="bandeau"><i class="fa-regular fa-pen-to-square"></i>Mode édition<input class = inputbandeau type="button" value="Publier les changements"></aside>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
@@ -37,7 +39,7 @@
 
 
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="projets"><h2>Mes Projets</h2><div><i class="fa-regular fa-pen-to-square"></i>Modifier</div></div>
 		<div class="filtres">
 			<input class = "filtre" type="button" value="Tous">
 			<input class = "filtre" type="button" value="Objets">
@@ -123,11 +125,14 @@
 		</form>
 	</section>
 
-	<aside class = "modal">
-		<div>Modale</div>
-	</aside>
+	
 
 </main>
+
+<aside class = "modal">
+	<div class ="modal-wrapper">Galerie photo</div>
+	<i class="fa-solid fa-arrows-up-down-left-right"></i><i class="fa-regular fa-trash-can"></i>
+</aside>
 
 <footer>
 	<nav>
