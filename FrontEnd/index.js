@@ -1,46 +1,38 @@
-/*Etape 1 : Récupérer dynamiquement les données des travaux via l'Api ;
-Document Swagger/Readme avec les différentes routes*/
+const gallery = document.getElementById("gallery");
 
-GET/works
-[
-  {
-    "id": 1,
-    "title": "Abajour Tahina",
-    "imageUrl": "http://localhost:5678/images/abajour-tahina1651286843956.png",
-    "categoryId": 1,
-    "userId": 1,
-    "category": {"id": 1, "name": "Objets"}
-  }
-]
-
-
-fetch /*et*/ URL
-
-/*liaison avec BDD pour récupérer les données*/
-
-/*Constructeur*/
-
-constructor
-
-
-getAll 
-/*pour récupérer les projets avec le id*/
-
-getElementbyid
-
-/*Etape 2 : Ajouter le tri des projets par catégorie dans la galerie*/
-
-GET/categories
-
-[
-    {
-      "id": 1,
-      "name": "Objets"
+fetch("http://localhost:5678/api/works")
+  .then(function(response) {
+    if (response.ok) {
+      return response.json();
     }
-  ]
+  })
 
-/*pour récupérer les projets avec les id*/
+  .then(function(works) {
+    console.log(works);
+    for(let work of works) {
+      console.log (work.title);
+      let figure = document.createElement("figure");
+      gallery.appendChild(figure);
 
-/*pour trier*/
-Sort()
+      let img = document.createElement("img");
+      figure.appendChild(img);
+      img.setAttribute("src", work.imageUrl);
+      img.setAttribute("alt", work.title);
+
+      let figcaption = document.createElement("figcaption");
+      figure.appendChild(figcaption); 
+
+      //elem.appendChild(document.createTextNode("Texte"));// 
+     // set.figcaption.add //
+      // figcaption.setAttribute (figcaption, work.title);*
+      /*figcaption.innerHTML = `${work.title.first} ${work.title.last}`*/ 
+    }
+  })
+   
+  .catch(function(error) {
+    console.log(error);
+  });
+
+
+
 
