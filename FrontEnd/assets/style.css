@@ -204,21 +204,16 @@ justify-content: center;}
 	font-weight: 700;
 	color: #1D6154;
 	background-color: white;
-	margin : 2em auto ;
+	margin : 30px 5px;
 	text-align: center;
 	border-color:#1D6154;
 	border-radius: 60px ;
+	padding: 5px 10px;	
 }
 
-.filtre:active{
+.filtre:focus{
 	background-color: #1D6154;
 	color: white;
-
-}
-.filtre:hover{
-	background-color: #1D6154;
-	color: white;
-
 }
 
 /*Bandeau*/
