@@ -1,5 +1,8 @@
-//déclaration constante
+//déclaration constante pour la gallerie des travaux
 const gallery = document.getElementById("gallery");
+
+// déclaration constante pour les filtres (div)
+const filtres = document.getElementById("filtres");
 
 
 //méthode pour récupérer les données avec liaison avec le backend
@@ -36,6 +39,8 @@ fetch("http://localhost:5678/api/works")
 
       gallery.appendChild(figure);
 
+     
+
 
     }
   })
@@ -45,8 +50,7 @@ fetch("http://localhost:5678/api/works")
     (error);
   });
 
-// déclaration constante pour les filtres (div)
-const filtres = document.getElementById("filtres");
+
 
 
 //méthode pour récupérer les catégories
@@ -59,20 +63,24 @@ fetch("http://localhost:5678/api/categories")
   .then(function (categories) {
     for (let category of categories) {
 
-      //création premier bouton qui a toutes les catégories par défaut
+       //création premier bouton qui a toutes les catégories par défaut
 
-      let button1 = document.createElement("button");
+       let button1 = document.createElement("button");
 
-      button1.setAttribute("class", "filtre");
-      button1.setAttribute("type", "button");
-      button1.setAttribute("name", "Tous");
-      button1.setAttribute("value", "Tous");
-
-      //affichage dans le HTML
-
-      button1.innerHTML = "Tous";
-      filtres.appendChild(button1);
-
+       button1.setAttribute("class", "filtre");
+       button1.setAttribute("type", "button");
+       button1.setAttribute("name", "Tous");
+       button1.setAttribute("value", "Tous");
+ 
+       //affichage dans le HTML
+ 
+       button1.innerHTML = "Tous";
+ 
+       filtres.appendChild(button1);
+       button1.addEventListener('click', event => {
+         gallery.innerHTML = works;
+       });
+      
       //création boutons
       let button2 = document.createElement("button");
 
@@ -85,26 +93,28 @@ fetch("http://localhost:5678/api/categories")
       button2.setAttribute("value", category.name);
 
       //récupération nom catégorie sur les boutons
-      console.log(button2.innerHTML = category.name);
+      button2.innerHTML = category.name;
 
 
       //boutons rattachés à la div filtres
     
-
+      
       filtres.appendChild(button2);
 
-      
-//Event pour récupérer chaque catégorie
-      const click = document.querySelector('button');
-click.addEventListener('click', event => {
-  click.innerHTML = gallery.innerHTML = category.work;
+      // Event pour récupérer chaque catégorie
+button2.addEventListener('click', event => {
+  gallery.innerHTML = works;
 });
 
 
-    }
-  })
+}
+
+
+
+})
+
   //si erreur
-  .catch(function (error) {(error);});//
+  .catch(function (error) {(error);});
 
 
 
