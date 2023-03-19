@@ -5,6 +5,10 @@ const gallery = document.getElementById("gallery");
 const filtres = document.getElementById("filtres");
 
 
+
+
+
+
 //méthode pour récupérer les données avec liaison avec le backend
 fetch("http://localhost:5678/api/works")
 
@@ -39,6 +43,8 @@ fetch("http://localhost:5678/api/works")
 
       gallery.appendChild(figure);
 
+
+
      
 
 
@@ -49,6 +55,28 @@ fetch("http://localhost:5678/api/works")
   .catch(function (error) {
     (error);
   });
+
+        //création premier bouton qui a toutes les catégories par défaut
+
+
+  let button1 = document.createElement("button");
+
+
+button1.setAttribute("class", "filtre");
+button1.setAttribute("type", "button");
+button1.setAttribute("name", "Tous");
+button1.setAttribute("value", "Tous");
+
+//affichage dans le HTML
+
+button1.innerHTML = "Tous";
+
+filtres.appendChild(button1);
+
+//comportement par défaut
+button1.addEventListener('click', event => {
+  gallery.innerHTML = location.reload();
+});
 
 
 
@@ -63,26 +91,12 @@ fetch("http://localhost:5678/api/categories")
   .then(function (categories) {
     for (let category of categories) {
 
-       //création premier bouton qui a toutes les catégories par défaut
+       
+//création boutons
 
-       let button1 = document.createElement("button");
-
-       button1.setAttribute("class", "filtre");
-       button1.setAttribute("type", "button");
-       button1.setAttribute("name", "Tous");
-       button1.setAttribute("value", "Tous");
- 
-       //affichage dans le HTML
- 
-       button1.innerHTML = "Tous";
- 
-       filtres.appendChild(button1);
-       button1.addEventListener('click', event => {
-         gallery.innerHTML = works;
-       });
+let button2 = document.createElement("button");
       
-      //création boutons
-      let button2 = document.createElement("button");
+      
 
       //création attributs bouton
 
@@ -101,13 +115,20 @@ fetch("http://localhost:5678/api/categories")
       
       filtres.appendChild(button2);
 
-      // Event pour récupérer chaque catégorie
-button2.addEventListener('click', event => {
-  gallery.innerHTML = works;
-});
 
+      
+
+      //Event pour récupérer les travaux de chaque catégorie
+button2.addEventListener('click', event => {fetch("http://localhost:5678/api/works")
+  gallery.innerHTML = category.name;
+  });
+
+
+      
 
 }
+
+
 
 
 
