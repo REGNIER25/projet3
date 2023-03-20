@@ -4,8 +4,7 @@ const gallery = document.getElementById("gallery");
 // déclaration constante pour les filtres (div)
 const filtres = document.getElementById("filtres");
 
-
-
+let button2 = document.createElement("button");
 
 
 
@@ -83,6 +82,7 @@ button1.addEventListener('click', event => {
 
 //méthode pour récupérer les catégories
 fetch("http://localhost:5678/api/categories")
+
   .then(function (response) {
     if (response.ok) { return response.json(); }
   })
@@ -96,8 +96,7 @@ fetch("http://localhost:5678/api/categories")
 
 let button2 = document.createElement("button");
       
-      
-
+  
       //création attributs bouton
 
       button2.setAttribute("class", "filtre");
@@ -115,27 +114,47 @@ let button2 = document.createElement("button");
       
       filtres.appendChild(button2);
 
-
-      
-
-      //Event pour récupérer les travaux de chaque catégorie
-button2.addEventListener('click', event => {fetch("http://localhost:5678/api/works")
-  gallery.innerHTML = category.name;
-  });
-
-
-      
+    
 
 }
-
-
-
 
 
 })
 
   //si erreur
   .catch(function (error) {(error);});
+
+
+
+//méthode pour récupérer les données avec liaison avec le backend
+fetch("http://localhost:5678/api/works","http://localhost:5678/api/categories")
+
+  //réponse du back-end (promise)
+  .then(function (response) {
+    if (response.ok) {
+      return response.json();
+    }
+  })
+
+  //traitement (promise)
+  //.then(function (filter) {
+
+
+    //for (let work of works) {
+      
+//resultat par rapport à la catégorie
+
+button2.addEventListener('click', event => {
+  gallery.innerHTML = 'STRING';
+  });
+    //}
+  //})
+
+  //si erreur
+  //.catch(function (error) {
+    //(error);
+  //});
+
 
 
 
