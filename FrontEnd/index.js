@@ -4,8 +4,6 @@ const gallery = document.getElementById("gallery");
 // déclaration constante pour les filtres (div)
 const filtres = document.getElementById("filtres");
 
-let button2 = document.createElement("button");
-
 
 
 //méthode pour récupérer les données avec liaison avec le backend
@@ -20,11 +18,12 @@ fetch("http://localhost:5678/api/works")
 
   //traitement (promise)
   .then(function (works) {
-
+    console.log(works)
     //création variable pour un projet avec la boucle for ... of ...
     for (let work of works) {
       let figure = document.createElement("figure");
 
+      figure.setAttribute("data-categoryid", work.categoryId)
       //création de la balise img
       let img = document.createElement("img");
 
@@ -43,10 +42,6 @@ fetch("http://localhost:5678/api/works")
       gallery.appendChild(figure);
 
 
-
-     
-
-
     }
   })
 
@@ -55,11 +50,9 @@ fetch("http://localhost:5678/api/works")
     (error);
   });
 
-        //création premier bouton qui a toutes les catégories par défaut
 
-
-  let button1 = document.createElement("button");
-
+//création premier bouton qui a toutes les catégories par défaut
+let button1 = document.createElement("button");
 
 button1.setAttribute("class", "filtre");
 button1.setAttribute("type", "button");
@@ -67,9 +60,7 @@ button1.setAttribute("name", "Tous");
 button1.setAttribute("value", "Tous");
 
 //affichage dans le HTML
-
 button1.innerHTML = "Tous";
-
 filtres.appendChild(button1);
 
 //comportement par défaut
@@ -77,8 +68,7 @@ button1.addEventListener('click', event => {
   gallery.innerHTML = location.reload();
 });
 
-
-
+let button2 = document.createElement("button");
 
 //méthode pour récupérer les catégories
 fetch("http://localhost:5678/api/categories")
@@ -91,14 +81,10 @@ fetch("http://localhost:5678/api/categories")
   .then(function (categories) {
     for (let category of categories) {
 
-       
-//création boutons
+      //création boutons
+      let button2 = document.createElement("button");
 
-let button2 = document.createElement("button");
-      
-  
       //création attributs bouton
-
       button2.setAttribute("class", "filtre");
       button2.setAttribute("type", "button");
       button2.setAttribute("id", category.id);
@@ -108,52 +94,37 @@ let button2 = document.createElement("button");
       //récupération nom catégorie sur les boutons
       button2.innerHTML = category.name;
 
-
       //boutons rattachés à la div filtres
-    
-      
       filtres.appendChild(button2);
 
-    
+      button2.addEventListener('click', event => {
+        filtering(category.id)
+      });
+    }
+  })
+  //si erreur
+  .catch(function (error) { (error); });
+
+
+
+
+function filtering(categoryID) {
+  let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
+
+  for (let figureToShow of figuresToShow) {
+
+    figureToShow.style.display = "block";
+
+  }
+  let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
+  for (let figure of figures) {
+
+    figure.style.display = "none";
+
+  }
 
 }
 
-
-})
-
-  //si erreur
-  .catch(function (error) {(error);});
-
-
-
-//méthode pour récupérer les données avec liaison avec le backend
-fetch("http://localhost:5678/api/works","http://localhost:5678/api/categories")
-
-  //réponse du back-end (promise)
-  .then(function (response) {
-    if (response.ok) {
-      return response.json();
-    }
-  })
-
-  //traitement (promise)
-  //.then(function (filter) {
-
-
-    //for (let work of works) {
-      
-//resultat par rapport à la catégorie
-
-button2.addEventListener('click', event => {
-  gallery.innerHTML = 'STRING';
-  });
-    //}
-  //})
-
-  //si erreur
-  //.catch(function (error) {
-    //(error);
-  //});
 
 
 
