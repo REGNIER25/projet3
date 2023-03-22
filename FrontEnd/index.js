@@ -6,7 +6,7 @@ const filtres = document.getElementById("filtres");
 
 
 
-//méthode pour récupérer les données avec liaison avec le backend
+//méthode pour récupérer les travaux (données) avec liaison avec le backend
 fetch("http://localhost:5678/api/works")
 
   //réponse du back-end (promise)
@@ -18,12 +18,15 @@ fetch("http://localhost:5678/api/works")
 
   //traitement (promise)
   .then(function (works) {
-    console.log(works)
+    (works)
+
     //création variable pour un projet avec la boucle for ... of ...
     for (let work of works) {
       let figure = document.createElement("figure");
 
+      // Rajout attribut data- pour avoir un sélecteur permettant de filtrer les travaux
       figure.setAttribute("data-categoryid", work.categoryId)
+
       //création de la balise img
       let img = document.createElement("img");
 
@@ -52,25 +55,23 @@ fetch("http://localhost:5678/api/works")
 
 
 //création premier bouton qui a toutes les catégories par défaut
-let button1 = document.createElement("button");
+let buttonAll = document.createElement("button");
 
-button1.setAttribute("class", "filtre");
-button1.setAttribute("type", "button");
-button1.setAttribute("name", "Tous");
-button1.setAttribute("value", "Tous");
+buttonAll.setAttribute("class", "filtre");
+buttonAll.setAttribute("type", "button");
+buttonAll.setAttribute("name", "Tous");
+buttonAll.setAttribute("value", "Tous");
 
 //affichage dans le HTML
-button1.innerHTML = "Tous";
-filtres.appendChild(button1);
+buttonAll.innerHTML = "Tous";
+filtres.appendChild(buttonAll);
 
 //comportement par défaut
-button1.addEventListener('click', event => {
+buttonAll.addEventListener('click', event => {
   gallery.innerHTML = location.reload();
 });
 
-let button2 = document.createElement("button");
-
-//méthode pour récupérer les catégories
+//Méthode pour récupérer les catégories (données) avec liaison avec le backend
 fetch("http://localhost:5678/api/categories")
 
   .then(function (response) {
@@ -81,23 +82,24 @@ fetch("http://localhost:5678/api/categories")
   .then(function (categories) {
     for (let category of categories) {
 
-      //création boutons
-      let button2 = document.createElement("button");
+      //création buttonCategories
+      let buttonCategories = document.createElement("button");
 
-      //création attributs bouton
-      button2.setAttribute("class", "filtre");
-      button2.setAttribute("type", "button");
-      button2.setAttribute("id", category.id);
-      button2.setAttribute("name", category.name);
-      button2.setAttribute("value", category.name);
+      //création attributs buttonCategories dont données du Back-end (id, name)
+      buttonCategories.setAttribute("class", "filtre");
+      buttonCategories.setAttribute("type", "button");
+      buttonCategories.setAttribute("id", category.id);
+      buttonCategories.setAttribute("name", category.name);
+      buttonCategories.setAttribute("value", category.name);
 
-      //récupération nom catégorie sur les boutons
-      button2.innerHTML = category.name;
+      // Sélection de buttonCategories (HTML) pour récupérer les category.name et générer les 3 boutons
+      buttonCategories.innerHTML = category.name;
 
-      //boutons rattachés à la div filtres
-      filtres.appendChild(button2);
+      // Intégration du buttonCategories rattaché à la div filtres
+      filtres.appendChild(buttonCategories);
 
-      button2.addEventListener('click', event => {
+      //Méthode pour détecter le clic sur les filtres et récupérer le category.id de la catégorie
+      buttonCategories.addEventListener('click', event => {
         filtering(category.id)
       });
     }
@@ -105,25 +107,73 @@ fetch("http://localhost:5678/api/categories")
   //si erreur
   .catch(function (error) { (error); });
 
-
-
-
+//Fonction pour filtrer les catégories et toute la liste des travaux
 function filtering(categoryID) {
+// Création variable figuresToShow 
+//pour afficher par défaut toutes les figures dans le DOM avec gallery.querySelectorAll
+//
   let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
 
   for (let figureToShow of figuresToShow) {
 
+    //intégration CSS display:block; en JS pour afficher
     figureToShow.style.display = "block";
 
   }
+
+  //not pour sélectionner les figures des catégories non voulues
   let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
   for (let figure of figures) {
-
+//intégration CSS display:none; en JS pour cacher
     figure.style.display = "none";
 
   }
 
 }
+
+//appel à l'API
+fetch("http://localhost:5678/api/users/login")
+
+  //réponse du back-end (promise)
+  .then(function (response) {
+    if (response.ok) {
+      return response.json();
+    }
+  })
+
+  //traitement (promise)
+  .then(function (users) {
+    (users)
+
+    //création variable pour un projet avec la boucle for ... of ...
+    for (let user of users) {
+
+
+        
+
+        //<input id="suivant" type="button" value="suivant" onClick="go(this);" />
+
+//et dans la fonction go
+	
+//function go(form_element){
+  //var form_element_id = form_element.id;
+  //alert("L’élément portant l'ID `" + form_element_id + "` à été cliqué !");
+//}
+
+    }
+  })
+
+  //si erreur
+  .catch(function (error) {
+    (error);
+  });
+
+  // l'evenement permet de détecter sur quel composant le clic est passé
+        
+  input.onclick.addEventListener= function(fonctionAExecuter) {
+    ('click', event => {alert("marche");
+});
+};
 
 
 
