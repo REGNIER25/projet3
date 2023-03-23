@@ -109,9 +109,9 @@ fetch("http://localhost:5678/api/categories")
 
 //Fonction pour filtrer les catégories et toute la liste des travaux
 function filtering(categoryID) {
-// Création variable figuresToShow 
-//pour afficher par défaut toutes les figures dans le DOM avec gallery.querySelectorAll
-//
+  // Création variable figuresToShow 
+  //pour afficher par défaut toutes les figures dans le DOM avec gallery.querySelectorAll
+  //
   let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
 
   for (let figureToShow of figuresToShow) {
@@ -124,59 +124,10 @@ function filtering(categoryID) {
   //not pour sélectionner les figures des catégories non voulues
   let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
   for (let figure of figures) {
-//intégration CSS display:none; en JS pour cacher
+    //intégration CSS display:none; en JS pour cacher
     figure.style.display = "none";
 
   }
 
 }
-
-//appel à l'API
-fetch("http://localhost:5678/api/users/login")
-
-  //réponse du back-end (promise)
-  .then(function (response) {
-    if (response.ok) {
-      return response.json();
-    }
-  })
-
-  //traitement (promise)
-  .then(function (users) {
-    (users)
-
-    //création variable pour un projet avec la boucle for ... of ...
-    for (let user of users) {
-
-
-        
-
-        //<input id="suivant" type="button" value="suivant" onClick="go(this);" />
-
-//et dans la fonction go
-	
-//function go(form_element){
-  //var form_element_id = form_element.id;
-  //alert("L’élément portant l'ID `" + form_element_id + "` à été cliqué !");
-//}
-
-    }
-  })
-
-  //si erreur
-  .catch(function (error) {
-    (error);
-  });
-
-  // l'evenement permet de détecter sur quel composant le clic est passé
-        
-  input.onclick.addEventListener= function(fonctionAExecuter) {
-    ('click', event => {alert("marche");
-});
-};
-
-
-
-
-
 
