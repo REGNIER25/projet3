@@ -97,7 +97,7 @@ fetch("http://localhost:5678/api/categories")
       filtres.appendChild(buttonCategories);
 
       //comportement par défaut
-buttonAll.addEventListener('click', event => {notfiltering(category.id)});
+      buttonAll.addEventListener('click', event => {notfiltering(category.id) });
 
       //Méthode pour détecter le clic sur les filtres et récupérer le category.id de la catégorie
       buttonCategories.addEventListener('click', event => {
@@ -109,26 +109,26 @@ buttonAll.addEventListener('click', event => {notfiltering(category.id)});
   .catch(function (error) { (error); });
 
 
-  function notFiltering(categoryID) {
+function notFiltering(categoryID) {
 
-    let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
-  
-    if(`figure[data-categoryid=0]`)
-  
-      figureToShow.style.display = "block";
-  
-  }
-  
+  let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
+
+  if (`figure[data-categoryid=0]`)
+
+    figureToShow.style.display = "block";
+
+}
+
 
 //Fonction pour filtrer les catégories et toute la liste des travaux
 function filtering(categoryID) {
 
   // Création variable figuresToShow 
   //pour afficher par défaut toutes les figures dans le DOM avec gallery.querySelectorAll
-  
+
   let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
 
-  for (let figureToShow of figuresToShow) 
+  for (let figureToShow of figuresToShow)
 
     //intégration CSS display:block; en JS pour afficher
     figureToShow.style.display = "block";
@@ -137,13 +137,13 @@ function filtering(categoryID) {
 
 
 
-  //not pour sélectionner les figures des catégories non voulues
-  let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
-  for (let figure of figures) {
-    //intégration CSS display:none; en JS pour cacher
-    figure.style.display = "none";
+//not pour sélectionner les figures des catégories non voulues
+let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
+for (let figure of figures) {
+  //intégration CSS display:none; en JS pour cacher
+  figure.style.display = "none";
 
-  }
+}
 
 
 
