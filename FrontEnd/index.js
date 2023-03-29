@@ -18,14 +18,11 @@ fetch("http://localhost:5678/api/works")
 
   //traitement (promise)
   .then(function (works) {
-    (works)
 
     //création variable pour un projet avec la boucle for ... of ...
     for (let work of works) {
       let figure = document.createElement("figure");
 
-      // Rajout attribut data- pour avoir une catégorie par défaut qui affiche tous les travaux
-      figure.setAttribute("data-categoryid", "0")
 
       // Rajout attribut data- pour avoir un sélecteur permettant de filtrer les travaux
       figure.setAttribute("data-categoryid", work.categoryId)
@@ -62,12 +59,14 @@ let buttonAll = document.createElement("button");
 
 buttonAll.setAttribute("class", "filtre");
 buttonAll.setAttribute("type", "button");
-buttonAll.setAttribute("name", "Tous");
+buttonAll.setAttribute("id", 0);
 buttonAll.setAttribute("value", "Tous");
 
 //affichage dans le HTML
 buttonAll.innerHTML = "Tous";
 filtres.appendChild(buttonAll);
+//comportement par défaut
+buttonAll.addEventListener('click', event => { filtering(0) });
 
 //Méthode pour récupérer les catégories (données) avec liaison avec le backend
 fetch("http://localhost:5678/api/categories")
@@ -96,8 +95,7 @@ fetch("http://localhost:5678/api/categories")
       // Intégration du buttonCategories rattaché à la div filtres
       filtres.appendChild(buttonCategories);
 
-      //comportement par défaut
-      buttonAll.addEventListener('click', event => {notfiltering(category.id) });
+
 
       //Méthode pour détecter le clic sur les filtres et récupérer le category.id de la catégorie
       buttonCategories.addEventListener('click', event => {
@@ -109,41 +107,32 @@ fetch("http://localhost:5678/api/categories")
   .catch(function (error) { (error); });
 
 
-function notFiltering(categoryID) {
-
-  let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
-
-  if (`figure[data-categoryid=0]`)
-
-    figureToShow.style.display = "block";
-
-}
-
-
 //Fonction pour filtrer les catégories et toute la liste des travaux
 function filtering(categoryID) {
 
-  // Création variable figuresToShow 
-  //pour afficher par défaut toutes les figures dans le DOM avec gallery.querySelectorAll
+  if (categoryID == 0) {
+    let figuresToShow = gallery.querySelectorAll(`figure`);
+    for (let figureToShow of figuresToShow) {
+      //intégration CSS display:block; en JS pour afficher
+      figureToShow.style.display = "block";
+    }
+  }
+  else {
+    // Création variable figuresToShow 
+    //pour afficher par défaut toutes les figures dans le DOM avec gallery.querySelectorAll
+    let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
+    for (let figureToShow of figuresToShow) {
+      //intégration CSS display:block; en JS pour afficher
+      figureToShow.style.display = "block";
+    }
 
-  let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
-
-  for (let figureToShow of figuresToShow)
-
-    //intégration CSS display:block; en JS pour afficher
-    figureToShow.style.display = "block";
-
+    //not pour sélectionner les figures des catégories non voulues
+    let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
+    for (let figure of figures) {
+      //intégration CSS display:none; en JS pour cacher
+      figure.style.display = "none";
+    }
+  }
 }
-
-
-
-//not pour sélectionner les figures des catégories non voulues
-let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
-for (let figure of figures) {
-  //intégration CSS display:none; en JS pour cacher
-  figure.style.display = "none";
-
-}
-
 
 

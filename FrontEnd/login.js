@@ -1,44 +1,35 @@
-//1) Détecter le clic sur le bouton de validation
-
-
 
 
 
   const boutonValider = document.getElementById("submit");
-    boutonValider.onclick = function(){
-    console.log("clic !");
+
+  //1) Détecter le clic sur le bouton de validation
+    boutonValider.onclick = async function(event){
+    event.preventDefault();
+
+//2) Récupérer l'ensemble des valeurs du formulaire
+      let inputEmail = document.getElementById("email").value;
+      let inputPassword = document.getElementById("password").value;
+
+    //3) Formater les valeurs pour les envoyer vers le serveur
+let tabloSubmit = {inputEmail, inputPassword};
+
+// //4) Envoyer les données formatées du formulaire au serveur
+// let response = await fetch("http://localhost:5678/api/users/login", {
+//   method: "POST",
+//   headers: { "accept": "application/json" , "Content-type": "application/json" },
+//   body: JSON.stringify(tabloSubmit)
+// });
+
+// //5) Traitement de la réponse et renvoi vers la page d'accueil si bonne combinaison
+// let result = await response.json();
+    
+      // Afficher les valeurs
+      console.log(tabloSubmit);
     }
 
 
-//2) Récupérer l'ensemble des valeurs du formulaire
 
-let inputEmail = document.getElementById("email").value;
-
-let inputPassword = document.getElementById("password").value;
-
-boutonValider.addEventListener('click', function() {console.log(inputEmail + " et " + inputPassword)});
-
-
-
-boutonValider.onclick = function() {
-
-  alert('Salut ' + inputEmail + ', sympa de vous voir !');
-}
-
-
-
-//3) Formater les valeurs pour les envoyer vers le serveur
-//let tabloSubmit = [(inputEmail), (inputPassword)];
-
-//4) Envoyer les données formatées du formulaire au serveur
-//let response = await fetch("http://localhost:5678/api/users/login", {
-  //method: "POST",
-  //headers: { "accept": "application/json", "Content-type": "text/plain" },
-  //body: JSON.stringify(users)
-//});
-
-//5) Traitement de la réponse et renvoi vers la page d'accueil si bonne combinaison
-//let result = await response.json();
 
 //Si mauvaise combinaison
 //if (result.status !== 200) { 
