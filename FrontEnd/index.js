@@ -135,4 +135,22 @@ function filtering(categoryID) {
   }
 }
 
+//déclaration constante pour la gallerie des travaux de la Modale
+const modalGallery = document.getElementById("modal-gallery");
+let figure = document.createElement("figure");
+figure.setAttribute("data-categoryid", work.categoryId)
+let img = document.createElement("img");
+img.setAttribute("src", work.imageUrl);
+img.setAttribute("alt", work.title);
+figure.appendChild(img);
+let figcaption = document.createElement("figcaption");
+figcaption.innerHTML = "éditer";
+figure.appendChild(figcaption);
+modalGallery.appendChild(figure);
 
+let figuresToShow = modalGallery.querySelectorAll(`figure`);
+    for (let figureToShow of figuresToShow) {
+      //intégration CSS display:block; en JS pour afficher
+      figureToShow.style.display = "block";
+
+    }

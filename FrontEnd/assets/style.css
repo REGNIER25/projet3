@@ -227,12 +227,6 @@ margin: auto;
 
 .motdepasseoublie {padding-bottom:200px;}
 
-/*Projets*/
-
-.projets {display: flex;
-	align-items: center;
-justify-content: center;
-flex-direction: row;}
 
 /*Filtres*/
 
@@ -257,16 +251,31 @@ justify-content: center;}
 	color: white;
 }
 
+/*Modifier*/
 
+.mes-projets {display: flex;
+	justify-content: center;
+}
+
+.modifier {font-size:25px;
+padding-left : 25px;
+}
 
 /*Bandeau*/
 
 .bandeau {background-color: black;
+	display: flex;
 	color:white;
-height: 30px;
+	align-items: center;
+	justify-content: center;
+height: 40px;
+width:100%;
 }
 
+.mode-edition {padding-right : 25px;}
+
 .inputbandeau{
+		
 color:black;
 background-color: white;
 border-radius:20px;}
@@ -274,6 +283,8 @@ border-radius:20px;}
 
 
 /*Modale*/
+
+hr{width: 100%;}
 
 .modal {box-sizing: border-box;
 	z-index: 2	;

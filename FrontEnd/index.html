@@ -12,8 +12,12 @@
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-<aside class="bandeau"><i class="fa-regular fa-pen-to-square"></i>Mode édition<input class = inputbandeau type="button" value="Publier les changements"></aside>
+	<aside class="bandeau">
+<span class="mode-edition"><i class="fa-regular fa-pen-to-square"></i>Mode édition
+</span>
+<input class = inputbandeau type="button" value="Publier les changements"></aside>
 <header>
+	
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
@@ -39,7 +43,11 @@
 
 
 	<section id="portfolio">
-		<div><h2>Mes Projets</h2><div><i class="fa-regular fa-pen-to-square"></i>Modifier</div></div>
+<!--Modifier-->
+
+		<div class="mes-projets"><h2>Mes Projets</h2>
+			<span class="modifier"><i class="fa-regular fa-pen-to-square"></i>
+			</i>modifier</span></div>
 		
 		<div id = "filtres">
 
@@ -69,8 +77,15 @@
 
 	<aside class = "modal">
 		<div class="modal-wrapper">Galerie photo</div>
+
+		<div id="modal-gallery">
+
+		</div>
+
 		<i class="fa-solid fa-arrows-up-down-left-right"></i><i class="fa-regular fa-trash-can"></i>
 
+		<hr>
+		
 		<section id="contact">
 			<form action="#" method="post">
 				<input type="submit" value="Ajouter une photo">
