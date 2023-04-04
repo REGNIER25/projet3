@@ -76,31 +76,38 @@
 	<!--Modales-->
 
 	<aside class = "modal">
+		<p class="croix">X</p>
 		<div class="modal-wrapper">Galerie photo</div>
 
 		<div id="modal-gallery">
 
 		</div>
 
-		<i class="fa-solid fa-arrows-up-down-left-right"></i><i class="fa-regular fa-trash-can"></i>
-
 		<hr>
 		
-		<section id="contact">
-			<form action="#" method="post">
-				<input type="submit" value="Ajouter une photo">
+		<div id="ajoutphoto">
+			<form>
+				<input id = "submit" type="submit" value="Ajouter une photo">
 			</form>
+
+			<p ><a  class="supprimergalerie" href="#">Supprimer la galerie</a></p>
 	
-		</section>
+		</div>
+
 
 	</aside>
 
-	<aside class="modal2">
-		<div class="modal-wrapper2">Ajout photo</div>
+	<aside class="modal">
+	<div><p class="fleche">←</p><p class="croix">X</p></div>
+
+		<div class="modal-wrapper">Ajout photo</div>
 
 		<section id="contact">
 			<form action="#" method="post">
-				<div>champ image pour uploader une image</div>
+				<div class="uploader-image">
+					<i class="fa-light fa-image"></i>
+
+				</div>
 				<label for="titre">Titre</label>
 				<input type="text" name="titre" id="titre">
 <label for="categorie">Catégorie</label>
@@ -110,6 +117,8 @@
     <option value="appartements">Appartements</option>
     <option value="Hotelsetrestaurants">Hôtels & restaurants</option>
 </select>
+<hr>
+
 				<input type="submit" value="Valider">
 			</form>
 	

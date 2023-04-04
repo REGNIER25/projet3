@@ -4,6 +4,10 @@ const gallery = document.getElementById("gallery");
 // déclaration constante pour les filtres (div)
 const filtres = document.getElementById("filtres");
 
+//déclaration constante pour la gallerie des travaux de la Modale
+const modalGallery = document.getElementById("modal-gallery");
+
+
 
 
 //méthode pour récupérer les travaux (données) avec liaison avec le backend
@@ -44,6 +48,31 @@ fetch("http://localhost:5678/api/works")
 
       gallery.appendChild(figure);
 
+//création de la galerie de la Modale
+      let div = document.createElement("div");
+div.setAttribute("data-categoryid", work.categoryId);
+let modalImg = document.createElement("img");
+modalImg.setAttribute("src", work.imageUrl);
+modalImg.setAttribute("alt", work.title);
+div.appendChild(modalImg);
+let editer = document.createElement("p");
+editer.innerHTML = "éditer";
+div.appendChild(editer);
+modalGallery.appendChild(div);
+
+//création classe pour travaux de la galerie de la Modale (CSS)
+div.setAttribute("class", "style-modal-gallery")
+
+// icônes sur les travaux de la galerie de la Modale (CSS)
+let span = document.createElement("span");
+span.setAttribute("class", "style-modal-icone");
+let iconeFleche = document.createElement("i");
+let iconePanier = document.createElement("i");
+iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
+iconePanier.setAttribute("class", "fa-regular fa-trash-can");
+span.appendChild(iconeFleche);
+span.appendChild(iconePanier);
+modalGallery.appendChild(span);
 
     }
   })
@@ -135,22 +164,4 @@ function filtering(categoryID) {
   }
 }
 
-//déclaration constante pour la gallerie des travaux de la Modale
-const modalGallery = document.getElementById("modal-gallery");
-let figure = document.createElement("figure");
-figure.setAttribute("data-categoryid", work.categoryId)
-let img = document.createElement("img");
-img.setAttribute("src", work.imageUrl);
-img.setAttribute("alt", work.title);
-figure.appendChild(img);
-let figcaption = document.createElement("figcaption");
-figcaption.innerHTML = "éditer";
-figure.appendChild(figcaption);
-modalGallery.appendChild(figure);
 
-let figuresToShow = modalGallery.querySelectorAll(`figure`);
-    for (let figureToShow of figuresToShow) {
-      //intégration CSS display:block; en JS pour afficher
-      figureToShow.style.display = "block";
-
-    }
