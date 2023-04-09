@@ -48,31 +48,32 @@ fetch("http://localhost:5678/api/works")
 
       gallery.appendChild(figure);
 
-//création de la galerie de la Modale
+      //création de la galerie de la Modale
       let div = document.createElement("div");
-div.setAttribute("data-categoryid", work.categoryId);
-let modalImg = document.createElement("img");
-modalImg.setAttribute("src", work.imageUrl);
-modalImg.setAttribute("alt", work.title);
-div.appendChild(modalImg);
-let editer = document.createElement("p");
-editer.innerHTML = "éditer";
-div.appendChild(editer);
-modalGallery.appendChild(div);
+      div.setAttribute("data-categoryid", work.categoryId);
+      let modalImg = document.createElement("img");
+      modalImg.setAttribute("src", work.imageUrl);
+      modalImg.setAttribute("alt", work.title);
+      div.appendChild(modalImg);
+      let editer = document.createElement("p");
+      editer.innerHTML = "éditer";
+      div.appendChild(editer);
+      
 
-//création classe pour travaux de la galerie de la Modale (CSS)
-div.setAttribute("class", "style-modal-gallery")
+      //création classe pour travaux de la galerie de la Modale (CSS)
+      div.setAttribute("class", "style-modal-gallery")
 
-// icônes sur les travaux de la galerie de la Modale (CSS)
-let span = document.createElement("span");
-span.setAttribute("class", "style-modal-icone");
-let iconeFleche = document.createElement("i");
-let iconePanier = document.createElement("i");
-iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
-iconePanier.setAttribute("class", "fa-regular fa-trash-can");
-span.appendChild(iconeFleche);
-span.appendChild(iconePanier);
-modalGallery.appendChild(span);
+      // icônes sur les travaux de la galerie de la Modale (CSS)
+      let span = document.createElement("span");
+      span.setAttribute("class", "style-modal-icone");
+      let iconeFleche = document.createElement("i");
+      let iconePanier = document.createElement("i");
+      iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
+      iconePanier.setAttribute("class", "fa-regular fa-trash-can");
+      span.appendChild(iconeFleche);
+      span.appendChild(iconePanier);
+      div.appendChild(span);
+      modalGallery.appendChild(div);
 
     }
   })
@@ -163,5 +164,113 @@ function filtering(categoryID) {
     }
   }
 }
+
+//Récupérer token d'authentification (condition)
+let tokenRecup = localStorage.getItem("token");
+console.log (tokenRecup)
+
+//Masquer les filtres (mettre token en condition)
+//filtres.style.display = "none";
+
+//bando noir
+let bandeau = document.createElement("aside");
+bandeau.setAttribute("class", "bandeau");
+
+let spanEdition = document.createElement("span");
+spanEdition.setAttribute("class", "mode-edition");
+
+element.textContent = "Mode édition";
+
+
+
+let inputPublier = document.createElement("input");
+inputPublier.setAttribute("class", "inputbandeau");
+inputPublier.setAttribute("type", "button");
+inputPublier.setAttribute("class", "Publier les changements");
+
+
+//Logout à la place de Login (déconnexion)
+//déclaration constante pour le lien Login/Logout
+const log = document.getElementById("log");
+element.textContent = "Logout";
+
+
+//Modifier
+let spanModifier = document.createElement("span");
+spanModifier.setAttribute("class", "modifier");
+let iModifier = document.createElement("i");
+iModifier.setAttribute("class", "fa-regular fa-pen-to-square");
+element.textContent = "Modifier";
+
+
+//création modale (Gestion des projets) (event)
+let modale = document.createElement("aside");
+modale.setAttribute("class", "modal");
+let hr = document.createElement("hr");
+
+
+
+//Fonction pour fermer modale (croix ou hors modale) (event)function closeModal
+
+
+//flèche pour retour en arrière
+
+
+//Suppression projet existant (demande confirmation ?) = delete
+//Clic sur la corbeille (Event)
+console.log ("cliqué")
+//let supprimerProjet = document.getElementById("");
+//requête Fetch pour supprimer un projet de la BDD et donc de la galerie (DOM)
+//DELETE par rapport au id du projet
+//fetch("http://localhost:5678/api/works/{Id}") (promesse)
+//réponse API
+
+//Clic sur Bouton ajouter photo (Event)
+console.log ("cliqué")
+
+//création formulaire envoi photo
+let formulaireProjet = document.createElement("form");
+
+//champ télécharger photo
+let inputPhoto = document.createElement("input");
+inputPhoto.setAttribute("type", "file");
+
+//champ titre
+let inputTitre = document.createElement("input");
+inputTitre.setAttribute("type", "Text");
+
+
+//menu déroulant avec les catégories (optionCategories)
+let select = document.createElement("select");
+//récup catégories dans le menu déroulant pour nouveau projet (filtres catégories)
+let optionCategories = document.createElement("option");
+//création attributs optionCategories
+optionCategories.setAttribute("class", "");
+optionCategories.setAttribute("id", category.id);
+optionCategories.setAttribute("name", category.name);
+optionCategories.setAttribute("value", category.name);
+// Récupérer les category.name et générer les 3 options
+optionCategories.innerHTML = category.name;
+
+// // optionCategories rattachée à select
+select.appendChild(optionCategories);
+
+
+
+//Ajout projet dans la galerie après envoi du formulaire (add)
+//Gestion des erreurs (bouton Valider reste désactivé)
+//Clic sur Bouton Valider (Event)
+// buttonCategories.addEventListener('click', event => {...
+console.log ("cliqué")
+//requête Fetch pour ajouter un projet dans la galerie (récupérer celle de Figma,dans assets)
+//POST
+//fetch("http://localhost:5678/api/works") (promesse)
+//FormData = photo, titre, catégorie
+//réponse API
+//récupérer même format html que les premiers projets
+//function addWork(){créer nouveau projet}
+
+//Publier changements (bandeau noir) pour afficher suppressions/additions dans le DOM
+
 
 
