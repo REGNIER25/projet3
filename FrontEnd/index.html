@@ -15,21 +15,17 @@
 </head>
 
 <body>
-	<aside class="bandeau">
-		<span class="mode-edition"><i class="fa-regular fa-pen-to-square">	
-		</i>Mode édition
-		</span>
-		<input class=inputbandeau type="button" value="Publier les changements">
-	</aside>
+
 	<header>
+		<div id="bandeau"></div>
 
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
-				<li>Projets</li>
-				<li>Contact</li>
-				<li id="log"><a class="login" href="login.html">Login</a></li>
-				<li><img class="instagram" src="./assets/icons/instagram.png" alt="Instagram"></li>
+<li>Projets</li>
+<li>Contact</li>
+<li id="log"></li>
+<li><img class="instagram" src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
 	</header>
@@ -54,11 +50,11 @@
 		<section id="portfolio">
 			<!--Modifier-->
 
-			<div class="mes-projets">
+	<div class="mes-projets">
 				<h2>Mes Projets</h2>
-				<span id = "modifier" class="modifier"><i class="fa-regular fa-pen-to-square"></i>
-					</i>modifier</span>
-			</div>
+<span id = "modifier" class="modifier"><i class="fa-regular fa-pen-to-square"></i>
+</i>modifier</span>
+</div>
 
 			<div id="filtres">
 
@@ -86,6 +82,9 @@
 
 		<!--Modales-->
 
+		<aside id="modaleVersion1"></aside>
+		<aside id ="modaleVersion2"></aside>
+
 		<aside class="modal">
 			<p class="croix">X</p>
 			<div class="modal-wrapper">Galerie photo</div>
@@ -109,6 +108,7 @@
 		</aside>
 
 		<aside class="modal">
+
 			<div>
 				<p class="fleche">←</p>
 				<p class="croix">X</p>
@@ -121,9 +121,14 @@
 
 			
 <form id="contact" enctype="multipart/form-data" action="#" method="post">
+
+	<!--Champ pour télécharger photo-->
+
+
 					<div class="uploader-image">
 						<i class="fa-regular fa-image"></i>
 					</div>
+
 <input type="file" accept="image/png,image/jpg" name="image">
 
 <!--Champ pour nommer projet-->
