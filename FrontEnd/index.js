@@ -10,8 +10,11 @@ const bandeau = document.getElementById("bandeau");
 //déclaration constante pour le lien Login/Logout
 const log = document.getElementById("log");
 
-//déclaration constante pour le lien Login/Logout
-const modifier = document.getElementById("modifier");
+//déclaration constantes pour les trois liens Modifier
+const modifier1 = document.getElementById("modifier1");
+const modifier2 = document.getElementById("modifier2");
+const modifier3 = document.getElementById("modifier3");
+
 
 //déclaration constante pour la modale (v1 et v2)
 const modale = document.getElementById("modale");
@@ -156,19 +159,19 @@ function filtering(categoryID) {
 }
 
 //Récupérer token d'authentification (condition)
-//le mettre dans login.js ???
 let tokenRecup = localStorage.getItem("token");
 
 //Bandeau noir
 bandeau.setAttribute("class", "bandeau");
 let spanEdition = document.createElement("span");
-spanEdition.setAttribute("class", "mode-edition");
 let iPenToSquare = document.createElement("i");
 iPenToSquare.setAttribute("class", "fa-regular fa-pen-to-square");
-//comment afficher l'icône ?
 spanEdition.appendChild(iPenToSquare);
-spanEdition.innerHTML = "Mode édition";
 bandeau.appendChild(spanEdition);
+let pModeEdition = document.createElement("p");
+pModeEdition.innerHTML = "Mode édition";
+pModeEdition.setAttribute("class", "mode-edition");
+bandeau.appendChild(pModeEdition);
 let inputPublier = document.createElement("input");
 inputPublier.setAttribute("class", "inputbandeau");
 inputPublier.setAttribute("type", "button");
@@ -184,13 +187,52 @@ loginLogout.innerText = "Login";
 loginLogout.innerText = "Logout";
 log.appendChild(loginLogout);
 
-//Modifier
-modifier.setAttribute("class", "modifier");
-let iModifier = document.createElement("i");
-iModifier.setAttribute("class", "fa-regular fa-pen-to-square");
-//comment afficher l'icône ?
-modifier.appendChild(iModifier);
-modifier.textContent = "Modifier";
+//Modifier (3 fois)
+
+let divModifier1 = document.createElement("div"); 
+divModifier1.setAttribute("class", "modifier");
+let spanModifier1 = document.createElement("span");
+let iModifier1 = document.createElement("i");
+iModifier1.setAttribute("class", "fa-regular fa-pen-to-square");
+spanModifier1.appendChild(iModifier);
+
+let divModifier2 = document.createElement("div"); 
+divModifier2.setAttribute("class", "modifier");
+let spanModifier2 = document.createElement("span");
+let iModifier2 = document.createElement("i");
+iModifier2.setAttribute("class", "fa-regular fa-pen-to-square");
+spanModifier2.appendChild(iModifier);
+
+let divModifier3 = document.createElement("div"); 
+divModifier3.setAttribute("class", "modifier");
+let spanModifier3 = document.createElement("span");
+let iModifier3 = document.createElement("i");
+iModifier3.setAttribute("class", "fa-regular fa-pen-to-square");
+spanModifier3.appendChild(iModifier);
+
+
+
+  divModifier1.appendChild(spanModifier);
+  divModifier2.appendChild(spanModifier);
+  divModifier3.appendChild(spanModifier);
+
+  let pModifier = document.createElement("p");
+  pModifier.innerHTML = "Modifier";
+  pModifier.setAttribute("class", "");
+  divModifier1.appendChild(pModifier);
+  divModifier2.appendChild(pModifier);
+  divModifier3.appendChild(pModifier);
+
+
+  //Afficher quand modale ouverte (condition)
+  modifier1.appendChild(divModifier1);
+  //filtres.style.display = "none";
+
+  
+  modifier2.appendChild(divModifier2);
+  modifier3.appendChild(divModifier3);
+
+
 
 //Masquer les filtres (mettre token en condition)
 //filtres.style.display = "none";
@@ -221,11 +263,17 @@ modifier.textContent = "Modifier";
       boutonAjoutPhoto.setAttribute("id", "ajoutphoto");
       boutonAjoutPhoto.setAttribute("type", "button");
       boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");
+      let lienSupprimerGalerie = document.createElement("a");
+      lienSupprimerGalerie.setAttribute("class", "supprimergalerie");
+      lienSupprimerGalerie.setAttribute("href", "#");
+      lienSupprimerGalerie.textContent = "Supprimer de la galerie";
+      // //lien fonctionnel pour supprimer une image ! delete
+      modaleVersion1.appendChild(lienSupprimerGalerie);
       //lien vers la "deuxième" modale
       //eventlistener ajout photo cration 27ME 
 boutonAjoutPhoto.addEventListener('click', event => { 
   modale.replaceChild(modaleVersion2,modaleVersion1); });
-  
+   
   
   
       modaleVersion1.appendChild(boutonAjoutPhoto);
@@ -255,66 +303,30 @@ boutonAjoutPhoto.addEventListener('click', event => {
           //hover souris sur image
           //  let iconeFleche = document.createElement("i");
           //  iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
-          modaleVersion1.appendChild(divGalerie);
-
-
-        }
-        console.log(works);
+          modaleVersion1.appendChild(divGalerie);}}
         
+      // 1) Détecter le clic sur le lien de validation
+      //Clic sur éditer; la corbeille (Event)
+      // boutonValider.onclick = async function (event) {
+      //console.log ("cliqué");
+      // event.preventDefault();
+      // 2) Récupérer l'ensemble des valeurs du formulaire
+      // let inputEmail = document.getElementById("email").value;
+      // 3) Formater l'id du projet pour l'envoyer vers le serveur
+      // let supprimerProjet = {"id":id};
+      // 4) Envoyer l'id du nouveau projet au serveur
+      // let response = await fetch("http://localhost:5678/api/works/{Id}"), {
+      // method: "DELETE", body: JSON.stringify(supprimerProjet)});
+      // 5) Traitement de la réponse
+      // if (response.ok === true) {let result = await response.json()
+      // localStorage.setItem("token", result.token)}
+      // Si mauvaise combinaison
+      // else {error}
+      // let supprimerProjet = document.getElementById("");
+      // requête Fetch pour supprimer un projet de la BDD et donc de la galerie (DOM)
+      // DELETE par rapport au id du projet
 
-
-        
-      }
-        
-      
-
-
-
-  
-      
-
-      
-
-      // let lienSupprimerGalerie = document.createElement(a);
-      // lienSupprimerGalerie.setAttribute("class", "supprimergalerie");
-      // lienSupprimerGalerie.setAttribute("href", "#");
-      // lienSupprimerGalerie.textContent = "Supprimer de la galerie";
-      // //lien fonctionnel ??? une image !
-      // modaleVersion1.appendChild(lienSupprimerGalerie);delete
-      // // //Clic sur la corbeille (Event)
-      // // console.log ("cliqué")
-      // // //1) Détecter le clic sur le bouton de validation
-      // // // boutonValider.onclick = async function (event) {
-      // // //   event.preventDefault();
-      // // //   //2) Récupérer l'ensemble des valeurs du formulaire
-      // // //   let inputEmail = document.getElementById("email").value;
-      // // //3) Formater l'id du projet pour l'envoyer vers le serveur
-      // // let supprimerProjet = {"id":id};
-      // // //4) Envoyer l'id du projet au serveur (promesse)
-      // // //let response = await fetch("http://localhost:5678/api/works/{Id}"), {
-      // // //method: "DELETE", body: JSON.stringify(supprimerProjet)});
-      // // //   // //5) Traitement de la réponse
-      // // //   // Si bonne combinaison, création localStorage 
-      // // //   //avec stockage du token et redirection vers l'accueil
-      // //   if (response.ok === true) {
-      // //     let result = await response.json()
-      // //     localStorage.setItem("token", result.token)
-      // //     document.location.href = "index.html"
-      // //   }
-      // //   //Si mauvaise combinaison
-      // //   else {
-      // //     alert("Le nom de l'utilisateur et/ou le mot de passe sont incorrects !");
-      // //   }
-      // // }
-      // //let supprimerProjet = document.getElementById("");
-      // //requête Fetch pour supprimer un projet de la BDD et donc de la galerie (DOM)
-      // //DELETE par rapport au id du projet
-      // //réponse API
-
-
-
-// création modale (Version 2) (temporaire)
-// cliquer pour l'ouvrir sur bouton Ajouter une photo (modale version 1)
+// Modale pour ajouter un projet
 let modaleVersion2 = document.createElement("div");
 modaleVersion2.setAttribute("class", "modal");
 let pFlecheCroix = document.createElement("p");

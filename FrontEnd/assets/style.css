@@ -369,17 +369,6 @@ footer nav ul {
 	color: white;
 }
 
-/*Modifier*/
-
-.mes-projets {
-	display: flex;
-	justify-content: center;
-}
-
-.modifier {
-	font-size: 25px;
-	padding-left: 25px;
-}
 
 /*Bandeau*/
 
@@ -391,11 +380,16 @@ footer nav ul {
 	justify-content: center;
 	height: 40px;
 	width: 100%;
+	position: absolute;
+	top:0;
+	left:0;
 }
 
 .mode-edition {
-	padding-right: 25px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
+
 
 .inputbandeau {
 
@@ -404,7 +398,17 @@ footer nav ul {
 	border-radius: 20px;
 }
 
+/*Modifier*/
 
+.mes-projets {
+	display: flex;
+	justify-content: center;
+}
+
+.modifier {
+	font-size: 25px;
+	padding-left: 25px;
+}
 
 /*Modale*/
 
@@ -418,6 +422,7 @@ hr {
 }
 
 .fleche {
+	text-align: left;
 	padding: 20px;
 }
 
@@ -432,7 +437,8 @@ hr {
 .style-modal-gallery img {
 	width: 120px;
 	height: 160px;
-	position: static;
+	/*photo parent*/
+	position: relative;
 }
 
 .fa-arrows-up-down-left-right,
@@ -504,8 +510,8 @@ hr {
 }
 
 .fa-image {
-	width: 200px;
-	height: 80px;
-	color: black;
+	width: 60px;
+	height: 45px;
+	color:#B9C5CC;
 	background-color: #E8F1F7;
 }
