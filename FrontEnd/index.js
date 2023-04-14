@@ -190,43 +190,54 @@ log.appendChild(loginLogout);
 //Modifier (3 fois)
 
 let divModifier1 = document.createElement("div"); 
-divModifier1.setAttribute("class", "modifier");
+divModifier1.setAttribute("class", "modifier1");
 let spanModifier1 = document.createElement("span");
+spanModifier1.setAttribute("class", "span-modifier1");
 let iModifier1 = document.createElement("i");
 iModifier1.setAttribute("class", "fa-regular fa-pen-to-square");
-spanModifier1.appendChild(iModifier);
+spanModifier1.appendChild(iModifier1);
 
 let divModifier2 = document.createElement("div"); 
-divModifier2.setAttribute("class", "modifier");
+divModifier2.setAttribute("class", "modifier2");
 let spanModifier2 = document.createElement("span");
+spanModifier2.setAttribute("class", "span-modifier2");
 let iModifier2 = document.createElement("i");
 iModifier2.setAttribute("class", "fa-regular fa-pen-to-square");
-spanModifier2.appendChild(iModifier);
+spanModifier2.appendChild(iModifier2);
 
 let divModifier3 = document.createElement("div"); 
-divModifier3.setAttribute("class", "modifier");
+divModifier3.setAttribute("class", "modifier3");
 let spanModifier3 = document.createElement("span");
+spanModifier3.setAttribute("class", "span-modifier3");
 let iModifier3 = document.createElement("i");
 iModifier3.setAttribute("class", "fa-regular fa-pen-to-square");
-spanModifier3.appendChild(iModifier);
+spanModifier3.appendChild(iModifier3);
+
+divModifier1.appendChild(spanModifier1);
+  divModifier2.appendChild(spanModifier2);
+  divModifier3.appendChild(spanModifier3);
 
 
+  let pModifier1 = document.createElement("p");
+  pModifier1.innerHTML = "Modifier";
+  pModifier1.setAttribute("class", "");
 
-  divModifier1.appendChild(spanModifier);
-  divModifier2.appendChild(spanModifier);
-  divModifier3.appendChild(spanModifier);
+  let pModifier2 = document.createElement("p");
+  pModifier2.innerHTML = "Modifier";
+  pModifier2.setAttribute("class", "");
 
-  let pModifier = document.createElement("p");
-  pModifier.innerHTML = "Modifier";
-  pModifier.setAttribute("class", "");
-  divModifier1.appendChild(pModifier);
-  divModifier2.appendChild(pModifier);
-  divModifier3.appendChild(pModifier);
+  let pModifier3 = document.createElement("p");
+  pModifier3.innerHTML = "Modifier";
+  pModifier3.setAttribute("class", "");
+
+  divModifier1.appendChild(pModifier1);
+  divModifier2.appendChild(pModifier2);
+  divModifier3.appendChild(pModifier3);
 
 
   //Afficher quand modale ouverte (condition)
   modifier1.appendChild(divModifier1);
-  //filtres.style.display = "none";
+  divModifier1.style.display = "none";
 
   
   modifier2.appendChild(divModifier2);

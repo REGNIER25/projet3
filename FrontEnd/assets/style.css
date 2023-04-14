@@ -386,8 +386,8 @@ footer nav ul {
 }
 
 .mode-edition {
-	padding-left: 10px;
-	padding-right: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 
@@ -400,15 +400,50 @@ footer nav ul {
 
 /*Modifier*/
 
+
+.modifier1 {
+	display: flex;
+	flex-direction: row;
+	font-size: 15px;
+	margin-bottom: 20px;
+}
+
+.span-modifier1 {
+	margin-right: 5px;
+
+}
+
+.modifier2 {
+	display: flex;
+	flex-direction: row;
+	font-size: 15px;
+	padding-left: 55px;
+	margin-top: 10px;	
+}
+
+.span-modifier2 {
+	margin-right: 5px;
+
+}
+
 .mes-projets {
 	display: flex;
 	justify-content: center;
+} 
+
+.modifier3 {
+	display: flex;
+	flex-direction: row;
+	font-size: 15px;
+	padding-top: 10px;	
 }
 
-.modifier {
-	font-size: 25px;
-	padding-left: 25px;
+
+.span-modifier3 {margin-left: 15px;
+	margin-right: 5px;
+
 }
+
 
 /*Modale*/
 
@@ -433,6 +468,8 @@ hr {
 	padding: 10px;
 	flex-wrap: wrap;
 }
+
+/*position absolute pour les images*/
 
 .style-modal-gallery img {
 	width: 120px;
