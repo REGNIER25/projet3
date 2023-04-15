@@ -21,6 +21,8 @@ const modale = document.getElementById("modale");
 
 
 
+
+
 //méthode pour récupérer les travaux (données) avec liaison avec le backend
 fetch("http://localhost:5678/api/works")
 
@@ -260,28 +262,34 @@ divModifier1.appendChild(spanModifier1);
         modale.setAttribute("class", "modal");
         let p = document.createElement("p");
         p.setAttribute("class", "croix");
+        //clic sur croix ou hors modale pour fermer modale
         p.textContent = "X";
         modaleVersion1.appendChild(p);
         let titreGalerie = document.createElement("h3");
-        titreGalerie.setAttribute("class", "modal-wrapper");
+        titreGalerie.setAttribute("class", "titre-modale");
         titreGalerie.textContent = "Galerie photo";
         modaleVersion1.appendChild(titreGalerie);
 
+
+//hr
         let hr = document.createElement("hr");
       modaleVersion1.appendChild(hr);
 
+
+      //lien vers la "deuxième" modale
       let boutonAjoutPhoto = document.createElement("input");
       boutonAjoutPhoto.setAttribute("id", "ajoutphoto");
-      boutonAjoutPhoto.setAttribute("type", "button");
+      boutonAjoutPhoto.setAttribute("type", "submit");
       boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");
+      // //lien fonctionnel pour supprimer une image ! delete
+
       let lienSupprimerGalerie = document.createElement("a");
       lienSupprimerGalerie.setAttribute("class", "supprimergalerie");
       lienSupprimerGalerie.setAttribute("href", "#");
       lienSupprimerGalerie.textContent = "Supprimer de la galerie";
-      // //lien fonctionnel pour supprimer une image ! delete
       modaleVersion1.appendChild(lienSupprimerGalerie);
-      //lien vers la "deuxième" modale
-      //eventlistener ajout photo cration 27ME 
+
+      //eventlistener ajout photo création 2ème photo 
 boutonAjoutPhoto.addEventListener('click', event => { 
   modale.replaceChild(modaleVersion2,modaleVersion1); });
    
@@ -294,23 +302,22 @@ boutonAjoutPhoto.addEventListener('click', event => {
           let divGalerie = document.createElement("div")
           divGalerie.setAttribute("id", "modal-gallery");
           divGalerie.setAttribute("data-categoryid", work.categoryId);
-          divGalerie.setAttribute("class", "style-modal-gallery")
-
           let modalImg = document.createElement("img");
           modalImg.setAttribute("src", work.imageUrl);
           modalImg.setAttribute("alt", work.title);
-          divGalerie.appendChild(modalImg);
-          let editer = document.createElement("p");
-          editer.innerHTML = "éditer";
-          divGalerie.appendChild(editer);
-
+          let pEditer = document.createElement("p");
+          pEditer.textContent = "éditer";
+          let divImageTexte = document.createElement("div")
+          divImageTexte.appendChild(modalImg);
+          divImageTexte.appendChild(pEditer);
+          divGalerie.appendChild(divImageTexte);
           //Corbeille sur les travaux de la galerie de la Modale
-          let span = document.createElement("span");
-          span.setAttribute("class", "style-modal-icone");
-          let iconePanier = document.createElement("i");
-          iconePanier.setAttribute("class", "fa-regular fa-trash-can");
-          span.appendChild(iconePanier);
-          divGalerie.appendChild(span);
+          // let span = document.createElement("span");
+          // span.setAttribute("class", "style-modal-icone");
+          // let iconePanier = document.createElement("i");
+          // iconePanier.setAttribute("class", "fa-regular fa-trash-can");
+          // span.appendChild(iconePanier);
+          // divGalerie.appendChild(span);
           //hover souris sur image
           //  let iconeFleche = document.createElement("i");
           //  iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
@@ -340,22 +347,29 @@ boutonAjoutPhoto.addEventListener('click', event => {
 // Modale pour ajouter un projet
 let modaleVersion2 = document.createElement("div");
 modaleVersion2.setAttribute("class", "modal");
-let pFlecheCroix = document.createElement("p");
-let spanFleche = document.createElement("span");
-spanFleche.setAttribute("class", "fleche");
-spanFleche.textContent = "←";
+
+//première ligne modale V2 (flèche et croix)
+let divFlecheCroix = document.createElement("div");
+divFlecheCroix.setAttribute("class", "divFlecheCroix");
+
 //retour en arrière
-pFlecheCroix.appendChild(spanFleche);
-let spanCroix = document.createElement("span");
-spanCroix.setAttribute("class", "croix");
-spanCroix.textContent = "X";
+let pFleche = document.createElement("p");
+pFleche.textContent = "←";
+divFlecheCroix.appendChild(pFleche);
+let pCroix = document.createElement("p");
+
 //fermer modale(croix ou hors modale) (event)function closeModal
-pFlecheCroix.appendChild(spanCroix);
-modaleVersion2.appendChild(pFlecheCroix);
+pCroix.textContent = "X";
+
+divFlecheCroix.appendChild(pCroix);
+modaleVersion2.appendChild(divFlecheCroix);
+
+//titre modale v2
 let titreAjoutPhoto = document.createElement("h3");
-titreAjoutPhoto.setAttribute("class", "modal-wrapper");
+titreAjoutPhoto.setAttribute("class", "titre-modale");
 titreAjoutPhoto.textContent = "Ajout photo";
 modaleVersion2.appendChild(titreAjoutPhoto);
+
 //Formulaire pour ajouter projet
 let formAjoutProjet = document.createElement("form");
 formAjoutProjet.setAttribute("id", "contact");
@@ -363,6 +377,7 @@ formAjoutProjet.setAttribute("enctype", "multipart/form-data");
 formAjoutProjet.setAttribute("action", "#");
 formAjoutProjet.setAttribute("method", "post");
 modaleVersion2.appendChild(formAjoutProjet);
+
 //Champ pour télécharger photo
 let champPhoto = document.createElement("div")
 champPhoto.setAttribute("class", "uploader-image");
@@ -376,6 +391,7 @@ inputPhoto.setAttribute("accept", "image/png,image/jpg");
 inputPhoto.setAttribute("name", "image");
 inputPhoto.setAttribute("id", "image");
 champPhoto.appendChild(inputPhoto);
+
 //Champ pour nommer projet
 let labelTitre = document.createElement("label");
 labelTitre.setAttribute("for", "titre");
@@ -386,8 +402,8 @@ inputTitre.setAttribute("type", "Text");
 inputTitre.setAttribute("name", "titre");
 inputTitre.setAttribute("id", "titre");
 formAjoutProjet.appendChild(inputTitre);
-//Champ pour sélectionner catégorie
 
+//Champ pour sélectionner catégorie
 function createMenuCategories(categories) {
   let labelCategories = document.createElement("label");
   labelCategories.setAttribute("for", "categorie");
@@ -407,23 +423,22 @@ function createMenuCategories(categories) {
 
 // récup les category.name dans le menu déroulant et générer les 3 options
 let optionCategories = document.createElement("option");
-optionCategories.setAttribute("class", "");
+optionCategories.setAttribute("class", "choix-categorie");
 optionCategories.setAttribute("id", category.id);
 optionCategories.setAttribute("name", category.name);
 optionCategories.setAttribute("value", category.name);
 optionCategories.innerHTML = category.name;
 select.appendChild(optionCategories);
 formAjoutProjet.appendChild(select);
-
   }
   
-
 }
 
 
 let hr2 = document.createElement("hr");
 formAjoutProjet.appendChild(hr2);
-// Création bouton
+
+// Création bouton envoi formulaire
 let inputNouveauProjet = document.createElement("input")
 inputNouveauProjet.setAttribute("id", "submit");
 inputNouveauProjet.setAttribute("type", "submit");
