@@ -265,33 +265,25 @@ divModifier1.appendChild(spanModifier1);
         //clic sur croix ou hors modale pour fermer modale
         p.textContent = "X";
         modaleVersion1.appendChild(p);
+
+        //Titre modale v1
         let titreGalerie = document.createElement("h3");
         titreGalerie.setAttribute("class", "titre-modale");
         titreGalerie.textContent = "Galerie photo";
         modaleVersion1.appendChild(titreGalerie);
 
-
-//hr
-        let hr = document.createElement("hr");
-      modaleVersion1.appendChild(hr);
-
-
-      //lien vers la "deuxième" modale
-      let boutonAjoutPhoto = document.createElement("input");
-      boutonAjoutPhoto.setAttribute("id", "ajoutphoto");
-      boutonAjoutPhoto.setAttribute("type", "submit");
-      boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");
-      // //lien fonctionnel pour supprimer une image ! delete
-
-      let lienSupprimerGalerie = document.createElement("a");
-      lienSupprimerGalerie.setAttribute("class", "supprimergalerie");
-      lienSupprimerGalerie.setAttribute("href", "#");
-      lienSupprimerGalerie.textContent = "Supprimer de la galerie";
-      modaleVersion1.appendChild(lienSupprimerGalerie);
-
-      //eventlistener ajout photo création 2ème photo 
+//lien vers la "deuxième" modale
+let boutonAjoutPhoto = document.createElement("input");
+boutonAjoutPhoto.setAttribute("id", "ajoutphoto");
+boutonAjoutPhoto.setAttribute("type", "submit");
+boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");    
+//eventlistener ajout photo création 2ème photo 
 boutonAjoutPhoto.addEventListener('click', event => { 
-  modale.replaceChild(modaleVersion2,modaleVersion1); });
+modale.replaceChild(modaleVersion2,modaleVersion1); });
+
+
+
+      
    
   
   
@@ -311,38 +303,71 @@ boutonAjoutPhoto.addEventListener('click', event => {
           divImageTexte.appendChild(modalImg);
           divImageTexte.appendChild(pEditer);
           divGalerie.appendChild(divImageTexte);
+
           //Corbeille sur les travaux de la galerie de la Modale
-          // let span = document.createElement("span");
-          // span.setAttribute("class", "style-modal-icone");
-          // let iconePanier = document.createElement("i");
-          // iconePanier.setAttribute("class", "fa-regular fa-trash-can");
-          // span.appendChild(iconePanier);
+          let span = document.createElement("span");
+          span.setAttribute("class", "style-modal-icone");
+          let iconePanier = document.createElement("i");
+          iconePanier.setAttribute("class", "fa-regular fa-trash-can");
+          span.appendChild(iconePanier);
+          divGalerie.appendChild(span);
+          
+          //hover souris sur image (récupéré en capture d'écran)
+          // let iconeFleche = document.createElement("i");
+          // iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
+          // divGalerie.appendChild(iconeFleche);
+          // span.appendChild(iconeFleche);
           // divGalerie.appendChild(span);
-          //hover souris sur image
-          //  let iconeFleche = document.createElement("i");
-          //  iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
-          modaleVersion1.appendChild(divGalerie);}}
+
+          modaleVersion1.appendChild(divGalerie);}
         
+        //hr
+      let hr = document.createElement("hr");
+      hr.setAttribute("class", "hr-modale");
+      modaleVersion1.appendChild(hr);
+
+     
+      
+   
+
+      // lien fonctionnel pour supprimer une image ! delete
+      let lienSupprimerGalerie = document.createElement("a");
+      lienSupprimerGalerie.setAttribute("class", "supprimergalerie");
+      lienSupprimerGalerie.setAttribute("href", "#");
+      lienSupprimerGalerie.textContent = "Supprimer de la galerie";
+      modaleVersion1.appendChild(lienSupprimerGalerie);
+        
+        }
+     
+
+
       // 1) Détecter le clic sur le lien de validation
       //Clic sur éditer; la corbeille (Event)
       // boutonValider.onclick = async function (event) {
       //console.log ("cliqué");
       // event.preventDefault();
+
       // 2) Récupérer l'ensemble des valeurs du formulaire
       // let inputEmail = document.getElementById("email").value;
+
       // 3) Formater l'id du projet pour l'envoyer vers le serveur
       // let supprimerProjet = {"id":id};
+
       // 4) Envoyer l'id du nouveau projet au serveur
       // let response = await fetch("http://localhost:5678/api/works/{Id}"), {
       // method: "DELETE", body: JSON.stringify(supprimerProjet)});
+
       // 5) Traitement de la réponse
       // if (response.ok === true) {let result = await response.json()
       // localStorage.setItem("token", result.token)}
       // Si mauvaise combinaison
       // else {error}
       // let supprimerProjet = document.getElementById("");
+      //monSet.delete(5)=retire 5 du set
       // requête Fetch pour supprimer un projet de la BDD et donc de la galerie (DOM)
       // DELETE par rapport au id du projet
+
+      
 
 // Modale pour ajouter un projet
 let modaleVersion2 = document.createElement("div");
@@ -364,15 +389,16 @@ pCroix.textContent = "X";
 divFlecheCroix.appendChild(pCroix);
 modaleVersion2.appendChild(divFlecheCroix);
 
-//titre modale v2
+//Titre modale v2
 let titreAjoutPhoto = document.createElement("h3");
 titreAjoutPhoto.setAttribute("class", "titre-modale");
 titreAjoutPhoto.textContent = "Ajout photo";
 modaleVersion2.appendChild(titreAjoutPhoto);
+  
 
 //Formulaire pour ajouter projet
 let formAjoutProjet = document.createElement("form");
-formAjoutProjet.setAttribute("id", "contact");
+formAjoutProjet.setAttribute("id", "ajoutphoto");
 formAjoutProjet.setAttribute("enctype", "multipart/form-data");
 formAjoutProjet.setAttribute("action", "#");
 formAjoutProjet.setAttribute("method", "post");
@@ -381,16 +407,29 @@ modaleVersion2.appendChild(formAjoutProjet);
 //Champ pour télécharger photo
 let champPhoto = document.createElement("div")
 champPhoto.setAttribute("class", "uploader-image");
+
+
+//Icone photo
+let spanPhoto = document.createElement("span");
+          spanPhoto.setAttribute("class", "style-icone-photo");
 let iImage = document.createElement("i")
 iImage.setAttribute("class", "fa-regular fa-image");
-champPhoto.appendChild(iImage);
+spanPhoto.appendChild(iImage);
+champPhoto.appendChild(spanPhoto);
+
 formAjoutProjet.appendChild(champPhoto);
 let inputPhoto = document.createElement("input")
 inputPhoto.setAttribute("type", "file");
 inputPhoto.setAttribute("accept", "image/png,image/jpg");
 inputPhoto.setAttribute("name", "image");
 inputPhoto.setAttribute("id", "image");
+let pAjouterphoto = document.createElement("p")
+let pFormatsphoto = document.createElement("p")
+pAjouterphoto.textContent = "+ Ajouter photo";
+pFormatsphoto.textContent = "jpg, png : 4mo max";
 champPhoto.appendChild(inputPhoto);
+champPhoto.appendChild(pAjouterphoto);
+champPhoto.appendChild(pFormatsphoto);
 
 //Champ pour nommer projet
 let labelTitre = document.createElement("label");
@@ -436,42 +475,48 @@ formAjoutProjet.appendChild(select);
 
 
 let hr2 = document.createElement("hr");
-formAjoutProjet.appendChild(hr2);
+hr2.setAttribute("class", "hr-modale");
+modaleVersion2.appendChild(hr2);
 
-// Création bouton envoi formulaire
+
+// Création bouton envoi formulaire (gris avant remplissage de tous les champs)
 let inputNouveauProjet = document.createElement("input")
 inputNouveauProjet.setAttribute("id", "submit");
 inputNouveauProjet.setAttribute("type", "submit");
 inputNouveauProjet.setAttribute("value", "Valider");
-formAjoutProjet.appendChild(inputNouveauProjet);
-// // 1) Détecter le clic sur le bouton de validation (Event)
+modaleVersion2.appendChild(inputNouveauProjet);
+
+// 1) Détecter le clic sur le bouton de validation (Event)
 // inputNouveauProjet.onclick = async function (event) {console.log ("cliqué !");
 // console.log(tabloSubmitProjet);
 // event.preventDefault();}
-// // Gestion des erreurs (bouton Valider reste désactivé)
-// // 2) Récupérer l'ensemble des trois valeurs du formulaire (3)
-// // //pour récupérer la valeur photo
+// Gestion des erreurs (bouton Valider reste désactivé)
+
+// 2) Récupérer l'ensemble des 3 valeurs du formulaire
+// pour récupérer la valeur photo
 // let champImage = document.getElementById("image").value;
-// // //pour récupérer la valeur titre
+// pour récupérer la valeur titre
 // let champTitre = document.getElementById("titre").value;
-// // //pour récupérer la valeur id des catégories
+// pour récupérer la valeur id des catégories
 // let champCategorie = document.getElementById(category.id);
-// // // 3) Formater les valeurs pour les envoyer vers le serveur
+
+// 3) Formater les valeurs pour les envoyer vers le serveur (FormData)
 // let tabloSubmitProjet = { "imageUrl": champImage, "title": champTitre,
 // "categoryId": champCategorie};
-// // //4) Envoyer les données formatées du formulaire au serveur
-// // let response = await fetch("http://localhost:5678/api/works",
-// // {method: "POST",
-// // headers: { "accept": "application/json", "Content-type": "multipart/form-data" },
-// // body: JSON.stringify(tabloSubmitProjet)});
-// // // 5) Traitement de la réponse
-// // if (response.ok === true) {
-// // let result = await response.json()
-// // console.log ("Nouveau projet créé !")}
-// // //   //Si mauvaise combinaison
-// // // }
-// // //requête Fetch pour ajouter un projet dans la galerie (récupérer celle de Figma,dans assets)
-// // //function addWork(){créer nouveau projet}
-// // //Publier changements (bandeau noir) pour afficher suppressions/additions dans le DOM
-// // //Ajout projet dans la galerie après envoi du formulaire (add)
+
+// 4) Envoyer les données formatées du formulaire au serveur
+// let response = await fetch("http://localhost:5678/api/works",
+// {method: "POST",
+// headers: { "accept": "application/json", "Content-type": "multipart/form-data" },
+// body: JSON.stringify(tabloSubmitProjet)});
+
+// 5) Traitement de la réponse
+// if (response.ok === true) {let result = await response.json()
+// console.log ("Nouveau projet créé !")}
+// Si mauvaise combinaison}
+// requête Fetch pour ajouter un projet dans la galerie (récupérer celle de Figma,dans assets)
+// function addWork(){créer nouveau projet}
+// Publier changements (bandeau noir) pour afficher suppressions/additions dans le DOM
+// Ajout projet dans la galerie après envoi du formulaire (add)
+//monset.add(5)= ajoute 5
 

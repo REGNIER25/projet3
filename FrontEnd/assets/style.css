@@ -449,20 +449,22 @@ footer nav ul {
 
 .modal {
 	box-sizing: border-box;
-	position:fixed;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
-	margin-left :25%;
+	margin :auto;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 	width: 600px;
-	height: 700px;
 	background: white;
 	border-radius: 10px;
 	padding: 20px;
+	justify-content: center;
+	align-items: center;
 }
+
 
 .croix {
 	text-align: right;
@@ -470,51 +472,54 @@ footer nav ul {
 
 .titre-modale {
 	display: flex;
-	align-items: center;
-	justify-content: center;
 	font-size: 20px;
 }
 
 
 
 #modal-gallery {
-	width : 100%;
-display:grid;
-	grid-template-rows: auto;
-}
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+} 
 
-/* .gallery {
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
-}*/
 
 
 #modal-gallery img {
 	width: 120px;
 	height: 160px;
-	/*photo parent*/
-	/* position: absolute; */
+	position: absolute;
+	display: flex;
+	flex-direction: row;
 }  
 
 
+/*curseur*/
 
+  #modal-gallery img:hover {
+	cursor: url("././icons/curseur.png"), auto;
 
+}
 
-.fa-arrows-up-down-left-right,
+.hr-modale {margin-top:200px;
+	line-height: 60px;
+	color:red;
+}
+
+/*icone Corbeille*/
 .fa-trash-can {
 	color: white;
 	background-color: black;
+	padding: 5px;
 }
 
 .style-modal-icone {
-	top: 0;
-	right: 0;
+	top:0;
+	right:0;
 	position: relative;
 }
 
 #ajoutphoto {
-	width: 50%;
 	margin: auto;
 }
 
@@ -539,7 +544,6 @@ display:grid;
 /* divFlecheCroix */
 
 .divFlecheCroix{display: flex;
-justify-content: space-between;
 }
 
 .uploader-image {
@@ -548,12 +552,19 @@ justify-content: space-between;
 	background-color: #E8F1F7;
 }
 
+/*icone champ image*/
+
 .fa-image {
-	width: 60px;
-	height: 45px;
 	color:#B9C5CC;
 	background-color: #E8F1F7;
 }
 
+.style-icone-photo {
+	width:60px;
+	height:45px;
+}
+
 /* Liste des catégories */
-.choix-categorie{margin-bottom:30Opx;}
+.choix-categorie{margin-bottom:30Opx;
+text-align: left;
+}
