@@ -161,6 +161,7 @@ function filtering(categoryID) {
 }
 
 //Récupérer token d'authentification (condition)
+//If (localStorage.getItem("token")!=null)
 let tokenRecup = localStorage.getItem("token");
 
 //Bandeau noir
@@ -189,7 +190,7 @@ loginLogout.innerText = "Login";
 loginLogout.innerText = "Logout";
 log.appendChild(loginLogout);
 
-//Modifier (3 fois)
+//Modifier (3 fois) = rendre les trois fonctionnels ???
 
 let divModifier1 = document.createElement("div"); 
 divModifier1.setAttribute("class", "modifier1");
@@ -251,6 +252,7 @@ divModifier1.appendChild(spanModifier1);
 //filtres.style.display = "none";
 
 //création modale (Version 1) (temporaire)
+//Rajout let modal = null par défaut
      
 
 
@@ -262,7 +264,13 @@ divModifier1.appendChild(spanModifier1);
         modale.setAttribute("class", "modal");
         let p = document.createElement("p");
         p.setAttribute("class", "croix");
+        //function close(){}
         //clic sur croix ou hors modale pour fermer modale
+        //eventListener pour click sur window, récup l'event avec event.target 
+        //(si utilisateur a clique sur modale ou à l'extérieur display:none;)
+        //console.log(event.target)
+        //window.addEventListener('click',e=>{console.log(e.target)})
+        //e.stopPropagation aux enfants
         p.textContent = "X";
         modaleVersion1.appendChild(p);
 
@@ -298,6 +306,8 @@ modale.replaceChild(modaleVersion2,modaleVersion1); });
           modalImg.setAttribute("src", work.imageUrl);
           modalImg.setAttribute("alt", work.title);
           let pEditer = document.createElement("p");
+
+          //pas de fonction à faire dessus
           pEditer.textContent = "éditer";
           let divImageTexte = document.createElement("div")
           divImageTexte.appendChild(modalImg);
@@ -339,6 +349,37 @@ modale.replaceChild(modaleVersion2,modaleVersion1); });
         
         }
      
+//faire une boucle avec tous les travaux pour trouver celui qu'on veut éliminer
+// //donner l'id du dom à chaque carte/poubelle
+//sessionStoarge (token périssable?)
+//id de la figure
+// //poubelle.addEventListener ("click",async function(e){
+// e.preventDefault()
+// for (const workId of selectedWorks)
+// {
+//   const response = await fetch("http://localhost:5678/api/works/${workId}",
+//   method:"DELETE",
+//   // headers:{
+//     "content-type":"application/json",
+//   // Authorization:`Bearer ${window.localStorage.getItem('token')}`,
+// }
+// });
+// // if(!response.ok) {
+// // console.log ('projet ${workId}supprimé !');
+// // }
+// else {console.log(' impossible de supprimer projet ${workId}')}
+// // catch (error) {
+// // console.log (error);
+// // }
+// // }
+// // //pour un travail (doit faire pour tous les travaux ????)
+// // for (let trash of trashIcons){
+// // trash.addEventListener("click", function() {
+// // let workId = trash.getAttribute ("data-works-id");
+// // deleteWork(workId);
+// // });
+// // }
+// //imageàsuppimer.remove();
 
 
       // 1) Détecter le clic sur le lien de validation
@@ -347,8 +388,8 @@ modale.replaceChild(modaleVersion2,modaleVersion1); });
       //console.log ("cliqué");
       // event.preventDefault();
 
-      // 2) Récupérer l'ensemble des valeurs du formulaire
-      // let inputEmail = document.getElementById("email").value;
+      // 2) Récupérer l'id  du projet à supprimer
+      // let inputEmail = document.getElementById("id").value;
 
       // 3) Formater l'id du projet pour l'envoyer vers le serveur
       // let supprimerProjet = {"id":id};
@@ -356,16 +397,17 @@ modale.replaceChild(modaleVersion2,modaleVersion1); });
       // 4) Envoyer l'id du nouveau projet au serveur
       // let response = await fetch("http://localhost:5678/api/works/{Id}"), {
       // method: "DELETE", body: JSON.stringify(supprimerProjet)});
-
+//rajout header ??? request, response
       // 5) Traitement de la réponse
       // if (response.ok === true) {let result = await response.json()
       // localStorage.setItem("token", result.token)}
-      // Si mauvaise combinaison
-      // else {error}
+      // Si mauvaise combinaison else {error}
       // let supprimerProjet = document.getElementById("");
       //monSet.delete(5)=retire 5 du set
       // requête Fetch pour supprimer un projet de la BDD et donc de la galerie (DOM)
       // DELETE par rapport au id du projet
+      //innerHTML pour ne pas recharger la page
+      //push()
 
       
 
@@ -378,6 +420,10 @@ let divFlecheCroix = document.createElement("div");
 divFlecheCroix.setAttribute("class", "divFlecheCroix");
 
 //retour en arrière
+//inverser replace
+//eventlistener ajout photo création 2ème photo 
+// boutonAjoutPhoto.addEventListener('click', event => { 
+//   modale.replaceChild(modaleVersion2,modaleVersion1); });
 let pFleche = document.createElement("p");
 pFleche.textContent = "←";
 divFlecheCroix.appendChild(pFleche);
@@ -405,6 +451,8 @@ formAjoutProjet.setAttribute("method", "post");
 modaleVersion2.appendChild(formAjoutProjet);
 
 //Champ pour télécharger photo
+//voir vidéo danakil YT objet filereader pour aperçu image sélectionné
+//cacher quand l'image est mise
 let champPhoto = document.createElement("div")
 champPhoto.setAttribute("class", "uploader-image");
 
@@ -486,6 +534,41 @@ inputNouveauProjet.setAttribute("type", "submit");
 inputNouveauProjet.setAttribute("value", "Valider");
 modaleVersion2.appendChild(inputNouveauProjet);
 
+//const formulairePhoto=document.getElementById('btnvalider')
+//console.log (formulairePhoto)
+//formulairePhoto.addEventListener ("click", async function (event)
+//{
+//   event.preventDefault();
+//   const someData ={
+// image:document.getElementById ('image').files[0],
+// title:document.getElementById ('title').value,
+// category:document.getElementById ('category').value,
+//   }
+//   console.log(someData);
+//   fetch ('http://localhost:5678/api/works',{
+// //   method:'POST',
+// //   headers :{
+//     "accept": "application/json", 
+//     "Content-type": "multipart/form-data", (//à supprimer ???)
+//     'Authorization': `Bearer ${localStorage.getItem('token')}`,
+//   },
+//   body:JSON.stringify(someData)
+// }
+// .then (async (response) =>{
+// if (response.ok) {
+  //
+//   location.replace ("index.html");} 
+//   else {
+//     alert("fichier refusé")
+// }
+// })
+// .catch ((err) => console.log(err))
+// }
+//si formData (retirer multipart du header)
+
+
+
+
 // 1) Détecter le clic sur le bouton de validation (Event)
 // inputNouveauProjet.onclick = async function (event) {console.log ("cliqué !");
 // console.log(tabloSubmitProjet);
@@ -516,7 +599,10 @@ modaleVersion2.appendChild(inputNouveauProjet);
 // Si mauvaise combinaison}
 // requête Fetch pour ajouter un projet dans la galerie (récupérer celle de Figma,dans assets)
 // function addWork(){créer nouveau projet}
-// Publier changements (bandeau noir) pour afficher suppressions/additions dans le DOM
+//ajout projet dans la galerie de la Modale sans recharger !!
+
+// 6)Publier changements (bandeau noir) à rendre fonctionnel ???
+//pour afficher suppressions/additions dans le DOM
 // Ajout projet dans la galerie après envoi du formulaire (add)
 //monset.add(5)= ajoute 5
-
+//modale fermé quand on a ajouté un projet
