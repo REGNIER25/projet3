@@ -61,7 +61,7 @@ fetch("http://localhost:5678/api/works")
 
       gallery.appendChild(figure);
     }
-createModal(works);
+    createModal(works);
 
   })
 
@@ -70,7 +70,7 @@ createModal(works);
     (error);
   });
 
- 
+
 
 //création premier bouton qui a toutes les catégories par défaut
 let buttonAll = document.createElement("button");
@@ -116,7 +116,7 @@ fetch("http://localhost:5678/api/categories")
       filtres.appendChild(buttonCategories);
 
 
-      
+
 
 
 
@@ -192,7 +192,7 @@ log.appendChild(loginLogout);
 
 //Modifier (3 fois) = rendre les trois fonctionnels ???
 
-let divModifier1 = document.createElement("div"); 
+let divModifier1 = document.createElement("div");
 divModifier1.setAttribute("class", "modifier1");
 let spanModifier1 = document.createElement("span");
 spanModifier1.setAttribute("class", "span-modifier1");
@@ -200,7 +200,7 @@ let iModifier1 = document.createElement("i");
 iModifier1.setAttribute("class", "fa-regular fa-pen-to-square");
 spanModifier1.appendChild(iModifier1);
 
-let divModifier2 = document.createElement("div"); 
+let divModifier2 = document.createElement("div");
 divModifier2.setAttribute("class", "modifier2");
 let spanModifier2 = document.createElement("span");
 spanModifier2.setAttribute("class", "span-modifier2");
@@ -208,7 +208,7 @@ let iModifier2 = document.createElement("i");
 iModifier2.setAttribute("class", "fa-regular fa-pen-to-square");
 spanModifier2.appendChild(iModifier2);
 
-let divModifier3 = document.createElement("div"); 
+let divModifier3 = document.createElement("div");
 divModifier3.setAttribute("class", "modifier3");
 let spanModifier3 = document.createElement("span");
 spanModifier3.setAttribute("class", "span-modifier3");
@@ -217,34 +217,34 @@ iModifier3.setAttribute("class", "fa-regular fa-pen-to-square");
 spanModifier3.appendChild(iModifier3);
 
 divModifier1.appendChild(spanModifier1);
-  divModifier2.appendChild(spanModifier2);
-  divModifier3.appendChild(spanModifier3);
+divModifier2.appendChild(spanModifier2);
+divModifier3.appendChild(spanModifier3);
 
 
-  let pModifier1 = document.createElement("p");
-  pModifier1.innerHTML = "Modifier";
-  pModifier1.setAttribute("class", "");
+let pModifier1 = document.createElement("p");
+pModifier1.innerHTML = "Modifier";
+pModifier1.setAttribute("class", "");
 
-  let pModifier2 = document.createElement("p");
-  pModifier2.innerHTML = "Modifier";
-  pModifier2.setAttribute("class", "");
+let pModifier2 = document.createElement("p");
+pModifier2.innerHTML = "Modifier";
+pModifier2.setAttribute("class", "");
 
-  let pModifier3 = document.createElement("p");
-  pModifier3.innerHTML = "Modifier";
-  pModifier3.setAttribute("class", "");
+let pModifier3 = document.createElement("p");
+pModifier3.innerHTML = "Modifier";
+pModifier3.setAttribute("class", "");
 
-  divModifier1.appendChild(pModifier1);
-  divModifier2.appendChild(pModifier2);
-  divModifier3.appendChild(pModifier3);
+divModifier1.appendChild(pModifier1);
+divModifier2.appendChild(pModifier2);
+divModifier3.appendChild(pModifier3);
 
 
-  //Afficher quand modale ouverte (condition)
-  modifier1.appendChild(divModifier1);
-  divModifier1.style.display = "none";
+//Afficher quand modale ouverte (condition)
+modifier1.appendChild(divModifier1);
+divModifier1.style.display = "none";
 
-  
-  modifier2.appendChild(divModifier2);
-  modifier3.appendChild(divModifier3);
+
+modifier2.appendChild(divModifier2);
+modifier3.appendChild(divModifier3);
 
 
 
@@ -253,163 +253,142 @@ divModifier1.appendChild(spanModifier1);
 
 //création modale (Version 1) (temporaire)
 //Rajout let modal = null par défaut
-     
 
 
 
-      function createModal(works){ 
-        //cliquer pour l'ouvrir sur bandeau noir et titre projet (modifier/éditer)
-        let modaleVersion1 = document.createElement("div");
-        modale.appendChild (modaleVersion1);
-        modale.setAttribute("class", "modal");
-        let p = document.createElement("p");
-        p.setAttribute("class", "croix");
-        //function close(){}
-        //clic sur croix ou hors modale pour fermer modale
-        //eventListener pour click sur window, récup l'event avec event.target 
-        //(si utilisateur a clique sur modale ou à l'extérieur display:none;)
-        //console.log(event.target)
-        //window.addEventListener('click',e=>{console.log(e.target)})
-        //e.stopPropagation aux enfants
-        p.textContent = "X";
-        modaleVersion1.appendChild(p);
 
-        //Titre modale v1
-        let titreGalerie = document.createElement("h3");
-        titreGalerie.setAttribute("class", "titre-modale");
-        titreGalerie.textContent = "Galerie photo";
-        modaleVersion1.appendChild(titreGalerie);
+function createModal(works) {
+  //cliquer pour l'ouvrir sur bandeau noir et titre projet (modifier/éditer)
+  let modaleVersion1 = document.createElement("div");
+  modale.appendChild(modaleVersion1);
+  modale.setAttribute("class", "modal");
+  let p = document.createElement("p");
+  p.setAttribute("class", "croix");
+  //function close(){}
+  //clic sur croix ou hors modale pour fermer modale
+  //eventListener pour click sur window, récup l'event avec event.target 
+  //(si utilisateur a clique sur modale ou à l'extérieur display:none;)
+  //console.log(event.target)
+  //window.addEventListener('click',e=>{console.log(e.target)})
+  //e.stopPropagation aux enfants
+  p.textContent = "X";
+  modaleVersion1.appendChild(p);
 
-//lien vers la "deuxième" modale
-let boutonAjoutPhoto = document.createElement("input");
-boutonAjoutPhoto.setAttribute("id", "ajoutphoto");
-boutonAjoutPhoto.setAttribute("type", "submit");
-boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");    
-//eventlistener ajout photo création 2ème photo 
-boutonAjoutPhoto.addEventListener('click', event => { 
-modale.replaceChild(modaleVersion2,modaleVersion1); });
+  //Titre modale v1
+  let titreGalerie = document.createElement("h3");
+  titreGalerie.setAttribute("class", "titre-modale");
+  titreGalerie.textContent = "Galerie photo";
+  modaleVersion1.appendChild(titreGalerie);
 
+  //lien vers la "deuxième" modale
+  let boutonAjoutPhoto = document.createElement("input");
+  boutonAjoutPhoto.setAttribute("id", "ajoutphoto");
+  boutonAjoutPhoto.setAttribute("type", "submit");
+  boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");
+  //eventlistener ajout photo création 2ème photo 
+  boutonAjoutPhoto.addEventListener('click', event => {
+    modale.replaceChild(modaleVersion2, modaleVersion1);
+  });
 
+  modaleVersion1.appendChild(boutonAjoutPhoto);
+  for (work of works) {
 
-      
-   
-  
-  
-      modaleVersion1.appendChild(boutonAjoutPhoto);
-        for(work of works) {
-          
-          //Création de la galerie de la Modale
-          let divGalerie = document.createElement("div")
-          divGalerie.setAttribute("id", "modal-gallery");
-          divGalerie.setAttribute("data-categoryid", work.categoryId);
-          let modalImg = document.createElement("img");
-          modalImg.setAttribute("src", work.imageUrl);
-          modalImg.setAttribute("alt", work.title);
-          let pEditer = document.createElement("p");
+    //Création de la galerie de la Modale
+    let divGalerie = document.createElement("div")
+    divGalerie.setAttribute("id", "modal-gallery");
+    divGalerie.setAttribute("data-categoryid", work.categoryId);
+    let modalImg = document.createElement("img");
+    modalImg.setAttribute("src", work.imageUrl);
+    modalImg.setAttribute("alt", work.title);
+    let pEditer = document.createElement("p");
 
-          //pas de fonction à faire dessus
-          pEditer.textContent = "éditer";
-          let divImageTexte = document.createElement("div")
-          divImageTexte.appendChild(modalImg);
-          divImageTexte.appendChild(pEditer);
-          divGalerie.appendChild(divImageTexte);
+    //pas de fonction à faire dessus
+    pEditer.textContent = "éditer";
+    let divImageTexte = document.createElement("div")
+    divImageTexte.appendChild(modalImg);
+    divImageTexte.appendChild(pEditer);
+    divGalerie.appendChild(divImageTexte);
 
-          //Corbeille sur les travaux de la galerie de la Modale
-          let span = document.createElement("span");
-          span.setAttribute("class", "style-modal-icone");
-          let iconePanier = document.createElement("i");
-          iconePanier.setAttribute("class", "fa-regular fa-trash-can");
-          span.appendChild(iconePanier);
-          divGalerie.appendChild(span);
-          
-          //hover souris sur image (récupéré en capture d'écran)
-          // let iconeFleche = document.createElement("i");
-          // iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
-          // divGalerie.appendChild(iconeFleche);
-          // span.appendChild(iconeFleche);
-          // divGalerie.appendChild(span);
+    //Corbeille sur les travaux de la galerie de la Modale
+    let buttonPanier = document.createElement("button");
+    let spanPanier = document.createElement("span");
+    spanPanier.setAttribute("class", "style-modal-icone");
+    let iconePanier = document.createElement("i");
+    iconePanier.setAttribute("class", "fa-regular fa-trash-can");
+    spanPanier.appendChild(iconePanier);
+    buttonPanier.appendChild(spanPanier);
+    divGalerie.appendChild(buttonPanier);
 
-          modaleVersion1.appendChild(divGalerie);}
-        
-        //hr
-      let hr = document.createElement("hr");
-      hr.setAttribute("class", "hr-modale");
-      modaleVersion1.appendChild(hr);
+    //hover souris sur image (récupéré en capture d'écran)
+    // let iconeFleche = document.createElement("i");
+    // iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
+    // divGalerie.appendChild(iconeFleche);
+    // span.appendChild(iconeFleche);
+    // divGalerie.appendChild(span);
 
-     
-      
-   
+    modaleVersion1.appendChild(divGalerie);
+  }
 
-      // lien fonctionnel pour supprimer une image ! delete
-      let lienSupprimerGalerie = document.createElement("a");
-      lienSupprimerGalerie.setAttribute("class", "supprimergalerie");
-      lienSupprimerGalerie.setAttribute("href", "#");
-      lienSupprimerGalerie.textContent = "Supprimer de la galerie";
-      modaleVersion1.appendChild(lienSupprimerGalerie);
-        
-        }
-     
-//faire une boucle avec tous les travaux pour trouver celui qu'on veut éliminer
-// //donner l'id du dom à chaque carte/poubelle
-//sessionStoarge (token périssable?)
-//id de la figure
-// //poubelle.addEventListener ("click",async function(e){
-// e.preventDefault()
-// for (const workId of selectedWorks)
-// {
-//   const response = await fetch("http://localhost:5678/api/works/${workId}",
-//   method:"DELETE",
-//   // headers:{
-//     "content-type":"application/json",
-//   // Authorization:`Bearer ${window.localStorage.getItem('token')}`,
-// }
-// });
-// // if(!response.ok) {
-// // console.log ('projet ${workId}supprimé !');
-// // }
-// else {console.log(' impossible de supprimer projet ${workId}')}
-// // catch (error) {
-// // console.log (error);
-// // }
-// // }
-// // //pour un travail (doit faire pour tous les travaux ????)
-// // for (let trash of trashIcons){
-// // trash.addEventListener("click", function() {
-// // let workId = trash.getAttribute ("data-works-id");
-// // deleteWork(workId);
-// // });
-// // }
-// //imageàsuppimer.remove();
+  //hr
+  let hr = document.createElement("hr");
+  hr.setAttribute("class", "hr-modale");
+  modaleVersion1.appendChild(hr);
 
 
-      // 1) Détecter le clic sur le lien de validation
-      //Clic sur éditer; la corbeille (Event)
-      // boutonValider.onclick = async function (event) {
-      //console.log ("cliqué");
-      // event.preventDefault();
+  // lien fonctionnel pour supprimer une image ! delete
+  let lienSupprimerGalerie = document.createElement("a");
+  lienSupprimerGalerie.setAttribute("class", "supprimergalerie");
+  lienSupprimerGalerie.setAttribute("href", "#");
+  lienSupprimerGalerie.textContent = "Supprimer toute la galerie";
+  modaleVersion1.appendChild(lienSupprimerGalerie);
 
-      // 2) Récupérer l'id  du projet à supprimer
-      // let inputEmail = document.getElementById("id").value;
+  //SUPPRIMER UN PROJET
+  //Aussi pour tous les travaux
+  //Pas recharger page pour voir que projet est supprimé
 
-      // 3) Formater l'id du projet pour l'envoyer vers le serveur
-      // let supprimerProjet = {"id":id};
+  // 1) Détecter le clic sur la corbeille
+  buttonPanier.addEventListener('click', event => {
+    console.log("Cliqué !");
+  });
 
-      // 4) Envoyer l'id du nouveau projet au serveur
-      // let response = await fetch("http://localhost:5678/api/works/{Id}"), {
-      // method: "DELETE", body: JSON.stringify(supprimerProjet)});
-//rajout header ??? request, response
-      // 5) Traitement de la réponse
-      // if (response.ok === true) {let result = await response.json()
-      // localStorage.setItem("token", result.token)}
-      // Si mauvaise combinaison else {error}
-      // let supprimerProjet = document.getElementById("");
-      //monSet.delete(5)=retire 5 du set
-      // requête Fetch pour supprimer un projet de la BDD et donc de la galerie (DOM)
-      // DELETE par rapport au id du projet
-      //innerHTML pour ne pas recharger la page
-      //push()
 
-      
+  // event.preventDefault();
+  // 2) Récupérer l'id  du projet à supprimer
+
+
+  // 3) Formater l'id du projet pour l'envoyer vers le serveur
+  // Boucle avec toutes les corbeille pour trouver celle qu'on cible
+  // for (let trash of trashIcons)
+  // {trash.addEventListener("click", function() {
+  // // Attribuer l'id du projet à chaque poubelle
+  // let workId = trash.getAttribute ("data-works-id");
+  // console.log(workId);
+  // supprimerProjet(workId);});}
+
+  // 4) Envoyer l'id du nouveau projet au serveur
+  // Boucle avec tous les travaux pour trouver celui qu'on veut éliminer
+  // for (const workId of selectedWorks){
+  // await fetch("http://localhost:5678/api/works/${workId}",
+  // {method:'DELETE', 
+  // headers:
+  // {"accept": "application/json",
+  //   "content-type":"application/json",
+  // 'Authorization':`Bearer ${localStorage.getItem('token')}`,},
+  // 'body':JSON.stringify(tabloSubmitProjet)})}
+
+  // 5) Traitement de la réponse
+  // .then (async (response) =>{
+  //   if (!response.ok) {
+  //     console.log ('Projet ${workId}supprimé !');
+  //   location.replace ("index.html");
+  // }
+  //   } 
+  //   else {console.log('Impossible de supprimer projet ${workId}')}
+  //   .catch ((error) => console.log(error))})
+
+}
+
+
 
 // Modale pour ajouter un projet
 let modaleVersion2 = document.createElement("div");
@@ -440,7 +419,7 @@ let titreAjoutPhoto = document.createElement("h3");
 titreAjoutPhoto.setAttribute("class", "titre-modale");
 titreAjoutPhoto.textContent = "Ajout photo";
 modaleVersion2.appendChild(titreAjoutPhoto);
-  
+
 
 //Formulaire pour ajouter projet
 let formAjoutProjet = document.createElement("form");
@@ -459,7 +438,7 @@ champPhoto.setAttribute("class", "uploader-image");
 
 //Icone photo
 let spanPhoto = document.createElement("span");
-          spanPhoto.setAttribute("class", "style-icone-photo");
+spanPhoto.setAttribute("class", "style-icone-photo");
 let iImage = document.createElement("i")
 iImage.setAttribute("class", "fa-regular fa-image");
 spanPhoto.appendChild(iImage);
@@ -467,8 +446,10 @@ champPhoto.appendChild(spanPhoto);
 
 formAjoutProjet.appendChild(champPhoto);
 let inputPhoto = document.createElement("input")
+inputPhoto.setAttribute("required", "required");
 inputPhoto.setAttribute("type", "file");
 inputPhoto.setAttribute("accept", "image/png,image/jpg");
+//rajout poids autorisé
 inputPhoto.setAttribute("name", "image");
 inputPhoto.setAttribute("id", "image");
 let pAjouterphoto = document.createElement("p")
@@ -485,6 +466,7 @@ labelTitre.setAttribute("for", "titre");
 labelTitre.textContent = "Titre";
 formAjoutProjet.appendChild(labelTitre);
 let inputTitre = document.createElement("input");
+inputTitre.setAttribute("required", "required");
 inputTitre.setAttribute("type", "Text");
 inputTitre.setAttribute("name", "titre");
 inputTitre.setAttribute("id", "titre");
@@ -505,20 +487,21 @@ function createMenuCategories(categories) {
   optionVide.setAttribute("value", "");
   select.appendChild(optionVide);
 
-  for(category of categories) {
+  for (category of categories) {
 
 
-// récup les category.name dans le menu déroulant et générer les 3 options
-let optionCategories = document.createElement("option");
-optionCategories.setAttribute("class", "choix-categorie");
-optionCategories.setAttribute("id", category.id);
-optionCategories.setAttribute("name", category.name);
-optionCategories.setAttribute("value", category.name);
-optionCategories.innerHTML = category.name;
-select.appendChild(optionCategories);
-formAjoutProjet.appendChild(select);
+    // récup les category.name dans le menu déroulant et générer les 3 options
+    let optionCategories = document.createElement("option");
+    optionCategories.setAttribute("required", "required");
+    optionCategories.setAttribute("class", "choix-categorie");
+    optionCategories.setAttribute("id", category.id);
+    optionCategories.setAttribute("name", category.name);
+    optionCategories.setAttribute("value", category.name);
+    optionCategories.innerHTML = category.name;
+    select.appendChild(optionCategories);
+    formAjoutProjet.appendChild(select);
   }
-  
+
 }
 
 
@@ -528,81 +511,59 @@ modaleVersion2.appendChild(hr2);
 
 
 // Création bouton envoi formulaire (gris avant remplissage de tous les champs)
+//fonction changement de couleur et activer quand tous les champs st remplis
+// Gestion des erreurs (bouton Valider reste désactivé)
+
 let inputNouveauProjet = document.createElement("input")
 inputNouveauProjet.setAttribute("id", "submit");
 inputNouveauProjet.setAttribute("type", "submit");
 inputNouveauProjet.setAttribute("value", "Valider");
 modaleVersion2.appendChild(inputNouveauProjet);
 
-//const formulairePhoto=document.getElementById('btnvalider')
-//console.log (formulairePhoto)
-//formulairePhoto.addEventListener ("click", async function (event)
-//{
-//   event.preventDefault();
-//   const someData ={
-// image:document.getElementById ('image').files[0],
-// title:document.getElementById ('title').value,
-// category:document.getElementById ('category').value,
-//   }
-//   console.log(someData);
-//   fetch ('http://localhost:5678/api/works',{
-// //   method:'POST',
-// //   headers :{
-//     "accept": "application/json", 
-//     "Content-type": "multipart/form-data", (//à supprimer ???)
-//     'Authorization': `Bearer ${localStorage.getItem('token')}`,
-//   },
-//   body:JSON.stringify(someData)
-// }
-// .then (async (response) =>{
-// if (response.ok) {
-  //
-//   location.replace ("index.html");} 
-//   else {
-//     alert("fichier refusé")
-// }
-// })
-// .catch ((err) => console.log(err))
-// }
+//CREATION NOUVEAU PROJET
 //si formData (retirer multipart du header)
+//récupérer photo dans dossier assets
 
-
-
-
-// 1) Détecter le clic sur le bouton de validation (Event)
-// inputNouveauProjet.onclick = async function (event) {console.log ("cliqué !");
-// console.log(tabloSubmitProjet);
-// event.preventDefault();}
-// Gestion des erreurs (bouton Valider reste désactivé)
-
+// 1) Détecter le clic sur le bouton de validation
 // 2) Récupérer l'ensemble des 3 valeurs du formulaire
-// pour récupérer la valeur photo
-// let champImage = document.getElementById("image").value;
-// pour récupérer la valeur titre
-// let champTitre = document.getElementById("titre").value;
-// pour récupérer la valeur id des catégories
-// let champCategorie = document.getElementById(category.id);
+inputNouveauProjet.addEventListener('click', event => {
+  console.log("cliqué !");
+  event.preventDefault();
+  const tabloSubmitProjet = {
+    // pour récupérer la valeur photo (MARCHE PAS)
+    image: document.getElementById("image").files[0],
+    // pour récupérer la valeur titre
+    title: document.getElementById("titre").value,
+    // pour récupérer la valeur id des catégories
+    category: document.getElementById(category.id).value
+  }
+  console.log(tabloSubmitProjet);
 
-// 3) Formater les valeurs pour les envoyer vers le serveur (FormData)
-// let tabloSubmitProjet = { "imageUrl": champImage, "title": champTitre,
-// "categoryId": champCategorie};
+  // 3) Formater les valeurs pour les envoyer vers le serveur (FormData???)
+  // 4) Envoyer les données formatées du formulaire au serveur
+  fetch('http://localhost:5678/api/works',
+    {
+      method: 'POST',
+      headers:
+      {
+        "accept": "application/json",
+        "Content-type": "multipart/form-data",
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+      'body': JSON.stringify(tabloSubmitProjet)
+    })
 
-// 4) Envoyer les données formatées du formulaire au serveur
-// let response = await fetch("http://localhost:5678/api/works",
-// {method: "POST",
-// headers: { "accept": "application/json", "Content-type": "multipart/form-data" },
-// body: JSON.stringify(tabloSubmitProjet)});
-
-// 5) Traitement de la réponse
-// if (response.ok === true) {let result = await response.json()
-// console.log ("Nouveau projet créé !")}
-// Si mauvaise combinaison}
-// requête Fetch pour ajouter un projet dans la galerie (récupérer celle de Figma,dans assets)
-// function addWork(){créer nouveau projet}
-//ajout projet dans la galerie de la Modale sans recharger !!
+    // 5) Traitement de la réponse
+    .then(async (response) => {
+      if (response.ok) {
+        //ajout projet dans la galerie de la Modale sans recharger la page
+        location.replace("index.html");
+      }
+      else { alert("Nouveau projet refusé !") }
+    })
+    .catch((error) => console.log(error))
+})
 
 // 6)Publier changements (bandeau noir) à rendre fonctionnel ???
 //pour afficher suppressions/additions dans le DOM
-// Ajout projet dans la galerie après envoi du formulaire (add)
-//monset.add(5)= ajoute 5
 //modale fermé quand on a ajouté un projet

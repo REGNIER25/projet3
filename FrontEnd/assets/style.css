@@ -381,8 +381,8 @@ footer nav ul {
 	height: 40px;
 	width: 100%;
 	position: absolute;
-	top:0;
-	left:0;
+	top: 0;
+	left: 0;
 }
 
 .mode-edition {
@@ -418,7 +418,7 @@ footer nav ul {
 	flex-direction: row;
 	font-size: 15px;
 	padding-left: 55px;
-	margin-top: 10px;	
+	margin-top: 10px;
 }
 
 .span-modifier2 {
@@ -429,17 +429,18 @@ footer nav ul {
 .mes-projets {
 	display: flex;
 	justify-content: center;
-} 
+}
 
 .modifier3 {
 	display: flex;
 	flex-direction: row;
 	font-size: 15px;
-	padding-top: 10px;	
+	padding-top: 10px;
 }
 
 
-.span-modifier3 {margin-left: 15px;
+.span-modifier3 {
+	margin-left: 15px;
 	margin-right: 5px;
 
 }
@@ -452,11 +453,11 @@ footer nav ul {
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-	margin :auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 	width: 600px;
 	background: white;
 	border-radius: 10px;
@@ -481,7 +482,7 @@ footer nav ul {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-} 
+}
 
 
 
@@ -491,19 +492,19 @@ footer nav ul {
 	position: absolute;
 	display: flex;
 	flex-direction: row;
-}  
+}
 
 
 /*curseur*/
 
-  #modal-gallery img:hover {
+#modal-gallery img:hover {
 	cursor: url("././icons/curseur.png"), auto;
 
 }
 
-.hr-modale {margin-top:200px;
+.hr-modale {
+	margin-top: 200px;
 	line-height: 60px;
-	color:red;
 }
 
 /*icone Corbeille*/
@@ -514,8 +515,8 @@ footer nav ul {
 }
 
 .style-modal-icone {
-	top:0;
-	right:0;
+	top: 0;
+	right: 0;
 	position: relative;
 }
 
@@ -543,7 +544,8 @@ footer nav ul {
 
 /* divFlecheCroix */
 
-.divFlecheCroix{display: flex;
+.divFlecheCroix {
+	display: flex;
 }
 
 .uploader-image {
@@ -555,16 +557,17 @@ footer nav ul {
 /*icone champ image*/
 
 .fa-image {
-	color:#B9C5CC;
+	color: #B9C5CC;
 	background-color: #E8F1F7;
 }
 
 .style-icone-photo {
-	width:60px;
-	height:45px;
+	width: 60px;
+	height: 45px;
 }
 
 /* Liste des catégories */
-.choix-categorie{margin-bottom:30Opx;
-text-align: left;
+.choix-categorie {
+	margin-bottom: 30Opx;
+	text-align: left;
 }
