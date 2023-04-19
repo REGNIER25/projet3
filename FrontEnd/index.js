@@ -175,6 +175,7 @@ let pModeEdition = document.createElement("p");
 pModeEdition.innerHTML = "Mode édition";
 pModeEdition.setAttribute("class", "mode-edition");
 bandeau.appendChild(pModeEdition);
+//pas à rendre fonctionnel
 let inputPublier = document.createElement("input");
 inputPublier.setAttribute("class", "inputbandeau");
 inputPublier.setAttribute("type", "button");
@@ -190,8 +191,7 @@ loginLogout.innerText = "Login";
 loginLogout.innerText = "Logout";
 log.appendChild(loginLogout);
 
-//Modifier (3 fois) = rendre les trois fonctionnels ???
-
+//Modifier (3 fois) = les deux premiers éléments pour l'image et la présentation
 let divModifier1 = document.createElement("div");
 divModifier1.setAttribute("class", "modifier1");
 let spanModifier1 = document.createElement("span");
@@ -223,15 +223,12 @@ divModifier3.appendChild(spanModifier3);
 
 let pModifier1 = document.createElement("p");
 pModifier1.innerHTML = "Modifier";
-pModifier1.setAttribute("class", "");
 
 let pModifier2 = document.createElement("p");
 pModifier2.innerHTML = "Modifier";
-pModifier2.setAttribute("class", "");
 
 let pModifier3 = document.createElement("p");
 pModifier3.innerHTML = "Modifier";
-pModifier3.setAttribute("class", "");
 
 divModifier1.appendChild(pModifier1);
 divModifier2.appendChild(pModifier2);
@@ -291,11 +288,18 @@ function createModal(works) {
   });
 
   modaleVersion1.appendChild(boutonAjoutPhoto);
+
+  //parent en CSS
+  let modalGalerie = document.createElement("div");
+  
+  modalGalerie.setAttribute("id", "modal-gallery");
+  modaleVersion1.appendChild(modalGalerie);
+
+
   for (work of works) {
 
     //Création de la galerie de la Modale
-    let divGalerie = document.createElement("div")
-    divGalerie.setAttribute("id", "modal-gallery");
+    let divGalerie = document.createElement("div");
     divGalerie.setAttribute("data-categoryid", work.categoryId);
     let modalImg = document.createElement("img");
     modalImg.setAttribute("src", work.imageUrl);
@@ -304,12 +308,12 @@ function createModal(works) {
 
     //pas de fonction à faire dessus
     pEditer.textContent = "éditer";
-    let divImageTexte = document.createElement("div")
-    divImageTexte.appendChild(modalImg);
-    divImageTexte.appendChild(pEditer);
-    divGalerie.appendChild(divImageTexte);
+    divGalerie.appendChild(modalImg);
+    divGalerie.appendChild(pEditer);
+
 
     //Corbeille sur les travaux de la galerie de la Modale
+    // rajouter une class au bouton pour cibler
     let buttonPanier = document.createElement("button");
     let spanPanier = document.createElement("span");
     spanPanier.setAttribute("class", "style-modal-icone");
@@ -319,14 +323,20 @@ function createModal(works) {
     buttonPanier.appendChild(spanPanier);
     divGalerie.appendChild(buttonPanier);
 
+// 1) Détecter le clic sur la corbeille
+buttonPanier.addEventListener('click', event => {
+  console.log("Cliqué !");
+});
+
     //hover souris sur image (récupéré en capture d'écran)
     // let iconeFleche = document.createElement("i");
     // iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
     // divGalerie.appendChild(iconeFleche);
     // span.appendChild(iconeFleche);
     // divGalerie.appendChild(span);
+    modalGalerie.appendChild(divGalerie);
 
-    modaleVersion1.appendChild(divGalerie);
+
   }
 
   //hr
@@ -346,10 +356,7 @@ function createModal(works) {
   //Aussi pour tous les travaux
   //Pas recharger page pour voir que projet est supprimé
 
-  // 1) Détecter le clic sur la corbeille
-  buttonPanier.addEventListener('click', event => {
-    console.log("Cliqué !");
-  });
+  
 
 
   // event.preventDefault();
@@ -379,6 +386,7 @@ function createModal(works) {
   // 5) Traitement de la réponse
   // .then (async (response) =>{
   //   if (!response.ok) {
+    //Mettre une alerte de confirmation pour la sécurité
   //     console.log ('Projet ${workId}supprimé !');
   //   location.replace ("index.html");
   // }
@@ -468,7 +476,7 @@ formAjoutProjet.appendChild(labelTitre);
 let inputTitre = document.createElement("input");
 inputTitre.setAttribute("required", "required");
 inputTitre.setAttribute("type", "Text");
-inputTitre.setAttribute("name", "titre");
+inputTitre.setAttribute("name", "title");
 inputTitre.setAttribute("id", "titre");
 formAjoutProjet.appendChild(inputTitre);
 
@@ -479,7 +487,7 @@ function createMenuCategories(categories) {
   labelCategories.textContent = "Catégorie";
   formAjoutProjet.appendChild(labelCategories);
   let select = document.createElement("select");
-  select.setAttribute("name", "categorie");
+  select.setAttribute("name", "category");
   select.setAttribute("id", "categorie");
   // création première option vide par défaut
   let optionVide = document.createElement("option");
@@ -496,7 +504,8 @@ function createMenuCategories(categories) {
     optionCategories.setAttribute("class", "choix-categorie");
     optionCategories.setAttribute("id", category.id);
     optionCategories.setAttribute("name", category.name);
-    optionCategories.setAttribute("value", category.name);
+    //integer pour la catégorie
+    optionCategories.setAttribute("value", parseInt(category.id));
     optionCategories.innerHTML = category.name;
     select.appendChild(optionCategories);
     formAjoutProjet.appendChild(select);
@@ -529,14 +538,15 @@ modaleVersion2.appendChild(inputNouveauProjet);
 inputNouveauProjet.addEventListener('click', event => {
   console.log("cliqué !");
   event.preventDefault();
-  const tabloSubmitProjet = {
-    // pour récupérer la valeur photo (MARCHE PAS)
+  const tabloSubmitProjet2 = {
+    // pour récupérer la valeur photo
     image: document.getElementById("image").files[0],
     // pour récupérer la valeur titre
     title: document.getElementById("titre").value,
-    // pour récupérer la valeur id des catégories
-    category: document.getElementById(category.id).value
+    // pour récupérer la valeur id des catégories sur select
+    category: parseInt(document.getElementById("categorie").value)
   }
+  let tabloSubmitProjet = new FormData(document.getElementById("ajoutphoto"))
   console.log(tabloSubmitProjet);
 
   // 3) Formater les valeurs pour les envoyer vers le serveur (FormData???)
@@ -547,14 +557,14 @@ inputNouveauProjet.addEventListener('click', event => {
       headers:
       {
         "accept": "application/json",
-        "Content-type": "multipart/form-data",
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
-      'body': JSON.stringify(tabloSubmitProjet)
+      //FormData sur le body créé en variable
+      'body': tabloSubmitProjet
     })
 
     // 5) Traitement de la réponse
-    .then(async (response) => {
+    .then((response) => {
       if (response.ok) {
         //ajout projet dans la galerie de la Modale sans recharger la page
         location.replace("index.html");
@@ -564,6 +574,4 @@ inputNouveauProjet.addEventListener('click', event => {
     .catch((error) => console.log(error))
 })
 
-// 6)Publier changements (bandeau noir) à rendre fonctionnel ???
-//pour afficher suppressions/additions dans le DOM
 //modale fermé quand on a ajouté un projet
