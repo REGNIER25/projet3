@@ -248,9 +248,38 @@ modifier3.appendChild(divModifier3);
 //Masquer les filtres (mettre token en condition)
 //filtres.style.display = "none";
 
+//MODALE
+/* background-color: rgba(0, 0, 0, 0.02);pour body en sombre */
 //création modale (Version 1) (temporaire)
+//utiliser Aria ???
 //Rajout let modal = null par défaut
-
+// let modal = null;
+// const ouvrirModale = function(e) {
+// e.preventDefault();
+// const target = document.querySelector(e.target.getAttribute('href'));
+// target.style.display = null;
+// target.removeAttribute('aria-hidden');
+// target.setAttribute('aria-modal','true');
+// modal = target;
+// const fermer = document.querySelector(".x-close");
+// fermer.addEventListener('click', fermerModale);
+// modale.querySelector('.modale-supprimer-btn').addEventListener('click',fermerModale);
+// };
+// const fermerModale = function(e){
+// if(modal===null) return
+// e.preventDefault();
+// const fond = document.querySelector('html');
+// fond.style.background = "white";
+// modal.style.display="none";
+// modal.setAttribute('aria-hidden','true');
+// modal.removeAttribute('aria-modal');
+// modal.removeEventListener('click',fermerModale);
+// modal.querySelector('.modale-supprimer-btn').addEventListener('click',fermerModale);
+// modal=null;
+// };
+// document.querySelectorAll('.open-modal1').forEach(a=>{
+// a.addEventListener('click',ouvrirModale)
+// })
 
 
 
@@ -268,6 +297,8 @@ function createModal(works) {
   //console.log(event.target)
   //window.addEventListener('click',e=>{console.log(e.target)})
   //e.stopPropagation aux enfants
+
+  //icone class="fa-solid fa-xmark"
   p.textContent = "X";
   modaleVersion1.appendChild(p);
 
@@ -407,14 +438,16 @@ let divFlecheCroix = document.createElement("div");
 divFlecheCroix.setAttribute("class", "divFlecheCroix");
 
 //retour en arrière
-//inverser replace
-//eventlistener ajout photo création 2ème photo 
-// boutonAjoutPhoto.addEventListener('click', event => { 
-//   modale.replaceChild(modaleVersion2,modaleVersion1); });
+//history.back()???
 let pFleche = document.createElement("p");
 pFleche.textContent = "←";
+// pFleche.addEventListener('click', event => { 
+// console.log ("flèche cliquée !")
+// modaleVersion2.replaceChild(modale,modaleVersion2); });
+
 divFlecheCroix.appendChild(pFleche);
 let pCroix = document.createElement("p");
+pCroix.setAttribute("class", "croix");
 
 //fermer modale(croix ou hors modale) (event)function closeModal
 pCroix.textContent = "X";

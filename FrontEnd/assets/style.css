@@ -448,6 +448,7 @@ footer nav ul {
 
 /*Modale*/
 
+
 .modal {
 	box-sizing: border-box;
 	position: absolute;
@@ -458,6 +459,7 @@ footer nav ul {
 	bottom: 50px;
 	left: 0;
 	width: 600px;
+	height:100%;
 	background: white;
 	border-radius: 10px;
 	padding: 20px;
@@ -468,7 +470,8 @@ footer nav ul {
 
 
 .croix {
-	text-align: right;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .titre-modale {
