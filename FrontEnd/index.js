@@ -234,28 +234,65 @@ divModifier1.appendChild(pModifier1);
 divModifier2.appendChild(pModifier2);
 divModifier3.appendChild(pModifier3);
 
-
 //Afficher quand modale ouverte (condition)
 modifier1.appendChild(divModifier1);
 divModifier1.style.display = "none";
-
-
 modifier2.appendChild(divModifier2);
 modifier3.appendChild(divModifier3);
-
-
 
 //Masquer les filtres (mettre token en condition)
 //filtres.style.display = "none";
 
 //MODALE
 /* background-color: rgba(0, 0, 0, 0.02);pour body en sombre */
-//création modale (Version 1) (temporaire)
 //utiliser Aria ???
-//Rajout let modal = null par défaut
-// let modal = null;
-// const ouvrirModale = function(e) {
+  //eventListener pour click sur window, récup l'event avec event.target 
+  //(si utilisateur a clique sur modale ou à l'extérieur display:none;)
+  //console.log(event.target)
+  //window.addEventListener('click',e=>{console.log(e.target)})
+  //e.stopPropagation aux enfants
+
+// //OUVERTURE MODALE
+// const ouvrirModale = function(e){
+//   e.preventDefault();
+// const target=document.querySelector(e.target.getAttribute('href'));
+// target.style.display=null;
+// target.removeAttribute('aria-hidden');
+// target.setAttribute('aria-modal','true');
+// afficherImageModale();
+// modal=target;
+// const fermer =document.querySelector(".x-close");
+// fermer.addEventListener('click',fermerModale);
+// modal.querySelector('.modale-supprimer-btn').addEventListener('click', fermerModale);
+// modal.querySelector('.fermer-modale').addEventListener('click', stopPropagation);
+// };
+// //FERMETURE MODALE
+// // fermer modale avec la croix ou clic hors modale
+//   //function close(){}
+//   const fermerModale = function(e){
+// if(modal===null) return
 // e.preventDefault();
+// const fond=document.querySelector('html');
+// fond.style.background="white";
+// modal.style.display="none";
+// modal.setAttribute('aria-hidden','true');
+// modal.removeAttribute('aria-modal');
+// modal.removeEventListener('click',fermerModale);
+// modal.querySelector('.modale-supprimer-btn').removeEventListener('click',fermerModale);
+// modal.querySelector('.fermer-modale').removeEventListener('click', stopPropagation);
+// modal=null;
+//   }
+//   //STOP PROPAGATION MODALE
+//   const stopPropagation=function(e) {
+// e.stopPropagation()
+//   };
+//   //APPEL FONCTION
+//   document.querySelectorAll('.open-modal1').forEach(a=> {
+//    a.addEventListener ('click', ouvrirModale)});
+
+//Rajout let modal
+// let modal = null; (par défaut)
+// const ouvrirModale = function(e) {e.preventDefault();
 // const target = document.querySelector(e.target.getAttribute('href'));
 // target.style.display = null;
 // target.removeAttribute('aria-hidden');
@@ -263,8 +300,7 @@ modifier3.appendChild(divModifier3);
 // modal = target;
 // const fermer = document.querySelector(".x-close");
 // fermer.addEventListener('click', fermerModale);
-// modale.querySelector('.modale-supprimer-btn').addEventListener('click',fermerModale);
-// };
+//modale.querySelector('.modale-supprimer-btn').addEventListener('click',fermerModale);};
 // const fermerModale = function(e){
 // if(modal===null) return
 // e.preventDefault();
@@ -275,14 +311,12 @@ modifier3.appendChild(divModifier3);
 // modal.removeAttribute('aria-modal');
 // modal.removeEventListener('click',fermerModale);
 // modal.querySelector('.modale-supprimer-btn').addEventListener('click',fermerModale);
-// modal=null;
-// };
+// modal=null;};
 // document.querySelectorAll('.open-modal1').forEach(a=>{
-// a.addEventListener('click',ouvrirModale)
-// })
+// a.addEventListener('click',ouvrirModale)})
 
 
-
+//création modale (Version 1)
 function createModal(works) {
   //cliquer pour l'ouvrir sur bandeau noir et titre projet (modifier/éditer)
   let modaleVersion1 = document.createElement("div");
@@ -290,13 +324,8 @@ function createModal(works) {
   modale.setAttribute("class", "modal");
   let p = document.createElement("p");
   p.setAttribute("class", "croix");
-  //function close(){}
-  //clic sur croix ou hors modale pour fermer modale
-  //eventListener pour click sur window, récup l'event avec event.target 
-  //(si utilisateur a clique sur modale ou à l'extérieur display:none;)
-  //console.log(event.target)
-  //window.addEventListener('click',e=>{console.log(e.target)})
-  //e.stopPropagation aux enfants
+
+  
 
   //icone class="fa-solid fa-xmark"
   p.textContent = "X";
@@ -342,7 +371,6 @@ function createModal(works) {
     divGalerie.appendChild(modalImg);
     divGalerie.appendChild(pEditer);
 
-
     //Corbeille sur les travaux de la galerie de la Modale
     // rajouter une class au bouton pour cibler
     let buttonPanier = document.createElement("button");
@@ -354,17 +382,70 @@ function createModal(works) {
     buttonPanier.appendChild(spanPanier);
     divGalerie.appendChild(buttonPanier);
 
+//SUPPRIMER UN PROJET
 // 1) Détecter le clic sur la corbeille
 buttonPanier.addEventListener('click', event => {
-  console.log("Cliqué !");
-});
+  console.log("Cliqué !");});
+  //Aussi pour tous les travaux
+  //Pas recharger page pour voir que projet est supprimé
+  // event.preventDefault();
+  // 2) Récupérer l'id  du projet à supprimer
+  // 3) Formater l'id du projet pour l'envoyer vers le serveur
+  // Boucle avec toutes les corbeille pour trouver celle qu'on cible
+  // for (let trash of trashIcons)
+  // {trash.addEventListener("click", function() {
+  // // Attribuer l'id du projet à chaque poubelle
+  // let workId = trash.getAttribute ("data-works-id");
+  // console.log(workId);
+  // supprimerProjet(workId);});}
+  // 4) Envoyer l'id du nouveau projet au serveur
+  // Boucle avec tous les travaux pour trouver celui qu'on veut éliminer
+  // for (const workId of selectedWorks){
+  // await fetch("http://localhost:5678/api/works/${workId}",
+  // {method:'DELETE', 
+  // headers:
+  // {"accept": "application/json",
+  //   "content-type":"application/json",
+  // 'Authorization':`Bearer ${localStorage.getItem('token')}`,},
+  // 'body':JSON.stringify(tabloSubmitProjet)})}
+  // 5) Traitement de la réponse
+  // .then (async (response) =>{if (!response.ok) {
+    //Mettre une alerte de confirmation pour la sécurité
+  //     console.log ('Projet ${workId}supprimé !');
+  //   location.replace ("index.html");}} 
+  //   else {console.log('Impossible de supprimer projet ${workId}')}
+  //   .catch ((error) => console.log(error))})
 
+
+// const trashIcons = document.querySelectorAll('.modal-delete');
+// trashIcons.forEach(trashIcons=>{
+//  trashIcons.addEventListener("click",()=> {
+//   let id=trashIcon.dataset.id;
+// fetch("http://localhost:5678/api/works/${Id}",
+//   {method:'DELETE', 
+//   headers:
+//   {"accept": "application/json",
+//   "content-type":"application/json",
+//   'Authorization':`Bearer ${localStorage.getItem('token')}`
+//   ,},
+//   'body':JSON.stringify(tabloSubmitProjet)}})
+//   .then(response) =>{if(response.ok){
+  // for (let i=0; i<works.length;i++){
+  //   if (works[i].id==id){
+  //     works.splice(i,1);
+  //     // console.log(works);}}
+  // displayWorks();}}
+//   .then (data=>{})}
+
+//HOVER IMAGES GALERIE MODALE
     //hover souris sur image (récupéré en capture d'écran)
     // let iconeFleche = document.createElement("i");
     // iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
     // divGalerie.appendChild(iconeFleche);
     // span.appendChild(iconeFleche);
     // divGalerie.appendChild(span);
+
+
     modalGalerie.appendChild(divGalerie);
 
 
@@ -381,63 +462,19 @@ buttonPanier.addEventListener('click', event => {
   lienSupprimerGalerie.setAttribute("class", "supprimergalerie");
   lienSupprimerGalerie.setAttribute("href", "#");
   lienSupprimerGalerie.textContent = "Supprimer toute la galerie";
-  modaleVersion1.appendChild(lienSupprimerGalerie);
-
-  //SUPPRIMER UN PROJET
-  //Aussi pour tous les travaux
-  //Pas recharger page pour voir que projet est supprimé
-
-  
-
-
-  // event.preventDefault();
-  // 2) Récupérer l'id  du projet à supprimer
-
-
-  // 3) Formater l'id du projet pour l'envoyer vers le serveur
-  // Boucle avec toutes les corbeille pour trouver celle qu'on cible
-  // for (let trash of trashIcons)
-  // {trash.addEventListener("click", function() {
-  // // Attribuer l'id du projet à chaque poubelle
-  // let workId = trash.getAttribute ("data-works-id");
-  // console.log(workId);
-  // supprimerProjet(workId);});}
-
-  // 4) Envoyer l'id du nouveau projet au serveur
-  // Boucle avec tous les travaux pour trouver celui qu'on veut éliminer
-  // for (const workId of selectedWorks){
-  // await fetch("http://localhost:5678/api/works/${workId}",
-  // {method:'DELETE', 
-  // headers:
-  // {"accept": "application/json",
-  //   "content-type":"application/json",
-  // 'Authorization':`Bearer ${localStorage.getItem('token')}`,},
-  // 'body':JSON.stringify(tabloSubmitProjet)})}
-
-  // 5) Traitement de la réponse
-  // .then (async (response) =>{
-  //   if (!response.ok) {
-    //Mettre une alerte de confirmation pour la sécurité
-  //     console.log ('Projet ${workId}supprimé !');
-  //   location.replace ("index.html");
-  // }
-  //   } 
-  //   else {console.log('Impossible de supprimer projet ${workId}')}
-  //   .catch ((error) => console.log(error))})
-
-}
-
-
+  modaleVersion1.appendChild(lienSupprimerGalerie);}
 
 // Modale pour ajouter un projet
+//N'avoir q'une seule modale dans le code !!!
 let modaleVersion2 = document.createElement("div");
 modaleVersion2.setAttribute("class", "modal");
 
 //première ligne modale V2 (flèche et croix)
+//croix = fermer la modale + clic hors modale
 let divFlecheCroix = document.createElement("div");
 divFlecheCroix.setAttribute("class", "divFlecheCroix");
 
-//retour en arrière
+//retour en arrière (Flèche sur 2 "pages" modale)
 //history.back()???
 let pFleche = document.createElement("p");
 pFleche.textContent = "←";
