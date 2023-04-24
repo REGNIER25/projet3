@@ -1,12 +1,11 @@
 //CONSTANTES
-
-//déclaration constante pour la galerie des travaux
+// Constante pour la galerie des travaux
 const gallery = document.getElementById("gallery");
 
 // déclaration constante pour les filtres (div)
 const filtres = document.getElementById("filtres");
 
-//déclaration constante pour le bandeau noir
+// Constante pour le bandeau noir
 const bandeau = document.getElementById("bandeau");
 
 //déclaration constante pour le lien Login/Logout
@@ -16,8 +15,7 @@ const log = document.getElementById("log");
 const modifier1 = document.getElementById("modifier1");
 const modifier2 = document.getElementById("modifier2");
 const modifier3 = document.getElementById("modifier3");
-
-// Constante pour la modale (v1 et v2)
+// Constante pour la modale
 const modale = document.getElementById("modale");
 
 // RECUPERATION DES TRAVAUX
@@ -30,7 +28,7 @@ fetch("http://localhost:5678/api/works")
   //traitement (promise)
   .then(function (works) {
 
-    //création variable pour un projet avec la boucle for ... of ...
+  //création variable pour un projet avec la boucle for ... of ...
     for (let work of works) {
       let figure = document.createElement("figure");
 
@@ -45,7 +43,11 @@ fetch("http://localhost:5678/api/works")
       figure.appendChild(figcaption);
       gallery.appendChild(figure);}
 
-    createModal(works);})
+    //FONCTION GALERIE MODALE
+    createModal(works);
+
+    //FONCTION SUPPRIMER MODALE
+    supprimerProjet (works);})
 
   //si erreur
   .catch(function (error) {(error);});
@@ -63,10 +65,7 @@ buttonAll.addEventListener('click', event => { filtering(0) });
 
 //Méthode pour récupérer les catégories (données) avec liaison avec le backend
 fetch("http://localhost:5678/api/categories")
-
   .then(function (response) {if (response.ok) { return response.json(); }})
-
-  //traitement
   .then(function (categories) {for (let category of categories) {
 
       //création buttonCategories
@@ -82,9 +81,9 @@ fetch("http://localhost:5678/api/categories")
       filtres.appendChild(buttonCategories);
 
       //Méthode pour détecter le clic sur les filtres et récupérer le category.id de la catégorie
-      buttonCategories.addEventListener('click', event => {
-        filtering(category.id)});}
+      buttonCategories.addEventListener('click', event => {filtering(category.id)});}
 
+     //FONCTION CREATION MENU DEROULANT MODALE   
     createMenuCategories(categories);})
 
   //si erreur
@@ -110,7 +109,12 @@ function filtering(categoryID) {if (categoryID == 0) {
     let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
     for (let figure of figures) {figure.style.display = "none";} }}
 
-//Récupérer token d'authentification (condition)
+// Masquer les filtres
+if (localStorage.getItem('token')) {
+  filtres.style.display = "none";
+  } else {console.log("Masquer les filtres : pas de connexion !");}
+
+    //Récupérer token d'authentification (condition)
 //If (localStorage.getItem("token")!=null)
 let tokenRecup = localStorage.getItem("token");
 
@@ -130,27 +134,21 @@ inputPublier.setAttribute("class", "inputbandeau");
 inputPublier.setAttribute("type", "button");
 inputPublier.setAttribute("value", "Publier les changements");
 bandeau.appendChild(inputPublier);
+// AFFICHER BANDEAU NOIR
+if (localStorage.getItem('token')) {
+  bandeau.style.display = "block";
+  } else {bandeau.style.display = "none";
+    console.log("Afficher le bandeau noir : pas de connexion !");}
 
-//Logout (Connexion) à la place de Login (déconnexion)
-
-// function loginLogout() {
-//   let loginLogout = document.createElement("a");
-//   loginLogout.setAttribute("class", "login");
-//   loginLogout.setAttribute("href", "login.html");
-//   log.appendChild(loginLogout);
-//   if (localStorage.getItem('token')) {
-//     loginLogout.innerText = "Logout";
-//   } else {
-//     loginLogout.innerText = "Login";
-//   }
-// }
-
+//LOGIN (Connexion)/ LOGOUT (déconnexion)
 let loginLogout = document.createElement("a");
 loginLogout.setAttribute("class", "login");
 loginLogout.setAttribute("href", "login.html");
 loginLogout.innerText = "Login";
-loginLogout.innerText = "Logout";
 log.appendChild(loginLogout);
+if (localStorage.getItem('token')) {
+  loginLogout.innerText = "Logout";
+  } else {console.log("Afficher Logout : pas de connexion !");}
 
 //MODIFIER POUR LA PRESENTATION DE L'ARCHITECTE
 let divModifier1 = document.createElement("div");
@@ -164,6 +162,10 @@ divModifier1.appendChild(spanModifier1);
 let pModifier1 = document.createElement("p");
 pModifier1.innerHTML = "Modifier";
 divModifier1.appendChild(pModifier1);
+if (localStorage.getItem('token')) {
+divModifier1.style.display = "block";
+} else {divModifier1.style.display = "none";
+console.log("Modifier la présentation : pas de connexion !");}
 
 //MODIFIER POUR LA PHOTO DE L'ARCHITECTE
 let divModifier2 = document.createElement("div");
@@ -177,8 +179,12 @@ divModifier2.appendChild(spanModifier2);
 let pModifier2 = document.createElement("p");
 pModifier2.innerHTML = "Modifier";
 divModifier2.appendChild(pModifier2);
+if (localStorage.getItem('token')) {
+divModifier2.style.display = "block";
+} else {divModifier2.style.display = "none";
+console.log("Modifier la photo : pas de connexion !");}
 
-// MODIFIER Lien pour la modale
+// MODIFIER pour ouvrir la modale
 let divModifier3 = document.createElement("div");
 divModifier3.setAttribute("class", "modifier3");
 let spanModifier3 = document.createElement("span");
@@ -190,25 +196,20 @@ divModifier3.appendChild(spanModifier3);
 let pModifier3 = document.createElement("p");
 pModifier3.innerHTML = "Modifier";
 divModifier3.appendChild(pModifier3);
+if (localStorage.getItem('token')) {
+  divModifier3.style.display = "block";
+  } else {divModifier3.style.display = "none";
+  console.log("Ouvrir la Modale : pas de connexion !");}
 
-//Afficher quand modale ouverte (condition)
 modifier1.appendChild(divModifier1);
-divModifier1.style.display = "none";
 modifier2.appendChild(divModifier2);
+
+// EventListener pour ouvrir la modale
 modifier3.appendChild(divModifier3);
-
-// Masquer les filtres
-  if (localStorage.getItem('token')) {
-  filtres.style.display = "none";
-  } else {console.log("Pas de connexion !");}
-
-//MODALE
-/* background-color: rgba(0, 0, 0, 0.02);pour body en sombre */
-  //eventListener pour click sur window, récup l'event avec event.target 
-  // si utilisateur a clique sur modale ou à l'extérieur display:none;
-  //console.log(event.target)
-  //window.addEventListener('click',e=>{console.log(e.target)})
-  //e.stopPropagation aux enfants
+modifier3.addEventListener('click', event => {
+modale.style.display = "block";
+document.body.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+console.log(" Cliqué !");});
 
 // //OUVERTURE MODALE
 // const ouvrirModale = function(e){e.preventDefault();
@@ -216,12 +217,20 @@ modifier3.appendChild(divModifier3);
 // target.style.display=null; target.removeAttribute('aria-hidden');
 // target.setAttribute('aria-modal','true');
 // afficherImageModale(); modal=target;
+//modal.querySelector('.fermer-modale').addEventListener('click', stopPropagation);};
+/* background-color: rgba(0, 0, 0, 0.02);pour body en sombre */
+
+//MODALE
+modale.style.display = "none";
+
 // const fermer =document.querySelector(".x-close");
 // fermer.addEventListener('click',fermerModale);
 // modal.querySelector('.modale-supprimer-btn').addEventListener('click', fermerModale);
-//modal.querySelector('.fermer-modale').addEventListener('click', stopPropagation);};
-
-// FERMETURE MODALE
+  //eventListener pour click sur window, récup l'event avec event.target 
+  // si utilisateur a clique sur modale ou à l'extérieur display:none;
+  //console.log(event.target)
+  //window.addEventListener('click',e=>{console.log(e.target)})
+  //e.stopPropagation aux enfants
 // fermer modale avec la croix ou clic hors modale
 // function close(){}
 // const fermerModale = function(e){if(modal===null) return
@@ -272,12 +281,19 @@ function createModal(works) {
   let modaleVersion1 = document.createElement("div");
   modale.appendChild(modaleVersion1);
   modale.setAttribute("class", "modal");
-  let p = document.createElement("p");
-  p.setAttribute("class", "croix");
+  let pCroixModale = document.createElement("p");
+  pCroixModale.setAttribute("class", "croix");
+
+  // FERMETURE MODALE
+
+//clic hors modale
 
   //icone class="fa-solid fa-xmark"
-  p.textContent = "X";
-  modaleVersion1.appendChild(p);
+  pCroixModale.textContent = "X";
+  modaleVersion1.appendChild(pCroixModale);
+  pCroixModale.addEventListener('click', event => { 
+    modale.style.display = "none";
+    console.log ("croix cliquée !")});
 
   //Titre modale v1
   let titreGalerie = document.createElement("h3");
@@ -290,11 +306,8 @@ function createModal(works) {
   boutonAjoutPhoto.setAttribute("id", "ajoutphoto");
   boutonAjoutPhoto.setAttribute("type", "submit");
   boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");
-
-  //eventlistener ajout photo création 2ème photo 
   boutonAjoutPhoto.addEventListener('click', event => {
   modale.replaceChild(modaleVersion2, modaleVersion1);});
-
   modaleVersion1.appendChild(boutonAjoutPhoto);
 
   //parent en CSS
@@ -315,68 +328,55 @@ function createModal(works) {
     divGalerie.appendChild(pEditer);
 
     // rajouter une class au bouton pour cibler
-    let buttonPanier = document.createElement("button");
     let spanPanier = document.createElement("span");
     spanPanier.setAttribute("class", "style-modal-icone");
     let iconePanier = document.createElement("i");
     iconePanier.setAttribute("class", "fa-regular fa-trash-can");
     spanPanier.appendChild(iconePanier);
-    buttonPanier.appendChild(spanPanier);
-    divGalerie.appendChild(buttonPanier);
+    divGalerie.appendChild(spanPanier);
 
 // SUPPRIMER UN PROJET
-// 1) Détecter le clic sur la corbeille
-buttonPanier.addEventListener('click', event => {
-  console.log("Cliqué !");
-  confirm("Voulez-vous vraiment supprimer ce projet ?");
-});
-  //Aussi pour tous les travaux
-  //Pas recharger page pour voir que projet est supprimé
+//Pas recharger page pour voir que projet est supprimé
   // event.preventDefault();
-  // 2) Récupérer l'id  du projet à supprimer
-  // 3) Formater l'id du projet pour l'envoyer vers le serveur
+
+// 1) Détecter le clic sur la corbeille
+  // 2-3) Récupérer l'id du projet à supprimer et le formater pour l'envoyer
+
   // Boucle avec toutes les corbeille pour trouver celle qu'on cible
-  // for (let trash of trashIcons)
-  // {trash.addEventListener("click", function() {
-  // // Attribuer l'id du projet à chaque poubelle
-  // let workId = trash.getAttribute ("data-works-id");
-  // console.log(workId); supprimerProjet(workId);});}
+  // for (let spanPanier of spanPaniers)
+  // {spanPanier.addEventListener("click", function() {console.log("Cliqué !");
+  // confirm("Voulez-vous vraiment supprimer ce projet ?");});
+
+  // Attribuer l'id du projet à chaque poubelle
+  // let Projet = spanPanier.getAttribute ("data-works-id");
+  // console.log(Projet); supprimerProjet(Projet);});}
+
   // 4) Envoyer l'id du nouveau projet au serveur
   // Boucle avec tous les travaux pour trouver celui qu'on veut éliminer
   // for (const workId of selectedWorks){
 
-  //FETCH
   // await fetch("http://localhost:5678/api/works/${Id}",
-
-  //METHOD 
   // {method:'DELETE', 
-
-  //HEADERS
   // headers:{"accept": "application/json",
   //   "content-type":"application/json",
   // 'Authorization':`Bearer ${localStorage.getItem('token')}`,},
-
- // BODY
 //  'body':JSON.stringify(supprimerProjet)}})
 
   // 5) Traitement de la réponse
   // .then (async (response) =>{if (!response.ok) {
-
-  //     console.log ('Projet ${workId}supprimé !');
+  //     console.log ('Projet ${Id}supprimé !');
   //   location.replace ("index.html");}} 
-  //   else {console.log('Impossible de supprimer projet ${workId}')}
+  //   else {console.log('Impossible de supprimer projet ${Id}')}
   //   .catch ((error) => console.log(error))})
-
 
 // const trashIcons = document.querySelectorAll('.modal-delete');
 // trashIcons.forEach(trashIcons=>{trashIcons.addEventListener("click",()=> {
 //   let id=trashIcon.dataset.id;
 
-
 //   .then(response) =>{if(response.ok){
   // for (let i=0; i<works.length;i++){
   //   if (works[i].id==id){works.splice(i,1);
-  //     // console.log(works);}}
+  // console.log(works);}}
   // displayWorks();}}
 //   .then (data=>{})}
 
@@ -395,41 +395,36 @@ buttonPanier.addEventListener('click', event => {
   hr.setAttribute("class", "hr-modale");
   modaleVersion1.appendChild(hr);
 
-  // lien fonctionnel pour supprimer une image ! delete
+// Lien supprimer galerie
   let lienSupprimerGalerie = document.createElement("a");
   lienSupprimerGalerie.setAttribute("class", "supprimergalerie");
   lienSupprimerGalerie.setAttribute("href", "#");
-  lienSupprimerGalerie.textContent = "Supprimer toute la galerie";
+  lienSupprimerGalerie.textContent = "Supprimer la galerie";
   modaleVersion1.appendChild(lienSupprimerGalerie);}
 
-// Modale pour ajouter un projet
-//N'avoir q'une seule modale dans le code !!!
+// Modale pour ajouter un projet, q'une seule modale dans le code !!!
 let modaleVersion2 = document.createElement("div");
 modaleVersion2.setAttribute("class", "modal");
 
-//première ligne modale V2 (flèche et croix)
 //croix = fermer la modale + clic hors modale
 let divFlecheCroix = document.createElement("div");
 divFlecheCroix.setAttribute("class", "divFlecheCroix");
 
 // Retour en arrière (Flèche)
-//history.back()???
 let pFleche = document.createElement("p");
 pFleche.textContent = "←";
 pFleche.addEventListener('click', event => { 
-console.log ("flèche cliquée !")});
-// modaleVersion2.replaceChild(modale,modaleVersion2); 
-
+// modale.style.display="block";
+console.log ("Flèche cliquée !")});
 divFlecheCroix.appendChild(pFleche);
 
-//CROIX
+//fermer modale(croix ou hors modale) (event)function closeModal
 let pCroix = document.createElement("p");
 pCroix.setAttribute("class", "croix");
-
-//fermer modale(croix ou hors modale) (event)function closeModal
 pCroix.textContent = "X";
 pCroix.addEventListener('click', event => { 
-console.log ("croix cliquée !")});
+  modale.style.display = "none";
+  console.log ("Croix cliquée !")});
 divFlecheCroix.appendChild(pCroix);
 modaleVersion2.appendChild(divFlecheCroix);
 
@@ -452,28 +447,27 @@ modaleVersion2.appendChild(formAjoutProjet);
 //cacher quand l'image est mise
 let champPhoto = document.createElement("div")
 champPhoto.setAttribute("class", "uploader-image");
-
-//Icone photo
-let spanPhoto = document.createElement("span");
-spanPhoto.setAttribute("class", "style-icone-photo");
-let iImage = document.createElement("i")
-iImage.setAttribute("class", "fa-regular fa-image");
-spanPhoto.appendChild(iImage);
-champPhoto.appendChild(spanPhoto);
-
+let iImage = document.createElement("i");
+iImage.setAttribute("class", "fa-sharp fa-regular fa-image image-upload-icone");
+champPhoto.appendChild(iImage);
 formAjoutProjet.appendChild(champPhoto);
-let inputPhoto = document.createElement("input")
+let inputPhoto = document.createElement("input");
 inputPhoto.setAttribute("required", "required");
 inputPhoto.setAttribute("type", "file");
-inputPhoto.setAttribute("accept", "image/png,image/jpg");
-
-//rajout poids autorisé
+inputPhoto.setAttribute("accept", ".png, .jpg, .jpeg");
 inputPhoto.setAttribute("name", "image");
 inputPhoto.setAttribute("id", "image");
-let pAjouterphoto = document.createElement("p")
-let pFormatsphoto = document.createElement("p")
-pAjouterphoto.textContent = "+ Ajouter photo";
+inputPhoto.setAttribute("max-size", "4000");
+inputPhoto.style.display = "hidden";
+inputPhoto.style.opacity = "0";
+let boutonAjouterPhoto=document.createElement("button");
+let pAjouterphoto = document.createElement("p");
+let pFormatsphoto = document.createElement("p");
+let labelAjouterPhoto=document.createElement("label");
+labelAjouterPhoto.textContent = "+ Ajouter photo";
+champPhoto.appendChild(labelAjouterPhoto);
 pFormatsphoto.textContent = "jpg, png : 4mo max";
+pFormatsphoto.setAttribute("class", "sous-titre-image");
 champPhoto.appendChild(inputPhoto);
 champPhoto.appendChild(pAjouterphoto);
 champPhoto.appendChild(pFormatsphoto);
@@ -563,11 +557,11 @@ inputNouveauProjet.addEventListener('click', event => {
       'body': tabloSubmitProjet})
 
     // 5) Traitement de la réponse
+    //ajout projet dans la galerie de la Modale sans recharger la page
     .then((response) => {if (response.ok) {
-        //ajout projet dans la galerie de la Modale sans recharger la page
         location.replace("index.html");
+        modale.style.display="none";
       }
-      else { alert("Nouveau projet refusé !") }
-    })
+      else { alert("Nouveau projet refusé !") }})
     .catch((error) => console.log(error))})
 
