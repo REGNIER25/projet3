@@ -46,7 +46,7 @@ fetch("http://localhost:5678/api/works")
     //FONCTION GALERIE MODALE
     createModal(works);
 
-    //FONCTION SUPPRIMER MODALE
+    //FONCTION SUPPRIMER PROJET MODALE
     supprimerProjet (works);})
 
   //si erreur
@@ -115,8 +115,8 @@ if (localStorage.getItem('token')) {
   } else {console.log("Masquer les filtres : pas de connexion !");}
 
     //Récupérer token d'authentification (condition)
-//If (localStorage.getItem("token")!=null)
-let tokenRecup = localStorage.getItem("token");
+//const token = localStorage.getItem("token");
+//`bearer ${token}`,
 
 // BANDEAU NOIR
 bandeau.setAttribute("class", "bandeau");
@@ -243,14 +243,11 @@ modale.style.display = "none";
 // modal.querySelector('.modale-supprimer-btn').removeEventListener('click',fermerModale);
 // modal.querySelector('.fermer-modale').removeEventListener('click', stopPropagation);
 // modal=null;}
-
 // STOP PROPAGATION MODALE
 // const stopPropagation=function(e) {e.stopPropagation()};
-
 // APPEL FONCTION
 // document.querySelectorAll('.open-modal1').forEach(a=> {
 // a.addEventListener ('click', ouvrirModale)});
-
 //Rajout let modal
 // let modal = null; (par défaut)
 // const ouvrirModale = function(e) {e.preventDefault();
@@ -337,48 +334,50 @@ function createModal(works) {
 
 // SUPPRIMER UN PROJET
 //Pas recharger page pour voir que projet est supprimé
-  // event.preventDefault();
 
-// 1) Détecter le clic sur la corbeille
-  // 2-3) Récupérer l'id du projet à supprimer et le formater pour l'envoyer
+// // 1) Détecter le clic sur la corbeille
+iconePanier.addEventListener("click", (e)=> {
+e.preventDefault(); 
+console.log("Corbeille cliquée !");
+confirm("Ce projet a l'id n°"+ work.id +
+". Voulez-vous vraiment supprimer ce projet ?");
+supprimerProjet(e);});
+function supprimerProjet(){
+  iconePanier.getAttribute("id", work.id);
+alert(work.id);
+};
+// 2 Récupérer l'id du projet à supprimer
+//   // Boucle avec toutes les corbeille pour trouver celle qu'on cible
+//   // Attribuer l'id du projet à chaque poubelle
+//   for (iconePanier of iconePaniers) {
+//   let idProjet = iconePanier.getAttribute ("data-works-id");
+//   }
+//   // const trashIcons = document.querySelectorAll('.modal-delete');
+// // trashIcons.forEach(trashIcons=>{trashIcons.addEventListener("click",()=> {
+// //   let id=trashIcon.dataset.id;
 
-  // Boucle avec toutes les corbeille pour trouver celle qu'on cible
-  // for (let spanPanier of spanPaniers)
-  // {spanPanier.addEventListener("click", function() {console.log("Cliqué !");
-  // confirm("Voulez-vous vraiment supprimer ce projet ?");});
+// function supprimerProjet(works) {
 
-  // Attribuer l'id du projet à chaque poubelle
-  // let Projet = spanPanier.getAttribute ("data-works-id");
-  // console.log(Projet); supprimerProjet(Projet);});}
+//   // Boucle avec tous les travaux pour trouver celui qu'on veut éliminer
+//   for (work of works){
+// //3) Formater l'id du projet pour l'envoyer au back-end
+// function supprimerProjet(e)
+// {let Projet =parseInt(e.target.id);
+//   // 4) Envoyer l'id du nouveau projet au serveur
+// fetch ("http://localhost:5678/api/works/${imgId}",
+// {method:'DELETE', headers:{"accept": "application/json",
+// "content-type": "application/json",
+// 'Authorization':`Bearer ${localStorage.getItem('token')}`,},})
 
-  // 4) Envoyer l'id du nouveau projet au serveur
-  // Boucle avec tous les travaux pour trouver celui qu'on veut éliminer
-  // for (const workId of selectedWorks){
+//   // 5) Traitement de la réponse
+// .then (response) =>{if (!response.ok) {
+// console.log ("Projet ${Id}supprimé !");
+// location.replace ("index.html");}
+// else {alert("Impossible de supprimer projet ${Id}")};}}
 
-  // await fetch("http://localhost:5678/api/works/${Id}",
-  // {method:'DELETE', 
-  // headers:{"accept": "application/json",
-  //   "content-type":"application/json",
-  // 'Authorization':`Bearer ${localStorage.getItem('token')}`,},
-//  'body':JSON.stringify(supprimerProjet)}})
+// // TRAITEMENTS DES ERREURS
+// .catch((error) => console.log(error))})
 
-  // 5) Traitement de la réponse
-  // .then (async (response) =>{if (!response.ok) {
-  //     console.log ('Projet ${Id}supprimé !');
-  //   location.replace ("index.html");}} 
-  //   else {console.log('Impossible de supprimer projet ${Id}')}
-  //   .catch ((error) => console.log(error))})
-
-// const trashIcons = document.querySelectorAll('.modal-delete');
-// trashIcons.forEach(trashIcons=>{trashIcons.addEventListener("click",()=> {
-//   let id=trashIcon.dataset.id;
-
-//   .then(response) =>{if(response.ok){
-  // for (let i=0; i<works.length;i++){
-  //   if (works[i].id==id){works.splice(i,1);
-  // console.log(works);}}
-  // displayWorks();}}
-//   .then (data=>{})}
 
 //HOVER IMAGES GALERIE MODALE
     //hover souris sur image (récupéré en capture d'écran)
@@ -443,7 +442,6 @@ formAjoutProjet.setAttribute("method", "post");
 modaleVersion2.appendChild(formAjoutProjet);
 
 //Champ pour télécharger photo
-//voir vidéo danakil YT objet filereader pour aperçu image sélectionné
 //cacher quand l'image est mise
 let champPhoto = document.createElement("div")
 champPhoto.setAttribute("class", "uploader-image");
@@ -458,7 +456,6 @@ inputPhoto.setAttribute("accept", ".png, .jpg, .jpeg");
 inputPhoto.setAttribute("name", "image");
 inputPhoto.setAttribute("id", "image");
 inputPhoto.setAttribute("max-size", "4000");
-inputPhoto.style.display = "hidden";
 inputPhoto.style.opacity = "0";
 let boutonAjouterPhoto=document.createElement("button");
 let pAjouterphoto = document.createElement("p");
@@ -565,3 +562,31 @@ inputNouveauProjet.addEventListener('click', event => {
       else { alert("Nouveau projet refusé !") }})
     .catch((error) => console.log(error))})
 
+//Affichez l'image choisie dans la modale
+// //voir vidéo danakil YT objet filereader pour aperçu image sélectionné
+// //récupérer l'input de l'image
+// let afficherImage = document.getElementById("image");
+// //listener
+// afficherImage.addEventListener('change',function(event){
+// //pour lire le fichier
+// let newReader = new FileReader();
+// //viser le fichier
+// let file =event.target.files[0];
+// //si fichier existe (condition)
+// if(file>0){
+// // création de l'image téléchargée
+//   let imageUpload=document.createElement("img");
+//   // ajouter l'image téléchargée (création espace)
+//   imageUpload.classList.add('image-load');
+//   //récupérer la source de l'image
+//   imageUpload.src= event.target.result;
+//   //création div pour afficher l'image (id à créer, voir si espace existe déjà)
+//   let divImageForm = document.getElementById("change-image");
+//   //vider l'input
+//   champPhoto.innerHTML='';
+//   //relier image à la div
+//   champPhoto.appendChild(imageUpload);
+//   //méthode pour lire le fichier dans le DOM
+//   newReader.readAsDataURL(file);
+// };
+// });
