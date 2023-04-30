@@ -20,8 +20,9 @@ const modifier3 = document.getElementById("modifier3");
 // Constante pour la modale
 const modale = document.getElementById("modale");
 
-//Récupérer token d'authentification (condition)
-//const token = localStorage.getItem("token"); `bearer ${token}`,
+// Constante pour le token
+const token = localStorage.getItem("token"); 
+//`bearer ${token}`,
 
 // RECUPERATION DES TRAVAUX
 fetch("http://localhost:5678/api/works")
@@ -149,19 +150,24 @@ if (localStorage.getItem('token')) {bandeau.style.display = "block";
 console.log("Afficher le bandeau noir : pas de connexion !");}
 
 //LOGIN (Connexion)/ LOGOUT (déconnexion)
+//mode visiteur par défaut
 let loginLogout = document.createElement("a");
 loginLogout.setAttribute("class", "login");
 loginLogout.setAttribute("href", "login.html");
 loginLogout.innerText = "Login";
 log.appendChild(loginLogout);
+//si connecté
 if (localStorage.getItem('token')) {loginLogout.innerText = "Logout";
 } else { console.log("Afficher Logout : pas de connexion !"); }
-//eventlistener
-//deconnexion
-//retour à la page d'accueil sans mode édition
-// log.addEventListener("click", (e) => {
-  // e.preventDefault();
-  // console.log(e.currentTarget.getAttribute("data-id"));})
+//Déconnexion/suppression token
+log.addEventListener("click", (e) => {
+e.preventDefault();
+console.log("clic log détecté");
+//retour à la page d'accueil en mode visiteur
+localStorage.removeItem(token);
+loginLogout.innerText = "Login";
+loginLogout.setAttribute("href", "index.html");
+})
 
 //MODIFIER POUR LA PRESENTATION DE L'ARCHITECTE
 let divModifier1 = document.createElement("div");
@@ -221,7 +227,11 @@ modifier3.addEventListener('click', event => {modale.style.display = "block";
   console.log("Modale ouverte !");});
 
 // GESTION DE LA MODALE
+if (modale.style.display = "none") {
+  document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
+}
 modale.style.display = "none";
+//Fermeture de la modale
 // const ouvrirModale = function(e){e.preventDefault();
 // const target=document.querySelector(e.target.getAttribute('href'));
 // target.style.display=null; target.removeAttribute('aria-hidden');
@@ -336,43 +346,32 @@ function createModal(works) {
     spanPanier.appendChild(iconePanier);
     divGalerie.appendChild(spanPanier);
 
-    // SUPPRIMER UN PROJET
-    // Pas recharger page pour voir que projet est supprimé
+    // SUPPRIMER UN PROJET (sans rechargement de la page!)
     // 1) Détecter le clic sur la corbeille
     iconePanier.addEventListener("click", (e) => {
       e.preventDefault();
       console.log(e.currentTarget.getAttribute("data-id"));
             // 2 Récupérer l'id du projet à supprimer
-          // Attribuer l'id du projet à chaque corbeille
       let workId = e.currentTarget.getAttribute("data-id");
       let workTitle = e.currentTarget.getAttribute("data-title");
       confirm("Ce projet a l'id n°" + workId + " et se nomme : " + workTitle +
       ". Voulez-vous vraiment supprimer ce projet ?");
-    // Boucle avec toutes les corbeille pour trouver celle qu'on cible
-    // for (iconePanier of iconePaniers) {
-    // let idProjet = iconePanier.getAttribute ("data-works-id");}
-    // const trashIcons = document.querySelectorAll('.modal-delete');
-    // trashIcons.forEach(trashIcons=>{trashIcons.addEventListener("click",()=> {
-    // let id=trashIcon.dataset.id;
-    // function supprimerProjet(works) {
-    // Boucle avec tous les travaux pour trouver celui qu'on veut éliminer
-    // for (work of works){
-
       // 3) Formater l'id du projet pour l'envoyer au back-end
-    // {let Projet =parseInt(e.target.id);
-        
+  let projetId = document.getElementsByName("data-id");
+  console.log(projetId);
     // 4) Envoyer l'id du nouveau projet au serveur
     //Utiliser fetch pour requête api et suprimer travail avec id
-    fetch ("http://localhost:5678/api/works/${workId}",
-    {method:'DELETE', headers:{"accept": "application/json",
+    fetch ("http://localhost:5678/api/works/${id}",
+    {method:'DELETE', 
+    headers:{"accept": "application/json",
     "content-type": "application/json",
     'Authorization':`Bearer ${localStorage.getItem('token')}`,},})
-
     // 5) Traitement de la réponse et des erreurs
     .then((response) => {if (response.ok) {
-      location.replace("index.html");
-    console.log ("Projet ${workId} supprimé !");}
-    else {alert("Impossible de supprimer projet ${workId}")}})
+    console.log (response); 
+    alert("Projet " +projetId+ " supprimé !");
+    console.log(projetId);}
+    else {alert("Impossible de supprimer projet " + projetId)}})
     .catch((error) => console.log(error))})
 
     //HOVER IMAGES GALERIE MODALE
@@ -448,12 +447,14 @@ iImage.setAttribute("class", "fa-sharp fa-regular fa-image image-upload-icone");
 champPhoto.appendChild(iImage);
 formAjoutProjet.appendChild(champPhoto);
 let inputPhoto = document.createElement("input");
+//champ obligatoire
 inputPhoto.setAttribute("required", "required");
 inputPhoto.setAttribute("type", "file");
 inputPhoto.setAttribute("accept", ".png, .jpg, .jpeg");
 inputPhoto.setAttribute("name", "image");
 inputPhoto.setAttribute("id", "image");
 inputPhoto.setAttribute("max-size", "4000");
+//opacity pour cacher l'input par défaut
 inputPhoto.style.opacity = "0";
 let boutonAjouterPhoto = document.createElement("button");
 let pAjouterphoto = document.createElement("p");
@@ -474,13 +475,16 @@ inputPhoto.addEventListener('change', function (event) {
   // si fichier existe (condition)
   if (file) {
   // création de l'image téléchargée
+  //lui appliquer une classe et la bonne taille
     let imageUpload = document.createElement("img");
     imageUpload.setAttribute("src", URL.createObjectURL(file));
+    imageUpload.setAttribute("class", "imageUpload");
     // ajouter l'image téléchargée (création espace)
     imageUpload.classList.add('image-load');
     // récupérer la source de l'image
     // imageUpload.src= event.target.result;
     // création div pour afficher l'image
+    // Affichez l'image choisie dans la modale
     let divImageForm = document.getElementById("image");
     // relier image à la div
     champPhoto.appendChild(imageUpload);
@@ -494,6 +498,7 @@ labelTitre.setAttribute("for", "titre");
 labelTitre.textContent = "Titre";
 formAjoutProjet.appendChild(labelTitre);
 let inputTitre = document.createElement("input");
+//champ obligatoire
 inputTitre.setAttribute("required", "required");
 inputTitre.setAttribute("type", "Text");
 inputTitre.setAttribute("name", "title");
@@ -519,6 +524,7 @@ function createMenuCategories(categories) {
   // BOUCLE POUR RECUPERER LES CATEGORIES DANS LE MENU DEROULANT
   for (category of categories) {
     let optionCategories = document.createElement("option");
+    //champ obligatoire
     optionCategories.setAttribute("required", "required");
     optionCategories.setAttribute("class", "choix-categorie");
     optionCategories.setAttribute("id", category.id);
@@ -533,16 +539,13 @@ let hr2 = document.createElement("hr");
 hr2.setAttribute("class", "hr-modale");
 modaleVersion2.appendChild(hr2);
 
-// Bouton envoi formulaire (gris avant remplissage de tous les champs)
-// Changement de couleur et activer quand tous les champs st remplis
-// Gestion des erreurs (bouton Valider reste désactivé)
-let inputNouveauProjet = document.createElement("input")
-inputNouveauProjet.setAttribute("id", "submit");
+// BOUTON ENVOI FORMULAIRE 
+let inputNouveauProjet = document.createElement("input");
 inputNouveauProjet.setAttribute("type", "submit");
 inputNouveauProjet.setAttribute("value", "Valider");
 modaleVersion2.appendChild(inputNouveauProjet);
 
-//CREATION NOUVEAU PROJET
+//CREATION NOUVEAU PROJET (sans rechargement de la page !)
 //récupérer photo dans dossier assets
 // 1) Détecter le clic sur le bouton de validation
 // 2) Récupérer les 3 valeurs du formulaire
@@ -580,8 +583,16 @@ inputNouveauProjet.addEventListener('click', event => {
       else { alert("Nouveau projet refusé !") }})
     .catch((error) => console.log(error))})
 
-// Affichez l'image choisie dans la modale
+    // GESTION BOUTON VALIDER (désactivé/activé)
+// inputNouveauProjet.setAttribute("id", "boutonpasactif");
+// inputNouveauProjet.setAttribute("disabled", "true");
+// //voir si tous les champs du formulaire sont remplis
+//   if (tabloSubmitProjet2 === null)
+// {console.log("Tous les champs ne sont pas remplis !");}
+// else {
+//   inputNouveauProjet.setAttribute("id", "submit");
+//   inputNouveauProjet.setAttribute("disabled", "false");
+// }
+
 // voir vidéo danakil YT objet filereader pour aperçu image sélectionné
-// récupérer l'input de l'image
 // let afficherImage = document.getElementById("image");
-// listener

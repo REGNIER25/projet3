@@ -296,6 +296,7 @@ footer nav ul {
 	height: 20px;
 }
 
+/* Lien login/logout menu*/
 .login {
 	text-decoration: none;
 	color: black;
@@ -496,10 +497,13 @@ footer nav ul {
 
 
 /*curseur*/
-
+/* cursor {
+	width: 50px;
+	height: 10px;
+} */
+/*mettre bonne taille*/
 #modal-gallery img:hover {
 	cursor: url("././icons/curseur.png"), auto;
-
 }
 
 .hr-modale {
@@ -507,18 +511,21 @@ footer nav ul {
 	line-height: 60px;
 }
 
-/*icone Corbeille*/
+/* span icone Corbeille */
+.style-modal-icone {
+	/* top: 0;
+	right: 0; */
+	position: absolute;
+}
+
+/*Icone Corbeille*/
 .fa-trash-can {
 	color: white;
 	background-color: black;
 	padding: 5px;
 }
 
-.style-modal-icone {
-	top: 0;
-	right: 0;
-	position: relative;
-}
+
 
 #ajoutphoto {
 	margin: auto;
@@ -566,8 +573,28 @@ footer nav ul {
 	height: 45px;
 }
 
+/* Image téléchargée */
+.imageUpload{
+width: 130px;
+height: 190px; 
+position:absolute;
+/* top: 770px; */
+/* left:650px; */
+}
+
 /* Liste des catégories */
 .choix-categorie {
 	margin-bottom: 30Opx;
 	text-align: left;
+}
+
+/* bouton formulaire désactivé */
+#boutonpasactif {color:white;
+background-color: #A7A7A7;
+}
+
+/* hover bouton formulaire */
+#submit:hover {
+	background-color: #1D6154;
+	color: white;
 }
