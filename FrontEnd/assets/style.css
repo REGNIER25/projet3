@@ -399,9 +399,7 @@ footer nav ul {
 	border-radius: 20px;
 }
 
-/*Modifier*/
-
-
+/*Les 3 liens Modifier*/
 .modifier1 {
 	display: flex;
 	flex-direction: row;
@@ -475,47 +473,56 @@ footer nav ul {
 	justify-content: flex-end;
 }
 
+/* titre modale */
+
 .titre-modale {
 	display: flex;
 	font-size: 20px;
+	justify-content: center;
 }
 
-
+/* Galerie des images dans la modale */
 
 #modal-gallery {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
+/* bloc image éditer corbeille */
+.bloc-galerie-modale{
+	padding:5px;
+} 
 
+
+/* Images de la galerie de la modale  */
 
 #modal-gallery img {
 	width: 120px;
 	height: 160px;
+	
 }
 
-
-/*curseur*/
-/* cursor {
-	width: 50px;
-	height: 10px;
-} */
-/*mettre bonne taille*/
+/* curseur */
 #modal-gallery img:hover {
 	cursor: url("././icons/curseur.png"), auto;
 }
 
+/* HR */
+
 .hr-modale {
-	margin-top: 200px;
+	margin-top: 80px;
 	line-height: 60px;
 }
 
 /* span icone Corbeille */
 .style-modal-icone {
-	/* top: 0;
-	right: 0; */
 	position: absolute;
+	margin-top: 5px;
+	margin-left: 50px;
+	margin-right: 5px;
+	margin-bottom: 400px;
 }
 
 /*Icone Corbeille*/
@@ -523,12 +530,17 @@ footer nav ul {
 	color: white;
 	background-color: black;
 	padding: 5px;
+	
 }
 
-
+/* Bouton ajouter une photo */
 
 #ajoutphoto {
+	display: flex;
 	margin: auto;
+	align-self: center;
+	justify-content: center;
+
 }
 
 #ajoutphoto>* {
@@ -543,10 +555,13 @@ footer nav ul {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+/* lien supprimer galerie */
 
 .supprimergalerie {
 	color: red;
 	text-decoration: none;
+	display: flex;
+	justify-content: center;
 }
 
 /* divFlecheCroix */
@@ -555,10 +570,31 @@ footer nav ul {
 	display: flex;
 }
 
+/* FORMULAIRE AJOUT PROJET */
+
+#formulaire-ajout-projet{
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-self: center;
+
+}
+
+#formulaire-ajout-projet input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+/* CHAMP IMAGE */
+
 .uploader-image {
 	width: 400px;
 	height: 160px;
 	background-color: #E8F1F7;
+	justify-content: center;
+	align-items: center;
 }
 
 /*icone champ image*/
@@ -591,10 +627,17 @@ position:absolute;
 /* bouton formulaire désactivé */
 #boutonpasactif {color:white;
 background-color: #A7A7A7;
+border-color: #A7A7A7;;
+display: flex;
+	margin: auto;
+	align-self: center;
+	justify-content: center;
 }
 
 /* hover bouton formulaire */
-#submit:hover {
+#boutonpasactif:hover {
 	background-color: #1D6154;
 	color: white;
 }
+/* .mybutton[disabled]
+.mybutton[disabled]:hover{background-color: #A7A7A7;} */
