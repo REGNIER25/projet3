@@ -53,8 +53,6 @@ fetch("http://localhost:5678/api/works")
     //FONCTION GALERIE MODALE
     createModal(works);
 
-    //FONCTION SUPPRIMER PROJET MODALE
-    supprimerProjet(works);
   })
 
   //si erreur
@@ -245,34 +243,32 @@ modifier3.appendChild(divModifier3);
 modifier3.addEventListener('click', event => {
   event.preventDefault ();
   modale.style.display = "block";
+// background-color pour mettre body en sombre
   document.body.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-  console.log("Modale ouverte !");});
+  console.log("Modale ouverte !");
+});
 
 // FERMETURE DE LA MODALE si clic en dehors de la modale
-//mettre avec ouverture de la modale !!!!
-if(modale.style.display = "block") {
-window.addEventListener('click', event => {event.preventDefault ();
-    modale.style.display = "none";
-    document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-    console.log("Clic hors modale !")});}
-  
-  
+document.addEventListener("mouseup", function(event) {
+  let cible = document.getElementById("modale");
+  if (!cible.contains(event.target)) 
+  {console.log("clic à l'extérieur de la modale !");
+  modale.style.display = "none";
+  document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
+}
+  else {console.log("clic à l'intérieur de la modale !");}
+})
   
 // const target=document.querySelector(e.target.getAttribute('href'));
 // target.style.display=null; target.removeAttribute('aria-hidden');
 // target.setAttribute('aria-modal','true');
 // afficherImageModale(); modal=target;
 // modal.querySelector('.fermer-modale').addEventListener('click', stopPropagation);};
-/* background-color: rgba(0, 0, 0, 0.02);pour body en sombre */
 // const fermer =document.querySelector(".x-close");
-// fermer.addEventListener('click',fermerModale);
 // modal.querySelector('.modale-supprimer-btn').addEventListener('click', fermerModale);
-// eventListener pour click sur window, récup l'event avec event.target 
-// window.addEventListener('click',e=>{console.log(e.target)})
 // e.stopPropagation aux enfants
 // const fermerModale = function(e){if(modal===null) return
 // const fond=document.querySelector('html');
-// fond.style.background="white"; modal.style.display="none";
 // modal.setAttribute('aria-hidden','true');
 // modal.removeAttribute('aria-modal');
 // modal.removeEventListener('click',fermerModale);
@@ -295,7 +291,6 @@ window.addEventListener('click', event => {event.preventDefault ();
 // modal.querySelector('.modale-supprimer-btn').addEventListener('click',fermerModale);
 // modal=null;};
 // document.querySelectorAll('.open-modal1').forEach(a=>{
-// a.addEventListener('click',ouvrirModale)})
 
 // CREATION MODALE
 function createModal(works) {
@@ -306,9 +301,6 @@ function createModal(works) {
   modale.setAttribute("class", "modal");
   let pCroixModale = document.createElement("p");
   pCroixModale.setAttribute("class", "croix");
-
-
-  //icone class="fa-solid fa-xmark"
   pCroixModale.textContent = "X";
   modaleVersion1.appendChild(pCroixModale);
 
@@ -353,36 +345,29 @@ function createModal(works) {
     divGalerie.appendChild(spanPanier);
 
     // SUPPRIMER UN PROJET (sans rechargement de la page!)
-    //Quels éléments sont nécessaires pour la suppression
-    //trash.ClassList.add
-    //trash.setAttribute('data-id,work[i].id);
     // 1) Détecter le clic sur la corbeille
     iconePanier.addEventListener("click", (e) => {
       e.preventDefault();
       console.log(e.currentTarget.getAttribute("data-id"));
-            // 2 Récupérer l'id du projet à supprimer
+// 2 Récupérer l'id du projet à supprimer
       let workId = e.currentTarget.getAttribute("data-id");
       let workTitle = e.currentTarget.getAttribute("data-title");
       confirm("Ce projet a l'id n°" + workId + " et se nomme : " + workTitle +
       ". Voulez-vous vraiment supprimer ce projet ?");
       // 3) Formater l'id du projet pour l'envoyer au back-end
-  let projetId = document.getElementsByName("data-id");
-  console.log(projetId);
     // 4) Envoyer l'id du nouveau projet au serveur
     //Utiliser fetch pour requête api et suprimer travail avec id
-    //boucle for pour supprimer travail
-    fetch ("http://localhost:5678/api/works/${id}",
+    fetch ("http://localhost:5678/api/works/${workId}",
     {method:'DELETE', 
-    headers:{"accept": "application/json",
-    "content-type": "application/json",
+    headers:{
     'Authorization':`Bearer ${token}`,},})
     // 5) Traitement de la réponse et des erreurs
-    .then((response) => {if (response.ok) {
-    console.log (response); 
+    .then((response) => {if (response.status===200) {
     e.preventDefault();
-    alert("Projet " +projetId+ " supprimé !");
-    console.log(projetId);}
-    else {alert("Impossible de supprimer projet " + projetId)}})
+    alert("Projet n° " +workId+ " supprimé !");}
+    else {alert("Impossible de supprimer n° " + workId);
+    console.log ("réponse du serveur :" + response.status); 
+  }})
     .catch((error) => console.log(error))})
 
     //HOVER IMAGES GALERIE MODALE (récupéré en capture d'écran)
@@ -416,32 +401,38 @@ function createModal(works) {
   modaleVersion1.appendChild(lienSupprimerGalerie);}
 
 // Modale pour ajouter un projet, q'une seule modale dans le code !!!
-//pas le même css v1 et v2
 let modaleVersion2 = document.createElement("div");
 modaleVersion2.setAttribute("class", "modal");
 
-// FLECHE = retour en arrière
+// FLECHE v2= retour en arrière V1 !!!!
 let pFleche = document.createElement("p");
 pFleche.textContent = "←";
 pFleche.addEventListener('click', event => {
-  document.location.href="index.html";
+  modaleVersion2.replaceWith(modaleVersion1);
+  // modaleVersion2.remove();
+  // modale.style.display = "block";
+// modaleVersion2.style.display="none";
   event.preventDefault();
 console.log("Flèche cliquée !")});
 
-
 let divFlecheCroix = document.createElement("div");
 divFlecheCroix.appendChild(pFleche);
-divFlecheCroix.setAttribute("class", "divFlecheCroix");
+
+//CROIX v2
 let pCroix = document.createElement("p");
 pCroix.setAttribute("class", "croix");
 pCroix.textContent = "X";
+
 // FERMETURE DE LA MODALE (croix)
+//problème qd on rouve la modale (v2 au lieu de v1) !!!!
 pCroix.addEventListener('click', event => {
   modale.style.display = "none";
   document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
   event.preventDefault();
   console.log("Croix cliquée !")});
+
 divFlecheCroix.appendChild(pCroix);
+divFlecheCroix.setAttribute("class", "divFlecheCroix");
 modaleVersion2.appendChild(divFlecheCroix);
 
 //TITRE modale v2
@@ -462,10 +453,19 @@ modaleVersion2.appendChild(formAjoutProjet);
 //cacher quand l'image est mise
 let champPhoto = document.createElement("div")
 champPhoto.setAttribute("class", "uploader-image");
+
+//icone image
 let iImage = document.createElement("i");
-iImage.setAttribute("class", "fa-sharp fa-regular fa-image image-upload-icone");
-champPhoto.appendChild(iImage);
+iImage.setAttribute("class", "fa-sharp fa-regular fa-image");
+let spanImage = document.createElement("i");
+spanImage.setAttribute("class", "span-image");
+spanImage.appendChild(iImage);
+champPhoto.appendChild(spanImage);
+
+
 formAjoutProjet.appendChild(champPhoto);
+
+//input photo
 let inputPhoto = document.createElement("input");
 //champ obligatoire
 inputPhoto.setAttribute("required", "required");
@@ -474,19 +474,30 @@ inputPhoto.setAttribute("accept", ".png, .jpg, .jpeg");
 inputPhoto.setAttribute("name", "image");
 inputPhoto.setAttribute("id", "image");
 inputPhoto.setAttribute("max-size", "4000");
+
 //opacity pour cacher l'input par défaut
 inputPhoto.style.opacity = "0";
+
+//créer bouton à la place de l'input
 let boutonAjouterPhoto = document.createElement("button");
-let pAjouterphoto = document.createElement("p");
+boutonAjouterPhoto.setAttribute("class", "bouton-ajouter-photo");
+boutonAjouterPhoto.textContent = "+ Ajouter photo";
+champPhoto.appendChild(boutonAjouterPhoto);
+
+//texte format image et taille
 let pFormatsphoto = document.createElement("p");
-let labelAjouterPhoto = document.createElement("label");
-labelAjouterPhoto.textContent = "<br>+ Ajouter photo";
-champPhoto.appendChild(labelAjouterPhoto);
 pFormatsphoto.textContent = "jpg, png : 4mo max";
 pFormatsphoto.setAttribute("class", "sous-titre-image");
-champPhoto.appendChild(inputPhoto);
-champPhoto.appendChild(pAjouterphoto);
 champPhoto.appendChild(pFormatsphoto);
+
+//label = voir utilité
+// let labelAjouterPhoto = document.createElement("label");
+// champPhoto.appendChild(labelAjouterPhoto);
+
+//raccorder avec "bouton" ajout photo!!!
+champPhoto.appendChild(inputPhoto);
+
+// PREVISUALISATION DE L'IMAGE
 inputPhoto.addEventListener('change', function (event) {
   // pour lire le fichier
   let newReader = new FileReader();
@@ -515,6 +526,7 @@ inputPhoto.addEventListener('change', function (event) {
 // CHAMP TITRE
 let labelTitre = document.createElement("label");
 labelTitre.setAttribute("for", "titre");
+labelTitre.setAttribute("class", "label-titre");
 labelTitre.textContent = "Titre";
 formAjoutProjet.appendChild(labelTitre);
 let inputTitre = document.createElement("input");
@@ -523,17 +535,20 @@ inputTitre.setAttribute("required", "required");
 inputTitre.setAttribute("type", "Text");
 inputTitre.setAttribute("name", "title");
 inputTitre.setAttribute("id", "titre");
+inputTitre.setAttribute("class", "champ-titre");
 formAjoutProjet.appendChild(inputTitre);
 
 //CHAMP CATEGORIES
 function createMenuCategories(categories) {
   let labelCategories = document.createElement("label");
   labelCategories.setAttribute("for", "categorie");
+  labelCategories.setAttribute("class", "label-categorie");
   labelCategories.textContent = "Catégorie";
   formAjoutProjet.appendChild(labelCategories);
   let select = document.createElement("select");
   select.setAttribute("name", "category");
   select.setAttribute("id", "categorie");
+  select.setAttribute("class", "champ-categorie");
 
   // Première option vide par défaut
   let optionVide = document.createElement("option");
@@ -556,7 +571,7 @@ function createMenuCategories(categories) {
 
 //HR2
 let hr2 = document.createElement("hr");
-hr2.setAttribute("class", "hr-modale");
+hr2.setAttribute("class", "hr2-modale");
 modaleVersion2.appendChild(hr2);
 
 // BOUTON VALIDER FORMULAIRE (désactivé)
@@ -564,20 +579,13 @@ let inputNouveauProjet = document.createElement("input");
 inputNouveauProjet.setAttribute("type", "submit");
 inputNouveauProjet.setAttribute("value", "Valider");
 modaleVersion2.appendChild(inputNouveauProjet);
-inputNouveauProjet.setAttribute("id", "boutonpasactif");
-inputNouveauProjet.setAttribute("disabled", "true");
-
-//BOUTON VALIDER FORMULAIRE (activé)
-// voir si tous les champs du formulaire sont remplis
-let image = document.getElementById("image").value;
-let title = document.getElementById("titre").value ;
-let categorie = document.getElementById("categorie").value ;
-console.log(image + title + categorie);
-if (image === null ||title === null ||categorie === null)
-{console.log("Tous les champs ne sont pas remplis !");}
-else {
 inputNouveauProjet.setAttribute("id", "submit");
-inputNouveauProjet.setAttribute("disabled", "false");}
+// inputNouveauProjet.setAttribute("disabled", "");
+// inputNouveauProjet.setAttribute("id", "boutonpasactif");
+//   inputNouveauProjet.setAttribute("disabled", "true");
+
+
+
 
 //CREATION NOUVEAU PROJET (sans rechargement de la page !)
 //récupérer photo dans dossier assets
@@ -624,5 +632,36 @@ inputNouveauProjet.addEventListener('click', event => {
     .catch((error) => console.log(error))})
 
  
+//BOUTON VALIDER FORMULAIRE (activé)
+// voir si tous les champs du formulaire sont remplis
+// if (image === null ||title === null ||categorie === null)
+
+// function RemplirFormulaire()
+
+// {
+//   let image = document.getElementById("image") ;
+// let title = document.getElementById("titre") ;
+// let categorie = document.getElementById("categorie");
+// let tableau_champs = [image, title, categorie];
+// console.log(tableau_champs);
+// let tableau_plein = true;
+// valeur = document.getElementById(champ_obligatoire[i]).value;
+
+// for (let i; h<3; i++)
+
+// if( (valeur.length == 0) || (valeur == "") || (valeur == "NULL") )
+// {tableau_plein = false;
+//   inputNouveauProjet.setAttribute("id", "boutonpasactif");
+//   inputNouveauProjet.setAttribute("disabled", "true");
+//   console.log("Tous les champs ne sont pas remplis !");
+// }
+// else (tableau_plein)
+// {
+// document.getElementById('Validation').disabled = false;
+// console.log(image + title + categorie);
+// inputNouveauProjet.setAttribute("id", "submit");
+// inputNouveauProjet.setAttribute("disabled", "false");
+
+// }
 
 

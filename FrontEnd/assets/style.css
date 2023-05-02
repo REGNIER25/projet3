@@ -564,10 +564,13 @@ footer nav ul {
 	justify-content: center;
 }
 
+/* MODALE V2 */
+
 /* divFlecheCroix */
 
 .divFlecheCroix {
 	display: flex;
+	justify-content: space-between;
 }
 
 /* FORMULAIRE AJOUT PROJET */
@@ -589,25 +592,50 @@ footer nav ul {
 
 /* CHAMP IMAGE */
 
+
 .uploader-image {
 	width: 400px;
 	height: 160px;
 	background-color: #E8F1F7;
-	justify-content: center;
-	align-items: center;
+	border-radius: 3px;
+		margin: auto;
+		justify-content: center;
 }
 
-/*icone champ image*/
+/*Icone photo du champ image*/
 
 .fa-image {
 	color: #B9C5CC;
 	background-color: #E8F1F7;
+	font-size:100px ;
+	display: flex;
+		margin: auto;
+		justify-content: center;
+	text-align: center;
 }
 
-.style-icone-photo {
-	width: 60px;
-	height: 45px;
-}
+
+/* Bouton ajouter photo */
+
+.bouton-ajouter-photo{color:#306685;
+	background-color: #CBD6DC;
+	border-color: #CBD6DC;
+	border-radius: 50px;
+	width: 170px;
+height: 35px;
+padding:5px;
+	display: flex;
+		margin: auto;
+		align-self: center;
+		justify-content: center;}
+
+/* Texte format, taille image */
+
+.sous-titre-image{
+	display: flex;
+		margin: auto;
+		align-self: center;
+		justify-content: center;}
 
 /* Image téléchargée */
 .imageUpload{
@@ -618,11 +646,46 @@ position:absolute;
 /* left:650px; */
 }
 
+/* champ titre */
+
+.label-titre{
+	padding-left: 70px;
+
+}
+
+
+.champ-titre {width: 400px;
+	height:50px;
+	display: flex;
+	margin: auto;
+	align-self: center;
+	justify-content: center;
+}
+
+/* champ categorie */
+
+.label-categorie{
+	padding-left: 70px;
+
+}
+
+.champ-categorie{width: 400px;
+	height:50px;
+	display: flex;
+	margin: auto;
+	align-self: center;
+	justify-content: center;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
 /* Liste des catégories */
 .choix-categorie {
-	margin-bottom: 30Opx;
 	text-align: left;
 }
+
+/* Hr modale v2 */
+.hr2-modale {width: 400px;}
 
 /* bouton formulaire désactivé */
 #boutonpasactif {color:white;
