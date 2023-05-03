@@ -21,7 +21,7 @@ const modifier3 = document.getElementById("modifier3");
 const modale = document.getElementById("modale");
 
 // Constante pour le token
-const token = localStorage.getItem("token"); 
+const token = localStorage.getItem("token");
 
 // RECUPERATION DES TRAVAUX
 fetch("http://localhost:5678/api/works")
@@ -29,7 +29,9 @@ fetch("http://localhost:5678/api/works")
   //réponse du back-end (promise)
   .then(function (response) {
     if (response.ok) {
-      return response.json();}})
+      return response.json();
+    }
+  })
 
   //traitement (promise)
   .then(function (works) {
@@ -93,7 +95,8 @@ fetch("http://localhost:5678/api/categories")
     }
 
     //FONCTION CREATION MENU DEROULANT MODALE   
-    createMenuCategories(categories);})
+    createMenuCategories(categories);
+  })
 
   //si erreur
   .catch(function (error) { (error); });
@@ -105,7 +108,9 @@ function filtering(categoryID) {
     for (let figureToShow of figuresToShow) {
 
       //intégration CSS display:block; en JS pour afficher
-      figureToShow.style.display = "block";}}
+      figureToShow.style.display = "block";
+    }
+  }
   else {
 
     // Création variable figuresToShow 
@@ -114,14 +119,18 @@ function filtering(categoryID) {
     for (let figureToShow of figuresToShow) {
 
       //intégration CSS display:block; en JS pour afficher
-      figureToShow.style.display = "block";}
+      figureToShow.style.display = "block";
+    }
 
     //not pour sélectionner les figures des catégories non voulues
     let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
-    for (let figure of figures) { figure.style.display = "none"; }}}
+    for (let figure of figures) { figure.style.display = "none"; }
+  }
+}
 
 // MASQUER FILTRES
-if (localStorage.getItem('token')) {filtres.style.display = "none";
+if (localStorage.getItem('token')) {
+  filtres.style.display = "none";
 } else { console.log("Masquer les filtres : pas de connexion !"); }
 
 // BANDEAU NOIR
@@ -144,8 +153,10 @@ bandeau.appendChild(inputPublier);
 // AFFICHER BANDEAU NOIR
 if (localStorage.getItem('token')) {
   // bandeau.style.display = "block";
-} else {bandeau.style.display = "none";
-console.log("Afficher le bandeau noir : pas de connexion !");}
+} else {
+  bandeau.style.display = "none";
+  console.log("Afficher le bandeau noir : pas de connexion !");
+}
 
 //LOGIN (Connexion)/ LOGOUT (déconnexion)
 //mode visiteur par défaut
@@ -166,19 +177,19 @@ logout.style.display = "none";
 if (localStorage.getItem('token')) {
   console.log("Afficher Logout : connexion ok !");
   login.style.display = "none";
-logout.style.display = "block";
-//si pas connecté
-} else { 
-  console.log("Afficher Logout : pas de connexion !"); 
+  logout.style.display = "block";
+  //si pas connecté
+} else {
+  console.log("Afficher Logout : pas de connexion !");
 }
 // Déconnexion/suppression token
 logout.addEventListener("click", (e) => {
-localStorage.removeItem("token", token);
-console.log("token : " + token);
-login.style.display = "block";
-//retour à la page d'accueil en mode visiteur
-document.location.href="index.html";
-e.preventDefault();
+  localStorage.removeItem("token", token);
+  console.log("token : " + token);
+  login.style.display = "block";
+  //retour à la page d'accueil en mode visiteur
+  document.location.href = "index.html";
+  e.preventDefault();
 })
 
 //MODIFIER POUR LA PRESENTATION DE L'ARCHITECTE
@@ -195,8 +206,10 @@ pModifier1.innerHTML = "Modifier";
 divModifier1.appendChild(pModifier1);
 if (localStorage.getItem('token')) {
   // divModifier1.style.display = "block";
-} else {divModifier1.style.display = "none";
-  console.log("Modifier la présentation : pas de connexion !");}
+} else {
+  divModifier1.style.display = "none";
+  console.log("Modifier la présentation : pas de connexion !");
+}
 
 //MODIFIER POUR LA PHOTO DE L'ARCHITECTE
 let divModifier2 = document.createElement("div");
@@ -212,8 +225,10 @@ pModifier2.innerHTML = "Modifier";
 divModifier2.appendChild(pModifier2);
 if (localStorage.getItem('token')) {
   // divModifier2.style.display = "block";
-} else {divModifier2.style.display = "none";
-  console.log("Modifier la photo : pas de connexion !");}
+} else {
+  divModifier2.style.display = "none";
+  console.log("Modifier la photo : pas de connexion !");
+}
 
 // MODIFIER pour ouvrir la modale
 let divModifier3 = document.createElement("div");
@@ -229,8 +244,10 @@ pModifier3.innerHTML = "Modifier";
 divModifier3.appendChild(pModifier3);
 if (localStorage.getItem('token')) {
   // divModifier3.style.display = "block";
-} else {divModifier3.style.display = "none";
-  console.log("Ouvrir la Modale : pas de connexion !");}
+} else {
+  divModifier3.style.display = "none";
+  console.log("Ouvrir la Modale : pas de connexion !");
+}
 
 modifier1.appendChild(divModifier1);
 modifier2.appendChild(divModifier2);
@@ -241,24 +258,24 @@ modale.style.display = "none";
 // OUVERTURE DE LA MODALE
 modifier3.appendChild(divModifier3);
 modifier3.addEventListener('click', event => {
-  event.preventDefault ();
+  event.preventDefault();
   modale.style.display = "block";
-// background-color pour mettre body en sombre
+  // background-color pour mettre body en sombre
   document.body.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
   console.log("Modale ouverte !");
 });
 
 // FERMETURE DE LA MODALE si clic en dehors de la modale
-document.addEventListener("mouseup", function(event) {
+document.addEventListener("mouseup", function (event) {
   let cible = document.getElementById("modale");
-  if (!cible.contains(event.target)) 
-  {console.log("clic à l'extérieur de la modale !");
-  modale.style.display = "none";
-  document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-}
-  else {console.log("clic à l'intérieur de la modale !");}
+  if (!cible.contains(event.target)) {
+    console.log("clic à l'extérieur de la modale !");
+    modale.style.display = "none";
+    document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
+  }
+  else { console.log("clic à l'intérieur de la modale !"); }
 })
-  
+
 // const target=document.querySelector(e.target.getAttribute('href'));
 // target.style.display=null; target.removeAttribute('aria-hidden');
 // target.setAttribute('aria-modal','true');
@@ -304,12 +321,13 @@ function createModal(works) {
   pCroixModale.textContent = "X";
   modaleVersion1.appendChild(pCroixModale);
 
-   // FERMETURE DE LA MODALE (croix)
+  // FERMETURE DE LA MODALE (croix)
   pCroixModale.addEventListener('click', event => {
     modale.style.display = "none";
     document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-    console.log("croix cliquée !")});
-   
+    console.log("croix cliquée !")
+  });
+
 
   //TITRE GALERIE PHOTO
   let titreGalerie = document.createElement("h3");
@@ -349,26 +367,35 @@ function createModal(works) {
     iconePanier.addEventListener("click", (e) => {
       e.preventDefault();
       console.log(e.currentTarget.getAttribute("data-id"));
-// 2 Récupérer l'id du projet à supprimer
+      // 2 Récupérer l'id du projet à supprimer
       let workId = e.currentTarget.getAttribute("data-id");
       let workTitle = e.currentTarget.getAttribute("data-title");
       confirm("Ce projet a l'id n°" + workId + " et se nomme : " + workTitle +
-      ". Voulez-vous vraiment supprimer ce projet ?");
+        ". Voulez-vous vraiment supprimer ce projet ?");
       // 3) Formater l'id du projet pour l'envoyer au back-end
-    // 4) Envoyer l'id du nouveau projet au serveur
-    //Utiliser fetch pour requête api et suprimer travail avec id
-    fetch ("http://localhost:5678/api/works/${workId}",
-    {method:'DELETE', 
-    headers:{
-    'Authorization':`Bearer ${token}`,},})
-    // 5) Traitement de la réponse et des erreurs
-    .then((response) => {if (response.status===200) {
-    e.preventDefault();
-    alert("Projet n° " +workId+ " supprimé !");}
-    else {alert("Impossible de supprimer n° " + workId);
-    console.log ("réponse du serveur :" + response.status); 
-  }})
-    .catch((error) => console.log(error))})
+      // 4) Envoyer l'id du nouveau projet au serveur
+      //Utiliser fetch pour requête api et suprimer travail avec id
+      fetch(`http://localhost:5678/api/works/${workId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        })
+        // 5) Traitement de la réponse et des erreurs
+        //change 200, 204 çà marche!!!
+        .then((response) => {
+          if (response.status === 200) {
+            e.preventDefault();
+            alert("Projet n° " + workId + " supprimé !");
+          }
+          else {
+            alert("Impossible de supprimer n° " + workId);
+            console.log("réponse du serveur :" + response.status);
+          }
+        })
+        .catch((error) => console.log(error))
+    })
 
     //HOVER IMAGES GALERIE MODALE (récupéré en capture d'écran)
     // let iconeFleche = document.createElement("i");
@@ -377,28 +404,31 @@ function createModal(works) {
     // span.appendChild(iconeFleche);
     // divGalerie.appendChild(span);
 
-    modalGalerie.appendChild(divGalerie); }
+    modalGalerie.appendChild(divGalerie);
+  }
 
   //HR (TRAIT)
   let hr = document.createElement("hr");
   hr.setAttribute("class", "hr-modale");
   modaleVersion1.appendChild(hr);
 
-   // BOUTON AJOUTER UNE PHOTO
-   let boutonAjoutPhoto = document.createElement("input");
-   boutonAjoutPhoto.setAttribute("id", "ajoutphoto");
-   boutonAjoutPhoto.setAttribute("type", "submit");
-   boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");
-   boutonAjoutPhoto.addEventListener('click', event => {
-   modale.replaceChild(modaleVersion2, modaleVersion1);});
-   modaleVersion1.appendChild(boutonAjoutPhoto);
+  // BOUTON AJOUTER UNE PHOTO
+  let boutonAjoutPhoto = document.createElement("input");
+  boutonAjoutPhoto.setAttribute("id", "ajoutphoto");
+  boutonAjoutPhoto.setAttribute("type", "submit");
+  boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");
+  boutonAjoutPhoto.addEventListener('click', event => {
+    modale.replaceChild(modaleVersion2, modaleVersion1);
+  });
+  modaleVersion1.appendChild(boutonAjoutPhoto);
 
   // LIEN SUPPRIMER LA GALERIE
   let lienSupprimerGalerie = document.createElement("a");
   lienSupprimerGalerie.setAttribute("class", "supprimergalerie");
   lienSupprimerGalerie.setAttribute("href", "#");
   lienSupprimerGalerie.textContent = "Supprimer la galerie";
-  modaleVersion1.appendChild(lienSupprimerGalerie);}
+  modaleVersion1.appendChild(lienSupprimerGalerie);
+}
 
 // Modale pour ajouter un projet, q'une seule modale dans le code !!!
 let modaleVersion2 = document.createElement("div");
@@ -408,12 +438,13 @@ modaleVersion2.setAttribute("class", "modal");
 let pFleche = document.createElement("p");
 pFleche.textContent = "←";
 pFleche.addEventListener('click', event => {
-  modaleVersion2.replaceWith(modaleVersion1);
+  console.log("Flèche cliquée !");
+  event.preventDefault();
+  // createModal(works);
   // modaleVersion2.remove();
   // modale.style.display = "block";
-// modaleVersion2.style.display="none";
-  event.preventDefault();
-console.log("Flèche cliquée !")});
+  // modaleVersion2.style.display="none";
+});
 
 let divFlecheCroix = document.createElement("div");
 divFlecheCroix.appendChild(pFleche);
@@ -427,9 +458,11 @@ pCroix.textContent = "X";
 //problème qd on rouve la modale (v2 au lieu de v1) !!!!
 pCroix.addEventListener('click', event => {
   modale.style.display = "none";
+  document.getElementById("modale").innerHTML=""
   document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
   event.preventDefault();
-  console.log("Croix cliquée !")});
+  console.log("Croix cliquée !")
+});
 
 divFlecheCroix.appendChild(pCroix);
 divFlecheCroix.setAttribute("class", "divFlecheCroix");
@@ -505,8 +538,8 @@ inputPhoto.addEventListener('change', function (event) {
   let file = event.target.files[0];
   // si fichier existe (condition)
   if (file) {
-  // création de l'image téléchargée
-  //lui appliquer une classe et la bonne taille
+    // création de l'image téléchargée
+    //lui appliquer une classe et la bonne taille
     let imageUpload = document.createElement("img");
     imageUpload.setAttribute("src", URL.createObjectURL(file));
     imageUpload.setAttribute("class", "imageUpload");
@@ -521,7 +554,8 @@ inputPhoto.addEventListener('change', function (event) {
     champPhoto.appendChild(imageUpload);
     // méthode pour lire le fichier dans le DOM
     // newReader.readAsDataURL(file);
-  };});
+  };
+});
 
 // CHAMP TITRE
 let labelTitre = document.createElement("label");
@@ -567,7 +601,9 @@ function createMenuCategories(categories) {
     optionCategories.setAttribute("value", parseInt(category.id));
     optionCategories.innerHTML = category.name;
     select.appendChild(optionCategories);
-    formAjoutProjet.appendChild(select);}}
+    formAjoutProjet.appendChild(select);
+  }
+}
 
 //HR2
 let hr2 = document.createElement("hr");
@@ -603,35 +639,44 @@ inputNouveauProjet.addEventListener('click', event => {
     title: document.getElementById("titre").value,
 
     // pour récupérer la valeur id des catégories sur select
-    category: parseInt(document.getElementById("categorie").value)}
+    category: parseInt(document.getElementById("categorie").value)
+  }
   let tabloSubmitProjet = new FormData(document.getElementById("formulaire-ajout-projet"))
   console.log(tabloSubmitProjet);
 
-  
+
 
   // 3) Formater les valeurs pour les envoyer vers le serveur (FormData)
   // 4) Envoyer les données formatées du formulaire au serveur
   //modale fermé quand on a ajouté un projet
   fetch('http://localhost:5678/api/works',
-    {method: 'POST', headers:
-      {"accept": "application/json",
-        'Authorization': `Bearer ${token}`,},
+    {
+      method: 'POST', headers:
+      {
+        "accept": "application/json",
+        'Authorization': `Bearer ${token}`,
+      },
       //FormData sur le body créé en variable
-      'body': tabloSubmitProjet })
+      'body': tabloSubmitProjet
+    })
 
     // 5) Traitement de la réponse
     //ajout projet dans la galerie de la Modale sans recharger la page
-     // FERMETURE DE LA MODALE
-    .then((response) => {if (response.ok) {
-      event.preventDefault();
+    // FERMETURE DE LA MODALE
+    .then((response) => {
+      if (response.ok) {
+        event.preventDefault();
         location.replace("index.html");
         modale.style.display = "none";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
+        alert("Nouveau projet accepté !");
       }
-      else { alert("Nouveau projet refusé !") }})
-    .catch((error) => console.log(error))})
+      else { alert("Nouveau projet refusé !") }
+    })
+    .catch((error) => console.log(error))
+})
 
- 
+
 //BOUTON VALIDER FORMULAIRE (activé)
 // voir si tous les champs du formulaire sont remplis
 // if (image === null ||title === null ||categorie === null)
@@ -653,6 +698,7 @@ inputNouveauProjet.addEventListener('click', event => {
 // {tableau_plein = false;
 //   inputNouveauProjet.setAttribute("id", "boutonpasactif");
 //   inputNouveauProjet.setAttribute("disabled", "true");
+//si tous les champs ne sont pas remplis
 //   console.log("Tous les champs ne sont pas remplis !");
 // }
 // else (tableau_plein)

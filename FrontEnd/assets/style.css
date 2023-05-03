@@ -290,6 +290,9 @@ footer nav ul {
 	margin: 2em
 }
 
+/* Lien logo page d'accueil */
+.lien-logo {text-decoration: none;}
+
 /*Menu*/
 
 .instagram {
@@ -458,7 +461,7 @@ footer nav ul {
 	bottom: 50px;
 	left: 0;
 	width: 600px;
-	height:100%;
+	height: 100%;
 	background: white;
 	border-radius: 10px;
 	padding: 20px;
@@ -491,9 +494,9 @@ footer nav ul {
 }
 
 /* bloc image éditer corbeille */
-.bloc-galerie-modale{
-	padding:5px;
-} 
+.bloc-galerie-modale {
+	padding: 5px;
+}
 
 
 /* Images de la galerie de la modale  */
@@ -501,7 +504,7 @@ footer nav ul {
 #modal-gallery img {
 	width: 120px;
 	height: 160px;
-	
+
 }
 
 /* curseur */
@@ -530,7 +533,7 @@ footer nav ul {
 	color: white;
 	background-color: black;
 	padding: 5px;
-	
+
 }
 
 /* Bouton ajouter une photo */
@@ -575,8 +578,8 @@ footer nav ul {
 
 /* FORMULAIRE AJOUT PROJET */
 
-#formulaire-ajout-projet{
-	display:flex;
+#formulaire-ajout-projet {
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-self: center;
@@ -598,8 +601,8 @@ footer nav ul {
 	height: 160px;
 	background-color: #E8F1F7;
 	border-radius: 3px;
-		margin: auto;
-		justify-content: center;
+	margin: auto;
+	justify-content: center;
 }
 
 /*Icone photo du champ image*/
@@ -607,55 +610,59 @@ footer nav ul {
 .fa-image {
 	color: #B9C5CC;
 	background-color: #E8F1F7;
-	font-size:100px ;
+	font-size: 100px;
 	display: flex;
-		margin: auto;
-		justify-content: center;
+	margin: auto;
+	justify-content: center;
 	text-align: center;
 }
 
 
 /* Bouton ajouter photo */
 
-.bouton-ajouter-photo{color:#306685;
+.bouton-ajouter-photo {
+	color: #306685;
 	background-color: #CBD6DC;
 	border-color: #CBD6DC;
 	border-radius: 50px;
 	width: 170px;
-height: 35px;
-padding:5px;
+	height: 35px;
+	padding: 5px;
 	display: flex;
-		margin: auto;
-		align-self: center;
-		justify-content: center;}
+	margin: auto;
+	align-self: center;
+	justify-content: center;
+}
 
 /* Texte format, taille image */
 
-.sous-titre-image{
+.sous-titre-image {
 	display: flex;
-		margin: auto;
-		align-self: center;
-		justify-content: center;}
+	margin: auto;
+	align-self: center;
+	justify-content: center;
+}
 
 /* Image téléchargée */
-.imageUpload{
-width: 130px;
-height: 190px; 
-position:absolute;
-/* top: 770px; */
-/* left:650px; */
+.imageUpload {
+	width: 130px;
+	height: 190px;
+	position: absolute;
+	/* top: 770px; */
+	/* left:650px; */
 }
 
 /* champ titre */
 
-.label-titre{
+.label-titre {
 	padding-left: 70px;
 
 }
 
 
-.champ-titre {width: 400px;
-	height:50px;
+.champ-titre {
+	width: 400px;
+	height: 50px;
 	display: flex;
 	margin: auto;
 	align-self: center;
@@ -664,13 +671,14 @@ position:absolute;
 
 /* champ categorie */
 
-.label-categorie{
+.label-categorie {
 	padding-left: 70px;
 
 }
 
-.champ-categorie{width: 400px;
-	height:50px;
+.champ-categorie {
+	width: 400px;
+	height: 50px;
 	display: flex;
 	margin: auto;
 	align-self: center;
@@ -685,13 +693,17 @@ position:absolute;
 }
 
 /* Hr modale v2 */
-.hr2-modale {width: 400px;}
+.hr2-modale {
+	width: 400px;
+}
 
 /* bouton formulaire désactivé */
-#boutonpasactif {color:white;
-background-color: #A7A7A7;
-border-color: #A7A7A7;;
-display: flex;
+#boutonpasactif {
+	color: white;
+	background-color: #A7A7A7;
+	border-color: #A7A7A7;
+	;
+	display: flex;
 	margin: auto;
 	align-self: center;
 	justify-content: center;
@@ -702,5 +714,6 @@ display: flex;
 	background-color: #1D6154;
 	color: white;
 }
+
 /* .mybutton[disabled]
 .mybutton[disabled]:hover{background-color: #A7A7A7;} */
