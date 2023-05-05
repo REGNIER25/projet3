@@ -594,8 +594,6 @@ footer nav ul {
 }
 
 /* CHAMP IMAGE */
-
-
 .uploader-image {
 	width: 400px;
 	height: 160px;
@@ -603,10 +601,18 @@ footer nav ul {
 	border-radius: 3px;
 	margin: auto;
 	justify-content: center;
+	align-items: center;
+}
+
+/* Affichage image téléchargée */
+.imageUpload {
+	width: 130px;
+	height: 160px;
+	position: absolute;
+	text-align: center;
 }
 
 /*Icone photo du champ image*/
-
 .fa-image {
 	color: #B9C5CC;
 	background-color: #E8F1F7;
@@ -619,7 +625,6 @@ footer nav ul {
 
 
 /* Bouton ajouter photo */
-
 .bouton-ajouter-photo {
 	color: #306685;
 	background-color: #CBD6DC;
@@ -635,7 +640,6 @@ footer nav ul {
 }
 
 /* Texte format, taille image */
-
 .sous-titre-image {
 	display: flex;
 	margin: auto;
@@ -643,14 +647,7 @@ footer nav ul {
 	justify-content: center;
 }
 
-/* Image téléchargée */
-.imageUpload {
-	width: 130px;
-	height: 190px;
-	position: absolute;
-	/* top: 770px; */
-	/* left:650px; */
-}
+
 
 /* champ titre */
 
@@ -658,7 +655,6 @@ footer nav ul {
 	padding-left: 70px;
 
 }
-
 
 .champ-titre {
 	width: 400px;
@@ -702,7 +698,6 @@ footer nav ul {
 	color: white;
 	background-color: #A7A7A7;
 	border-color: #A7A7A7;
-	;
 	display: flex;
 	margin: auto;
 	align-self: center;
