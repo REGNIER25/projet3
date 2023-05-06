@@ -42,14 +42,7 @@ function displayWorks(works) {
     let figcaption = document.createElement("figcaption");
     figcaption.innerHTML = work.title;
     figure.appendChild(figcaption);
-    gallery.appendChild(figure);
-  }
-
-}
-
-
-
-
+    gallery.appendChild(figure);}}
 
 //Méthode pour récupérer les catégories (données) avec liaison avec le backend
 
@@ -98,32 +91,22 @@ function filtering(categoryID) {
     console.log("script filtres en cours");
     let figuresToShow = gallery.querySelectorAll(`figure`);
     for (let figureToShow of figuresToShow) {
-
       //intégration CSS display:block; en JS pour afficher
-      figureToShow.style.display = "block";
-    }
-  }
+      figureToShow.style.display = "block";}}
   else {
-
     // Création variable figuresToShow 
     //pour afficher par défaut toutes les figures dans le DOM avec gallery.querySelectorAll
     let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
     for (let figureToShow of figuresToShow) {
-
       //intégration CSS display:block; en JS pour afficher
-      figureToShow.style.display = "block";
-    }
+      figureToShow.style.display = "block";}
 
     //not pour sélectionner les figures des catégories non voulues
     let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
-    for (let figure of figures) { figure.style.display = "none"; }
-  }
-}
+    for (let figure of figures) { figure.style.display = "none"; }}}
 
 // MASQUER FILTRES
-if (localStorage.getItem('token')) {
-  filtres.style.display = "none";
-} else { console.log("Masquer les filtres : pas de connexion !"); }
+if (localStorage.getItem('token')) {filtres.style.display = "none";}
 
 // BANDEAU NOIR
 bandeau.setAttribute("class", "bandeau");
@@ -143,22 +126,16 @@ inputPublier.setAttribute("value", "Publier les changements");
 bandeau.appendChild(inputPublier);
 
 // AFFICHER BANDEAU NOIR
-if (localStorage.getItem('token')) {
-  // bandeau.style.display = "block";
-} else {
-  bandeau.style.display = "none";
-  console.log("Afficher le bandeau noir : pas de connexion !");
-}
+if (token===null) {bandeau.style.display = "none";}
 
-//LOGIN (Connexion)/ LOGOUT (déconnexion)
-//mode visiteur par défaut
-//login
+//LOGIN (Connexion)
 let login = document.createElement("a");
 login.setAttribute("class", "login");
 login.innerText = "Login";
 login.setAttribute("href", "login.html");
 log.appendChild(login);
-//logout
+
+// LOGOUT (Déconnexion)
 let logout = document.createElement("a");
 logout.setAttribute("class", "login");
 logout.innerText = "Logout";
@@ -167,13 +144,8 @@ logout.style.display = "none";
 
 // si connecté
 if (localStorage.getItem('token')) {
-  console.log("Afficher Logout : connexion ok !");
   login.style.display = "none";
-  logout.style.display = "block";
-  //si pas connecté
-} else {
-  console.log("Afficher Logout : pas de connexion !");
-}
+  logout.style.display = "block";}
 // Déconnexion/suppression token
 logout.addEventListener("click", (e) => {
   localStorage.removeItem("token", token);
@@ -181,8 +153,7 @@ logout.addEventListener("click", (e) => {
   login.style.display = "block";
   //retour à la page d'accueil en mode visiteur
   document.location.href = "index.html";
-  e.preventDefault();
-})
+  e.preventDefault();})
 
 //MODIFIER POUR LA PRESENTATION DE L'ARCHITECTE
 let divModifier1 = document.createElement("div");
@@ -196,12 +167,7 @@ divModifier1.appendChild(spanModifier1);
 let pModifier1 = document.createElement("p");
 pModifier1.innerHTML = "Modifier";
 divModifier1.appendChild(pModifier1);
-if (localStorage.getItem('token')) {
-  // divModifier1.style.display = "block";
-} else {
-  divModifier1.style.display = "none";
-  console.log("Modifier la présentation : pas de connexion !");
-}
+if (token===null) {divModifier1.style.display = "none";}
 
 //MODIFIER POUR LA PHOTO DE L'ARCHITECTE
 let divModifier2 = document.createElement("div");
@@ -215,12 +181,7 @@ divModifier2.appendChild(spanModifier2);
 let pModifier2 = document.createElement("p");
 pModifier2.innerHTML = "Modifier";
 divModifier2.appendChild(pModifier2);
-if (localStorage.getItem('token')) {
-  // divModifier2.style.display = "block";
-} else {
-  divModifier2.style.display = "none";
-  console.log("Modifier la photo : pas de connexion !");
-}
+if (token===null) {divModifier2.style.display = "none";}
 
 // MODIFIER pour ouvrir la modale
 let divModifier3 = document.createElement("div");
@@ -252,25 +213,17 @@ modifier3.appendChild(divModifier3);
 modifier3.addEventListener('click', event => {
   createModal(works);
   modale.style.display = "block";
-  // background-color pour mettre body en sombre
-  document.body.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-  console.log("Modale ouverte !");
-});
+  document.body.style.backgroundColor = "rgba(0, 0, 0, 0.3)";});
 
 // FERMETURE DE LA MODALE si clic en dehors de la modale
 document.addEventListener("mouseup", function (event) {
-  let cible = document.getElementById("modale");
-  if (!cible.contains(event.target)) {
-    console.log("clic à l'extérieur de la modale !");
-    modale.style.display = "none";
-    document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-  }
-  else { console.log("clic à l'intérieur de la modale !"); }
-})
+let cible = document.getElementById("modale");
+if (!cible.contains(event.target)) {
+modale.style.display = "none";
+document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";}})
 
 // const target=document.querySelector(e.target.getAttribute('href'));
 // target.style.display=null; target.removeAttribute('aria-hidden');
-// target.setAttribute('aria-modal','true');
 // afficherImageModale(); modal=target;
 // modal.querySelector('.fermer-modale').addEventListener('click', stopPropagation);};
 // const fermer =document.querySelector(".x-close");
@@ -291,7 +244,6 @@ document.addEventListener("mouseup", function (event) {
 // Pour stopper la propagation d'un évènement, on va pouvoir utiliser la méthode stopPropagation() de l'interface Event . Cette méthode va stopper la propagation d'un évènement après qu'un gestionnaire d'évènement (gérant l'évènement en question) ait été atteint.
 // const ouvrirModale = function(e) {e.preventDefault();
 // const target = document.querySelector(e.target.getAttribute('href'));
-// target.style.display = null;
 // target.removeAttribute('aria-hidden');
 // target.setAttribute('aria-modal','true'); modal = target;
 // const fermer = document.querySelector(".x-close");
@@ -308,6 +260,7 @@ document.addEventListener("mouseup", function (event) {
 
 //function appelée pour faire apparaître les projets dans la modale
 //async function createModal(works)
+
 function createModal(works) {
   //cliquer pour l'ouvrir sur bandeau noir et titre projet (modifier/éditer)
   document.getElementById("modale").innerHTML="";
@@ -322,10 +275,7 @@ function createModal(works) {
   // FERMETURE DE LA MODALE (croix)
   pCroixModale.addEventListener('click', event => {
     modale.style.display = "none";
-    document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-    console.log("croix cliquée !")
-  });
-
+    document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";});
 
   //TITRE GALERIE PHOTO
   let titreGalerie = document.createElement("h3");
@@ -361,39 +311,38 @@ function createModal(works) {
     spanPanier.appendChild(iconePanier);
     divGalerie.appendChild(spanPanier);
 
-    // SUPPRIMER UN PROJET (sans rechargement de la page!)
-    // 1) Détecter le clic sur la corbeille
+    // SUPPRIMER UN PROJET sans rechargement de la page
+
+    // 1) DETECTION DU CLIC SUR LA CORBEILLE
     iconePanier.addEventListener("click", (e) => {
-      e.preventDefault();
-      console.log(e.currentTarget.getAttribute("data-id"));
-      // 2 Récupérer l'id du projet à supprimer ("data-id")
-      let workId = e.currentTarget.getAttribute("data-id");
-      let workTitle = e.currentTarget.getAttribute("data-title");
+    console.log(e.currentTarget.getAttribute("data-id"));
+
+    // 2-3) RECUPERATION DE L'ID DU PROJET POUR LE SERVEUR ("data-id")
+    let workId = e.currentTarget.getAttribute("data-id");
+    let workTitle = e.currentTarget.getAttribute("data-title");
       
-      // 3) Formater l'id du projet pour l'envoyer au back-end
-      // 4) Envoyer l'id du nouveau projet au serveur
-      //Utiliser fetch pour requête api et suprimer travail avec id
+    // 4) ENVOI DE L'ID DU PROJET A SUPPRIMER AU SERVEUR
       fetch(`http://localhost:5678/api/works/${workId}`,
-        {method: 'DELETE',
-          headers: {'Authorization': `Bearer ${token}`,}, })
-        // 5) Traitement de la réponse et des erreurs
-        //change 200, 204 çà marche!!!
+      {method: 'DELETE',
+      headers: {'Authorization': `Bearer ${token}`,}, })
+
+    // 5) TRAITEMENT DE LA REPONSE ET DES ERREURS
+
+    //pour ne pas faire la suppression si je dis non !!!
+//confirm
+// affiche un message et attend que l’utilisateur appuie sur “OK” ou “Annuler”. 
+// Il retourne true pour OK et false pour Annuler/Esc.
         .then((response) => {
-          //pour ne pas faire la suppression si je dis non !!!
-          confirm("Ce projet a l'id n°" + workId + " et se nomme : " + workTitle +
-        ". Voulez-vous vraiment supprimer ce projet ?");
-          if (response.ok) {
-            e.preventDefault();
-            console.log("réponse du serveur :" + response.status);
-            alert("Projet n° " + workId + " supprimé !");
-          }
-          else {
-            alert("Impossible de supprimer n° " + workId);
-            console.log("réponse du serveur :" + response.status);
-          }
-        })
-        .catch((error) => console.log(error))
-    })
+if (confirm("Ce projet a l'id n°" + workId + " et se nomme : " + workTitle +
+". Voulez-vous vraiment supprimer ce projet ?") == true) 
+{if (response.ok) {     
+    console.log("réponse du serveur :" + response.status);
+    alert("Projet n° " + workId + " supprimé !");}} 
+else (confirm==false)
+{alert("Projet n° " + workId + " non supprimé");
+ console.log("réponse du serveur :" + response.status);}})
+
+        .catch((error) => console.log(error))})
 
     //HOVER IMAGES GALERIE MODALE (récupéré en capture d'écran)
     // let iconeFleche = document.createElement("i");
@@ -427,6 +376,8 @@ function createModal(works) {
   modaleVersion1.appendChild(lienSupprimerGalerie);}
 
 // FENETRE MODALE AJOUTER UNE PHOTO
+
+
 let modaleVersion2 = document.createElement("div");
 modaleVersion2.setAttribute("class", "modal");
 
@@ -437,7 +388,6 @@ modaleVersion2.appendChild(divFlecheCroix);
 let pFleche = document.createElement("p");
 pFleche.textContent = "←";
 pFleche.addEventListener('click', event => {
-  console.log("Flèche cliquée !");
   event.preventDefault();
   createModal(works);});
 divFlecheCroix.appendChild(pFleche);
@@ -449,8 +399,7 @@ pCroix.textContent = "X";
 pCroix.addEventListener('click', event => {
   modale.style.display = "none";
   document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-  event.preventDefault();
-  console.log("Croix cliquée !")});
+  event.preventDefault();});
 divFlecheCroix.appendChild(pCroix);
 
 //TITRE FENETRE MODALE AJOUTER UNE PHOTO
@@ -482,7 +431,6 @@ champPhoto.appendChild(spanImage);
 
 // INPUT PHOTO
 let inputPhoto = document.createElement("input");
-//champ obligatoire
 inputPhoto.setAttribute("required", "required");
 inputPhoto.setAttribute("type", "file");
 inputPhoto.setAttribute("accept", ".png, .jpg, .jpeg");
@@ -490,7 +438,6 @@ inputPhoto.setAttribute("name", "image");
 inputPhoto.setAttribute("id", "image");
 // size : un nombre qui représente la taille du fichier en octets.
 inputPhoto.setAttribute("max-size", "4000000");
-
 //opacity pour cacher l'input par défaut
 inputPhoto.style.opacity = "0";
 
@@ -541,9 +488,7 @@ inputPhoto.addEventListener('change', function (event) {
 //cacher tous les autres éléments avec display:none; icone, bouton et et texte
 iImage.style.display = "none";
 boutonAjouterPhoto.style.display = "none";
-pFormatsphoto.style.display = "none";
-  };
-});
+pFormatsphoto.style.display = "none";};});
 
 // CHAMP TITRE
 let labelTitre = document.createElement("label");
@@ -561,9 +506,8 @@ inputTitre.setAttribute("class", "champ-titre");
 formAjoutProjet.appendChild(inputTitre);
 
 //CHAMP CATEGORIES
-
-function createMenuCategories(categories) {
-  let labelCategories = document.createElement("label");
+createFilters(categories)
+{let labelCategories = document.createElement("label");
   labelCategories.setAttribute("for", "categorie");
   labelCategories.setAttribute("class", "label-categorie");
   labelCategories.textContent = "Catégorie";
@@ -573,16 +517,15 @@ function createMenuCategories(categories) {
   select.setAttribute("id", "categorie");
   select.setAttribute("class", "champ-categorie");
 
-  // Première option vide par défaut
+  // CREATION PREMIERE OPTION VIDE (par défaut)
   let optionVide = document.createElement("option");
   optionVide.setAttribute("class", "");
   optionVide.setAttribute("value", "");
   select.appendChild(optionVide);
 
   // BOUCLE POUR RECUPERER LES CATEGORIES DANS LE MENU DEROULANT
-  for (category of categories) {
+  for (let category of categories) {
     let optionCategories = document.createElement("option");
-    //champ obligatoire
     optionCategories.setAttribute("required", "required");
     optionCategories.setAttribute("class", "choix-categorie");
     optionCategories.setAttribute("id", category.id);
@@ -590,115 +533,64 @@ function createMenuCategories(categories) {
     optionCategories.setAttribute("value", parseInt(category.id));
     optionCategories.innerHTML = category.name;
     select.appendChild(optionCategories);
-    formAjoutProjet.appendChild(select);
-  }
-}
+    formAjoutProjet.appendChild(select);}}
 
-//HR2
+//HR (TRAIT FENETRE MODALE FORMULAIRE)
 let hr2 = document.createElement("hr");
 hr2.setAttribute("class", "hr2-modale");
 formAjoutProjet.appendChild(hr2);
 
-// BOUTON VALIDER FORMULAIRE (désactivé)
+// BOUTON VALIDER FORMULAIRE (désactivé par défaut)
 let inputNouveauProjet = document.createElement("input");
 inputNouveauProjet.setAttribute("type", "submit");
 inputNouveauProjet.setAttribute("value", "Valider");
-//mettre bouton dans formulaire
 formAjoutProjet.appendChild(inputNouveauProjet);
-inputNouveauProjet.setAttribute("id", "submit");
-// inputNouveauProjet.setAttribute("disabled", "");
-// inputNouveauProjet.setAttribute("id", "boutonpasactif");
-//   inputNouveauProjet.setAttribute("disabled", "true");
+inputNouveauProjet.setAttribute("id", "boutonpasactif");
 
-//BOUTON VALIDER FORMULAIRE (activé)
-//file et titre
-//const requiredInputs = document.querySelectorAll('input[required]');
-//category
-//const requiredSelect = document.querySelector('select[required]');
-
-//Définir un écouteur d'événement au bouton submit
-
-
-// voir si tous les champs du formulaire sont remplis
-// if (image === null ||title === null ||categorie === null)
-// function RemplirFormulaire()
-// {let image = document.getElementById("image") ;
-// let title = document.getElementById("titre") ;
-// let categorie = document.getElementById("categorie");
-// let tableau_champs = [image, title, categorie];
-// console.log(tableau_champs);
-// let tableau_plein = true;
-// valeur = document.getElementById(champ_obligatoire[i]).value;
-// for (let i; h<3; i++)
-// if( (valeur.length == 0) || (valeur == "") || (valeur == "NULL") )
-// {tableau_plein = false;
-//   inputNouveauProjet.setAttribute("id", "boutonpasactif");
-//   inputNouveauProjet.setAttribute("disabled", "true");
-//si tous les champs ne sont pas remplis
-//   console.log("Tous les champs ne sont pas remplis !");
-// } else (tableau_plein)
-// {document.getElementById('Validation').disabled = false;
-// console.log(image + title + categorie);
-// inputNouveauProjet.setAttribute("id", "submit");
-// inputNouveauProjet.setAttribute("disabled", "false");
-// }
-
-
-
-//CREATION NOUVEAU PROJET (sans rechargement de la page !)
-//récupérer photo dans dossier assets
-//async function
-// 1) Détecter le clic sur le bouton de validation
-// 2) Récupérer les 3 valeurs du formulaire
+// ACTIVATION DU BOUTON VALIDER DU FORMULAIRE
+let requiredInputs = document.querySelectorAll('input[required]');
+let requiredSelect = document.querySelector('select[required]');
 inputNouveauProjet.addEventListener('click', event => {
-  console.log("cliqué !");
+  console.log(requiredInputs + requiredSelect);
+if (requiredInputs === null ||requiredSelect === null)
+{inputNouveauProjet.setAttribute("disabled", "true");
+  alert("Tous les champs ne sont pas remplis !");} 
+else {inputNouveauProjet.setAttribute("id", "submit");
+inputNouveauProjet.setAttribute("disabled", "false");}})
+
+//CREATION NOUVEAU PROJET sans rechargement de la page
+
+// 1) DETECTION DU CLIC
+// 2) RECUPERATION DES TROIS VALEURS DU FORMULAIRE
+inputNouveauProjet.addEventListener('click', event => {
+  console.log("Bouton de validation cliqué !");
   event.preventDefault();
   const tabloSubmitProjet2 = {
+  image: document.getElementById("image").files[0],
+  title: document.getElementById("titre").value,
+  category: parseInt(document.getElementById("categorie").value)}
 
-    // pour récupérer la valeur photo
-    image: document.getElementById("image").files[0],
-
-    // pour récupérer la valeur titre
-    title: document.getElementById("titre").value,
-
-    // pour récupérer la valeur id des catégories sur select
-    category: parseInt(document.getElementById("categorie").value)
-  }
-  let tabloSubmitProjet = new FormData(document.getElementById("formulaire-ajout-projet"))
+// 3) FORMATER VALEURS POUR ENVOI AU SERVEUR (FormData)
+  let tabloSubmitProjet = new FormData(document.getElementById("formulaire-ajout-projet"));
   console.log(tabloSubmitProjet);
 
-
-
-  // 3) Formater les valeurs pour les envoyer vers le serveur (FormData)
-  // 4) Envoyer les données formatées du formulaire au serveur
-  //modale fermé quand on a ajouté un projet
-  //await fetch
+  // 4) ENVOI DES DONNEES AU SERVEUR
   fetch('http://localhost:5678/api/works',
-    {
-      method: 'POST', headers:
-      {
-        "accept": "application/json",
-        'Authorization': `Bearer ${token}`,
-      },
-      //FormData sur le body créé en variable
-      'body': tabloSubmitProjet
-    })
+ {method: 'POST', headers:
+  {"accept": "application/json",
+  'Authorization': `Bearer ${token}`,},
+  'body': tabloSubmitProjet})
 
-    // 5) Traitement de la réponse
-    //ajout projet dans la galerie de la Modale sans recharger la page
-    // FERMETURE DE LA MODALE
+    // 5) REPONSE AVEC AJOUT NOUVEAU PROJET sans recharger la page
     .then((response) => {
       if (response.ok) {
         event.preventDefault();
         location.replace("index.html");
         modale.style.display = "none";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-        alert("Nouveau projet accepté !");
-      }
-      else { alert("Nouveau projet refusé !") }
-    })
-    .catch((error) => console.log(error))
-})
+        alert("Nouveau projet accepté !");}
+      else { alert("Nouveau projet refusé !") }})
+    .catch((error) => console.log(error))})
 
 
 
