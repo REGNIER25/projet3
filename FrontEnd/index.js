@@ -298,9 +298,6 @@ function createModal(works) {
     modalImg.setAttribute("alt", work.title);
     let pEditer = document.createElement("p");
     pEditer.textContent = "éditer";
-    divGalerie.appendChild(modalImg);
-    divGalerie.appendChild(pEditer);
-
     // ICONE CORBEILLE
     let spanPanier = document.createElement("span");
     spanPanier.setAttribute("class", "style-modal-icone");
@@ -310,6 +307,10 @@ function createModal(works) {
     iconePanier.setAttribute("data-title", work.title);
     spanPanier.appendChild(iconePanier);
     divGalerie.appendChild(spanPanier);
+    divGalerie.appendChild(modalImg);
+    divGalerie.appendChild(pEditer);
+
+    
 
     // SUPPRIMER UN PROJET sans rechargement de la page
 
@@ -476,19 +477,25 @@ inputPhoto.addEventListener('change', function (event) {
     imageUpload.setAttribute("class", "imageUpload");
     // ajouter l'image téléchargée (création espace)
     imageUpload.classList.add('image-load');
+    
+
+    // Affichez l'image choisie dans la modale
+
+    //vider la div de l'input
+    champPhoto.innerHTML=" ";
     // création div pour afficher l'image
     champPhoto.appendChild(imageUpload);
-    // Affichez l'image choisie dans la modale
-    //vider la div de l'input
-    // divImageForm.innerHTML=" ";
+
     // relier image à la div pour remplacer son ancien contenu
     // divImageForm.appendChild(imageUpload);
     // méthode pour lire le contenu du fichier choisi
     // newReader.readAsDataURL(file);
+
 //cacher tous les autres éléments avec display:none; icone, bouton et et texte
-iImage.style.display = "none";
-boutonAjouterPhoto.style.display = "none";
-pFormatsphoto.style.display = "none";};});
+// iImage.style.display = "none";
+// boutonAjouterPhoto.style.display = "none";
+// pFormatsphoto.style.display = "none";
+};});
 
 // CHAMP TITRE
 let labelTitre = document.createElement("label");
@@ -546,17 +553,48 @@ inputNouveauProjet.setAttribute("type", "submit");
 inputNouveauProjet.setAttribute("value", "Valider");
 formAjoutProjet.appendChild(inputNouveauProjet);
 inputNouveauProjet.setAttribute("id", "boutonpasactif");
+// inputNouveauProjet.setAttribute("disabled", "true");
 
-// ACTIVATION DU BOUTON VALIDER DU FORMULAIRE
-let requiredInputs = document.querySelectorAll('input[required]');
-let requiredSelect = document.querySelector('select[required]');
-inputNouveauProjet.addEventListener('click', event => {
-  console.log(requiredInputs + requiredSelect);
-if (requiredInputs === null ||requiredSelect === null)
-{inputNouveauProjet.setAttribute("disabled", "true");
-  alert("Tous les champs ne sont pas remplis !");} 
-else {inputNouveauProjet.setAttribute("id", "submit");
-inputNouveauProjet.setAttribute("disabled", "false");}})
+// function activerBouton () {
+// let requiredInputs = document.querySelectorAll('input[required]');
+// let requiredSelect = document.querySelector('select[required]');
+// if (requiredInputs === null ||requiredSelect === null)
+// {
+// console.log(requiredInputs + requiredSelect);
+
+// }
+// // ACTIVATION DU BOUTON VALIDER DU FORMULAIRE
+// else {
+// console.log(requiredInputs + requiredSelect);
+// inputNouveauProjet.setAttribute("id", "submit");
+// inputNouveauProjet.setAttribute("disabled", "false");
+// }
+//   }
+
+  function end_form()
+  {
+  var champ_obligatoire = ['image', 'titre', 'categorie'];
+  var champ_plein = true;
+  for (var i=0; i<3; h++)
+  {
+      valeur = document.getElementById(champ_obligatoire[i]).value;
+      if( (valeur.length == 0) || (valeur == "") || (valeur == "NULL") )
+      {
+          champ_plein = false;
+      }
+  }
+   
+  if (champ_plein)
+  {console.log("Tous les champs sont remplis !");
+  document.getElementById('boutonpasactif').disabled = false;
+   
+  }
+  else
+  {
+    console.log("Tous les champs ne sont pas remplis");
+  document.getElementById('boutonpasactif').disabled = true;
+  }
+  }
 
 //CREATION NOUVEAU PROJET sans rechargement de la page
 

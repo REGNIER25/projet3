@@ -523,9 +523,7 @@ footer nav ul {
 .style-modal-icone {
 	position: absolute;
 	margin-top: 5px;
-	margin-left: 50px;
-	margin-right: 5px;
-	margin-bottom: 400px;
+	margin-left: 90px;
 }
 
 /*Icone Corbeille*/
@@ -609,7 +607,7 @@ footer nav ul {
 	width: 130px;
 	height: 160px;
 	position: absolute;
-	text-align: center;
+	padding-left:140px;
 }
 
 /*Icone photo du champ image*/
@@ -686,6 +684,7 @@ footer nav ul {
 /* Liste des catégories */
 .choix-categorie {
 	text-align: left;
+	
 }
 
 /* Hr modale v2 */
