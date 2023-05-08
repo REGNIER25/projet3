@@ -453,7 +453,7 @@ footer nav ul {
 
 .modal {
 	box-sizing: border-box;
-	position: absolute;
+	position: fixed;
 	display: block;
 	margin: 0 auto;
 	top: 0;
@@ -601,6 +601,10 @@ footer nav ul {
 	justify-content: center;
 	align-items: center;
 }
+
+/*input photo*/
+.file-input-button {
+	position: absolute;}
 
 /* Affichage image téléchargée */
 .imageUpload {

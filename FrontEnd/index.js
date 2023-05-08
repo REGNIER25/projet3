@@ -310,8 +310,6 @@ function createModal(works) {
     divGalerie.appendChild(modalImg);
     divGalerie.appendChild(pEditer);
 
-    
-
     // SUPPRIMER UN PROJET sans rechargement de la page
 
     // 1) DETECTION DU CLIC SUR LA CORBEILLE
@@ -329,19 +327,13 @@ function createModal(works) {
 
     // 5) TRAITEMENT DE LA REPONSE ET DES ERREURS
 
-    //pour ne pas faire la suppression si je dis non !!!
-//confirm
-// affiche un message et attend que l’utilisateur appuie sur “OK” ou “Annuler”. 
-// Il retourne true pour OK et false pour Annuler/Esc.
-        .then((response) => {
-if (confirm("Ce projet a l'id n°" + workId + " et se nomme : " + workTitle +
-". Voulez-vous vraiment supprimer ce projet ?") == true) 
-{if (response.ok) {     
-    console.log("réponse du serveur :" + response.status);
-    alert("Projet n° " + workId + " supprimé !");}} 
-else (confirm==false)
-{alert("Projet n° " + workId + " non supprimé");
- console.log("réponse du serveur :" + response.status);}})
+        .then((response) => {if (response.ok) {     
+    alert("Projet (" + workTitle + ") n° " + workId + " supprimé !");}
+
+else
+{alert("Projet (" + workTitle + ") n° " + workId + " non supprimé !");
+ console.log("réponse du serveur :" + response.status);
+}})
 
         .catch((error) => console.log(error))})
 
@@ -422,6 +414,8 @@ let champPhoto = document.createElement("div")
 champPhoto.setAttribute("class", "uploader-image");
 formAjoutProjet.appendChild(champPhoto);
 
+
+
 // ICONE IMAGE
 let iImage = document.createElement("i");
 iImage.setAttribute("class", "fa-sharp fa-regular fa-image");
@@ -430,22 +424,11 @@ spanImage.setAttribute("class", "span-image");
 spanImage.appendChild(iImage);
 champPhoto.appendChild(spanImage);
 
-// INPUT PHOTO
-let inputPhoto = document.createElement("input");
-inputPhoto.setAttribute("required", "required");
-inputPhoto.setAttribute("type", "file");
-inputPhoto.setAttribute("accept", ".png, .jpg, .jpeg");
-inputPhoto.setAttribute("name", "image");
-inputPhoto.setAttribute("id", "image");
-// size : un nombre qui représente la taille du fichier en octets.
-inputPhoto.setAttribute("max-size", "4000000");
-//opacity pour cacher l'input par défaut
-inputPhoto.style.opacity = "0";
-
 //créer bouton à la place de l'input
 let boutonAjouterPhoto = document.createElement("button");
 boutonAjouterPhoto.setAttribute("class", "bouton-ajouter-photo");
 boutonAjouterPhoto.textContent = "+ Ajouter photo";
+boutonAjouterPhoto.classList.add("file-input-button");
 champPhoto.appendChild(boutonAjouterPhoto);
 
 //texte format image et taille
@@ -454,11 +437,24 @@ pFormatsphoto.textContent = "jpg, png : 4mo max";
 pFormatsphoto.setAttribute("class", "sous-titre-image");
 champPhoto.appendChild(pFormatsphoto);
 
+// INPUT PHOTO
+let inputPhoto = document.createElement("input");
+inputPhoto.setAttribute("required", "required");
+inputPhoto.setAttribute("type", "file");
+inputPhoto.setAttribute("accept", ".png, .jpg, .jpeg");
+inputPhoto.setAttribute("name", "image");
+inputPhoto.setAttribute("id", "image");
+// inputPhoto.classList.add("bouton-ajouter-photo");
+inputPhoto.setAttribute("class", "file-input-button");
+// size : un nombre qui représente la taille du fichier en octets.
+inputPhoto.setAttribute("max-size", "4000000");
+//opacity pour cacher l'input par défaut
+inputPhoto.style.opacity = "0";
+
 //label = voir utilité
 // let labelAjouterPhoto = document.createElement("label");
 // champPhoto.appendChild(labelAjouterPhoto);
 
-//raccorder avec "bouton" ajout photo!!!
 champPhoto.appendChild(inputPhoto);
 
 // PREVISUALISATION DE L'IMAGE
@@ -483,6 +479,7 @@ inputPhoto.addEventListener('change', function (event) {
 
     //vider la div de l'input
     champPhoto.innerHTML=" ";
+    // Refaire fonction? perd l'input
     // création div pour afficher l'image
     champPhoto.appendChild(imageUpload);
 
