@@ -28,6 +28,8 @@ const responseWorks = await fetch("http://localhost:5678/api/works");
 const works = await responseWorks.json();
 displayWorks(works);
 
+
+
 function displayWorks(works) {
   //création variable pour un projet avec la boucle for ... of ...
   for (let work of works) {
@@ -50,7 +52,6 @@ function displayWorks(works) {
 //async avant fonction
 const responseCategories = await fetch("http://localhost:5678/api/categories");
 const categories = await responseCategories.json();
-createFilters(categories);
 
 function createFilters(categories) {
 
@@ -222,40 +223,6 @@ if (!cible.contains(event.target)) {
 modale.style.display = "none";
 document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";}})
 
-// const target=document.querySelector(e.target.getAttribute('href'));
-// target.style.display=null; target.removeAttribute('aria-hidden');
-// afficherImageModale(); modal=target;
-// modal.querySelector('.fermer-modale').addEventListener('click', stopPropagation);};
-// const fermer =document.querySelector(".x-close");
-// modal.querySelector('.modale-supprimer-btn').addEventListener('click', fermerModale);
-// e.stopPropagation aux enfants
-// const fermerModale = function(e){if(modal===null) return
-// const fond=document.querySelector('html');
-// modal.setAttribute('aria-hidden','true');
-// modal.removeAttribute('aria-modal');
-// modal.removeEventListener('click',fermerModale);
-// modal.querySelector('.modale-supprimer-btn').removeEventListener('click',fermerModale);
-// modal.querySelector('.fermer-modale').removeEventListener('click', stopPropagation);
-// modal=null;}
-// STOP PROPAGATION MODALE
-// Lorsqu'un évènement se déclenche, celui-ci va en fait naviguer à travers le DOM et passer à travers les différents gestionnaires d'évènement disposés dans le document. 
-// On dit également que l'évènement se « propage » dans le DOM.
-// const stopPropagation=function(e) {e.stopPropagation()};
-// Pour stopper la propagation d'un évènement, on va pouvoir utiliser la méthode stopPropagation() de l'interface Event . Cette méthode va stopper la propagation d'un évènement après qu'un gestionnaire d'évènement (gérant l'évènement en question) ait été atteint.
-// const ouvrirModale = function(e) {e.preventDefault();
-// const target = document.querySelector(e.target.getAttribute('href'));
-// target.removeAttribute('aria-hidden');
-// target.setAttribute('aria-modal','true'); modal = target;
-// const fermer = document.querySelector(".x-close");
-// modale.querySelector('.modale-supprimer-btn').addEventListener('click',fermerModale);};
-// const fermerModale = function(e){if(modal===null) return
-// modal.setAttribute('aria-hidden','true');
-// modal.removeAttribute('aria-modal');
-// modal.removeEventListener('click',fermerModale);
-// modal.querySelector('.modale-supprimer-btn').addEventListener('click',fermerModale);
-// modal=null;};
-// document.querySelectorAll('.open-modal1').forEach(a=>{
-
 // CREATION MODALE
 
 //function appelée pour faire apparaître les projets dans la modale
@@ -310,7 +277,7 @@ function createModal(works) {
     divGalerie.appendChild(modalImg);
     divGalerie.appendChild(pEditer);
 
-    // SUPPRIMER UN PROJET sans rechargement de la page
+    // SUPPRIMER UN PROJET sans rechargement de la page (callback?)
 
     // 1) DETECTION DU CLIC SUR LA CORBEILLE
     iconePanier.addEventListener("click", (e) => {
@@ -450,11 +417,6 @@ inputPhoto.setAttribute("class", "file-input-button");
 inputPhoto.setAttribute("max-size", "4000000");
 //opacity pour cacher l'input par défaut
 inputPhoto.style.opacity = "0";
-
-//label = voir utilité
-// let labelAjouterPhoto = document.createElement("label");
-// champPhoto.appendChild(labelAjouterPhoto);
-
 champPhoto.appendChild(inputPhoto);
 
 // PREVISUALISATION DE L'IMAGE
@@ -473,13 +435,14 @@ inputPhoto.addEventListener('change', function (event) {
     imageUpload.setAttribute("class", "imageUpload");
     // ajouter l'image téléchargée (création espace)
     imageUpload.classList.add('image-load');
-    
-
     // Affichez l'image choisie dans la modale
-
     //vider la div de l'input
-    champPhoto.innerHTML=" ";
-    // Refaire fonction? perd l'input
+    // champPhoto.innerHTML=" ";
+//cacher tous les autres éléments avec display:none; icone, bouton et et texte
+iImage.style.display = "none";
+boutonAjouterPhoto.style.display = "none";
+pFormatsphoto.style.display = "none";
+
     // création div pour afficher l'image
     champPhoto.appendChild(imageUpload);
 
@@ -488,11 +451,9 @@ inputPhoto.addEventListener('change', function (event) {
     // méthode pour lire le contenu du fichier choisi
     // newReader.readAsDataURL(file);
 
-//cacher tous les autres éléments avec display:none; icone, bouton et et texte
-// iImage.style.display = "none";
-// boutonAjouterPhoto.style.display = "none";
-// pFormatsphoto.style.display = "none";
+
 };});
+
 
 // CHAMP TITRE
 let labelTitre = document.createElement("label");
@@ -539,6 +500,7 @@ createFilters(categories)
     select.appendChild(optionCategories);
     formAjoutProjet.appendChild(select);}}
 
+
 //HR (TRAIT FENETRE MODALE FORMULAIRE)
 let hr2 = document.createElement("hr");
 hr2.setAttribute("class", "hr2-modale");
@@ -546,10 +508,13 @@ formAjoutProjet.appendChild(hr2);
 
 // BOUTON VALIDER FORMULAIRE (désactivé par défaut)
 let inputNouveauProjet = document.createElement("input");
+inputNouveauProjet.setAttribute("id", "boutonpasactif");
 inputNouveauProjet.setAttribute("type", "submit");
 inputNouveauProjet.setAttribute("value", "Valider");
 formAjoutProjet.appendChild(inputNouveauProjet);
-inputNouveauProjet.setAttribute("id", "boutonpasactif");
+
+
+
 // inputNouveauProjet.setAttribute("disabled", "true");
 
 // function activerBouton () {
@@ -568,32 +533,32 @@ inputNouveauProjet.setAttribute("id", "boutonpasactif");
 // }
 //   }
 
-  function end_form()
-  {
-  var champ_obligatoire = ['image', 'titre', 'categorie'];
-  var champ_plein = true;
-  for (var i=0; i<3; h++)
-  {
-      valeur = document.getElementById(champ_obligatoire[i]).value;
-      if( (valeur.length == 0) || (valeur == "") || (valeur == "NULL") )
-      {
-          champ_plein = false;
-      }
-  }
+  // function end_form()
+  // {
+  // var champ_obligatoire = ['image', 'titre', 'categorie'];
+  // var champ_plein = true;
+  // for (var i=0; i<3; h++)
+  // {
+  //     valeur = document.getElementById(champ_obligatoire[i]).value;
+  //     if( (valeur.length == 0) || (valeur == "") || (valeur == "NULL") )
+  //     {
+  //         champ_plein = false;
+  //     }
+  // }
    
-  if (champ_plein)
-  {console.log("Tous les champs sont remplis !");
-  document.getElementById('boutonpasactif').disabled = false;
+  // if (champ_plein)
+  // {console.log("Tous les champs sont remplis !");
+  // document.getElementById('boutonpasactif').disabled = false;
    
-  }
-  else
-  {
-    console.log("Tous les champs ne sont pas remplis");
-  document.getElementById('boutonpasactif').disabled = true;
-  }
-  }
+  // }
+  // else
+  // {
+  //   console.log("Tous les champs ne sont pas remplis");
+  // document.getElementById('boutonpasactif').disabled = true;
+  // }
+  // }
 
-//CREATION NOUVEAU PROJET sans rechargement de la page
+//CREATION NOUVEAU PROJET sans rechargement de la page (callback?)
 
 // 1) DETECTION DU CLIC
 // 2) RECUPERATION DES TROIS VALEURS DU FORMULAIRE
@@ -619,12 +584,17 @@ inputNouveauProjet.addEventListener('click', event => {
     // 5) REPONSE AVEC AJOUT NOUVEAU PROJET sans recharger la page
     .then((response) => {
       if (response.ok) {
+        
+        // FONCTION CALLBACK CREA NOUVO TRAVAIL
+function callbackWorks(callback) {callback(works);}
+callbackWorks(displayWorks);
+
         event.preventDefault();
         location.replace("index.html");
         modale.style.display = "none";
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
         alert("Nouveau projet accepté !");}
-      else { alert("Nouveau projet refusé !") }})
+      else { alert("Nouveau projet refusé. Tous les champs doivent être remplis.") }})
     .catch((error) => console.log(error))})
 
 

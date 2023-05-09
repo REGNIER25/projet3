@@ -452,18 +452,17 @@ footer nav ul {
 
 
 .modal {
-	box-sizing: border-box;
 	position: fixed;
+	background: #FFFFFF;
+	border-radius: 10px;
+	box-sizing: border-box;
 	display: block;
 	margin: 0 auto;
-	top: 0;
+	top: 10px;
 	right: 0;
-	bottom: 50px;
 	left: 0;
-	width: 600px;
+	width: 630px;
 	height: 100%;
-	background: white;
-	border-radius: 10px;
 	padding: 20px;
 	justify-content: center;
 	align-items: center;
@@ -482,6 +481,14 @@ footer nav ul {
 	display: flex;
 	font-size: 20px;
 	justify-content: center;
+	margin-top :20px;
+	margin-bottom :30px;
+	font-family: 'Work Sans';
+font-style: normal;
+font-weight: 400;
+line-height: 30px;
+text-align: center;
+color: #000000;
 }
 
 /* Galerie des images dans la modale */
@@ -490,7 +497,8 @@ footer nav ul {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: start;
+	padding-left: 20px;
 }
 
 /* bloc image éditer corbeille */
@@ -502,8 +510,8 @@ footer nav ul {
 /* Images de la galerie de la modale  */
 
 #modal-gallery img {
-	width: 120px;
-	height: 160px;
+	width: 100px;
+	height: 130px;
 
 }
 
@@ -515,15 +523,18 @@ footer nav ul {
 /* HR */
 
 .hr-modale {
-	margin-top: 80px;
+	width: 90%;
+	margin-top: 40px;
+	margin-bottom: 30px;
 	line-height: 60px;
+	border: 1px solid #B3B3B3;
 }
 
 /* span icone Corbeille */
 .style-modal-icone {
 	position: absolute;
 	margin-top: 5px;
-	margin-left: 90px;
+	margin-left: 75px;
 }
 
 /*Icone Corbeille*/
@@ -541,20 +552,20 @@ footer nav ul {
 	margin: auto;
 	align-self: center;
 	justify-content: center;
-
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+width: 230px;
+height: 36px;
+font-family: 'Syne';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 17px;
+text-align: center;
+color: #FFFFFF;
 }
 
-#ajoutphoto>* {
-	text-align: center;
-}
 
-#ajoutphoto input {
-	height: 50px;
-	width: 100%;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
 
 /* lien supprimer galerie */
 
@@ -563,6 +574,7 @@ footer nav ul {
 	text-decoration: none;
 	display: flex;
 	justify-content: center;
+	margin-top :20px;
 }
 
 /* MODALE V2 */
@@ -593,8 +605,8 @@ footer nav ul {
 
 /* CHAMP IMAGE */
 .uploader-image {
-	width: 400px;
-	height: 160px;
+	width: 85%;
+	height: 170px;
 	background-color: #E8F1F7;
 	border-radius: 3px;
 	margin: auto;
@@ -602,43 +614,41 @@ footer nav ul {
 	align-items: center;
 }
 
-/*input photo*/
-.file-input-button {
-	position: absolute;}
-
-/* Affichage image téléchargée */
-.imageUpload {
-	width: 130px;
-	height: 160px;
-	position: absolute;
-	padding-left:140px;
-}
-
 /*Icone photo du champ image*/
 .fa-image {
 	color: #B9C5CC;
 	background-color: #E8F1F7;
-	font-size: 100px;
+	font-size: 60px;
 	display: flex;
 	margin: auto;
 	justify-content: center;
 	text-align: center;
-}
+	margin-top:20px;
+	margin-bottom:15px;
 
+}
 
 /* Bouton ajouter photo */
 .bouton-ajouter-photo {
 	color: #306685;
 	background-color: #CBD6DC;
-	border-color: #CBD6DC;
+	border : 1px solid #CBD6DC;
 	border-radius: 50px;
-	width: 170px;
+	font-family: 'Work Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+text-align: center;
+	width: 165px;
 	height: 35px;
-	padding: 5px;
 	display: flex;
-	margin: auto;
-	align-self: center;
 	justify-content: center;
+	margin: auto;
+padding-top: 8px;
+
+
+	
 }
 
 /* Texte format, taille image */
@@ -647,35 +657,79 @@ footer nav ul {
 	margin: auto;
 	align-self: center;
 	justify-content: center;
+	margin-top : 50px;
+	padding-left:20px;
 }
 
+/*input photo*/
+.file-input-button {
+	position:absolute;
+	top :200px;
+left : 230px;
+	} 
 
+/* Affichage image téléchargée */
+.imageUpload {
+	width: 130px;
+	height: 170px;
+	position: absolute;
+	padding-left:175px;
+}
 
 /* champ titre */
 
 .label-titre {
-	padding-left: 70px;
+	margin-top:30px;
+	margin-bottom:10px;
+
+	padding-left: 48px;
+
+	font-family: 'Work Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+
+color: #3D3D3D;
 
 }
 
 .champ-titre {
-	width: 400px;
+	width: 80%;
 	height: 50px;
 	display: flex;
 	margin: auto;
 	align-self: center;
 	justify-content: center;
+	font-family: 'Work Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+color: #444444;
+padding-left: 15px;
 }
 
 /* champ categorie */
 
 .label-categorie {
-	padding-left: 70px;
+	margin-top:20px;
+	margin-bottom:10px;
+
+	padding-left: 48px;
+
+	font-family: 'Work Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+
+color: #3D3D3D;
 
 }
 
 .champ-categorie {
-	width: 400px;
+	width: 83%;
 	height: 50px;
 	display: flex;
 	margin: auto;
@@ -683,6 +737,13 @@ footer nav ul {
 	justify-content: center;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	font-family: 'Work Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+color: #444444;
+padding-left: 10px;
 }
 
 /* Liste des catégories */
@@ -693,19 +754,37 @@ footer nav ul {
 
 /* Hr modale v2 */
 .hr2-modale {
-	width: 400px;
+	width: 80%;
+		margin-top: 40px;
+		margin-bottom: 30px;
+		line-height: 60px;
+		border: 1px solid #B3B3B3;
 }
+
 
 /* bouton formulaire désactivé */
 #boutonpasactif {
 	color: white;
 	background-color: #A7A7A7;
-	border-color: #A7A7A7;
+	border-color: 1px solid #A7A7A7;
 	display: flex;
 	margin: auto;
 	align-self: center;
 	justify-content: center;
+	border-radius: 60px;
+	width: 230px;
+height: 360px;
+font-family: 'Syne';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 17px;
+text-align: center;
+color: #FFFFFF;
 }
+
+
+
 
 /* hover bouton formulaire */
 #boutonpasactif:hover {
