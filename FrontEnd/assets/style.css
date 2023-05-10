@@ -291,7 +291,9 @@ footer nav ul {
 }
 
 /* Lien logo page d'accueil */
-.lien-logo {text-decoration: none;}
+.lien-logo {
+	text-decoration: none;
+}
 
 /*Menu*/
 
@@ -481,14 +483,14 @@ footer nav ul {
 	display: flex;
 	font-size: 20px;
 	justify-content: center;
-	margin-top :20px;
-	margin-bottom :30px;
+	margin-top: 20px;
+	margin-bottom: 30px;
 	font-family: 'Work Sans';
-font-style: normal;
-font-weight: 400;
-line-height: 30px;
-text-align: center;
-color: #000000;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 30px;
+	text-align: center;
+	color: #000000;
 }
 
 /* Galerie des images dans la modale */
@@ -554,15 +556,15 @@ color: #000000;
 	justify-content: center;
 	border: 1px solid #1D6154;
 	border-radius: 60px;
-width: 230px;
-height: 36px;
-font-family: 'Syne';
-font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 17px;
-text-align: center;
-color: #FFFFFF;
+	width: 230px;
+	height: 36px;
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+	color: #FFFFFF;
 }
 
 
@@ -574,7 +576,7 @@ color: #FFFFFF;
 	text-decoration: none;
 	display: flex;
 	justify-content: center;
-	margin-top :20px;
+	margin-top: 20px;
 }
 
 /* MODALE V2 */
@@ -623,8 +625,8 @@ color: #FFFFFF;
 	margin: auto;
 	justify-content: center;
 	text-align: center;
-	margin-top:20px;
-	margin-bottom:15px;
+	margin-top: 20px;
+	margin-bottom: 15px;
 
 }
 
@@ -632,23 +634,23 @@ color: #FFFFFF;
 .bouton-ajouter-photo {
 	color: #306685;
 	background-color: #CBD6DC;
-	border : 1px solid #CBD6DC;
+	border: 1px solid #CBD6DC;
 	border-radius: 50px;
 	font-family: 'Work Sans';
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 16px;
-text-align: center;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
 	width: 165px;
 	height: 35px;
 	display: flex;
 	justify-content: center;
 	margin: auto;
-padding-top: 8px;
+	padding-top: 8px;
 
 
-	
+
 }
 
 /* Texte format, taille image */
@@ -657,40 +659,40 @@ padding-top: 8px;
 	margin: auto;
 	align-self: center;
 	justify-content: center;
-	margin-top : 50px;
-	padding-left:20px;
+	margin-top: 50px;
+	padding-left: 20px;
 }
 
 /*input photo*/
 .file-input-button {
-	position:absolute;
-	top :200px;
-left : 230px;
-	} 
+	position: absolute;
+	top: 200px;
+	left: 230px;
+}
 
 /* Affichage image téléchargée */
 .imageUpload {
 	width: 130px;
 	height: 170px;
 	position: absolute;
-	padding-left:175px;
+	padding-left: 175px;
 }
 
 /* champ titre */
 
 .label-titre {
-	margin-top:30px;
-	margin-bottom:10px;
+	margin-top: 30px;
+	margin-bottom: 10px;
 
 	padding-left: 48px;
 
 	font-family: 'Work Sans';
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 16px;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
 
-color: #3D3D3D;
+	color: #3D3D3D;
 
 }
 
@@ -702,29 +704,29 @@ color: #3D3D3D;
 	align-self: center;
 	justify-content: center;
 	font-family: 'Work Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 16px;
-color: #444444;
-padding-left: 15px;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	color: #444444;
+	padding-left: 15px;
 }
 
 /* champ categorie */
 
 .label-categorie {
-	margin-top:20px;
-	margin-bottom:10px;
+	margin-top: 20px;
+	margin-bottom: 10px;
 
 	padding-left: 48px;
 
 	font-family: 'Work Sans';
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 16px;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
 
-color: #3D3D3D;
+	color: #3D3D3D;
 
 }
 
@@ -738,34 +740,34 @@ color: #3D3D3D;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	font-family: 'Work Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 16px;
-color: #444444;
-padding-left: 10px;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	color: #444444;
+	padding-left: 10px;
 }
 
 /* Liste des catégories */
 .choix-categorie {
 	text-align: left;
-	
+
 }
 
 /* Hr modale v2 */
 .hr2-modale {
 	width: 80%;
-		margin-top: 40px;
-		margin-bottom: 30px;
-		line-height: 60px;
-		border: 1px solid #B3B3B3;
+	margin-top: 40px;
+	margin-bottom: 30px;
+	line-height: 60px;
+	border: 1px solid #B3B3B3;
 }
 
 
 /* bouton formulaire désactivé */
 #boutonpasactif {
 	color: white;
-	background-color: #A7A7A7;
+	background-color: #1D6154;
 	border-color: 1px solid #A7A7A7;
 	display: flex;
 	margin: auto;
@@ -773,22 +775,28 @@ padding-left: 10px;
 	justify-content: center;
 	border-radius: 60px;
 	width: 230px;
-height: 360px;
-font-family: 'Syne';
-font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 17px;
-text-align: center;
-color: #FFFFFF;
+	height: 360px;
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+	color: #FFFFFF;
+}
+#boutonpasactif:invalid{
+	cursor:not-allowed;
+	background-color: #A7A7A7;
+	opacity: 0.5;
+
 }
 
 
 
 
-/* hover bouton formulaire */
+/* hover bouton formulaire
 #boutonpasactif:hover {
 	background-color: #1D6154;
 	color: white;
-}
+} */
 
