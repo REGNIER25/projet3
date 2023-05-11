@@ -23,14 +23,22 @@ const modale = document.getElementById("modale");
 // Constante pour le token
 const token = localStorage.getItem("token");
 
+
+
 // RECUPERATION DES TRAVAUX
+
 const responseWorks = await fetch("http://localhost:5678/api/works");
-const works = await responseWorks.json();
+let works = await responseWorks.json();
 displayWorks(works);
-
-
+// ligne 28
+// /id Projet
+// let works pour pouvoir modifier au lieu de constante dans tableau
+// display works
 
 function displayWorks(works) {
+
+  //vider au début de la fonction
+  document.getElementById("gallery").innerHTML = "";
   //création variable pour un projet avec la boucle for ... of ...
   for (let work of works) {
     let figure = document.createElement("figure");
@@ -240,6 +248,8 @@ document.addEventListener("mouseup", function (event) {
 //function appelée pour faire apparaître les projets dans la modale
 //async function createModal(works)
 
+//FONCTION POUR CREER LA MODALE AVEC LA GALERIE DES PROJETS
+
 function createModal(works) {
   //cliquer pour l'ouvrir sur bandeau noir et titre projet (modifier/éditer)
   document.getElementById("modale").innerHTML = "";
@@ -311,8 +321,7 @@ function createModal(works) {
 
         .then((response) => {
           if (response.ok) {
-            
-            // FONCTION CALLBACK SUPPRESSION PROJET
+             // FONCTION CALLBACK SUPPRESSION PROJET
             // function callbackSupprim(callback) { callback(works); }
             // callbackSupprim(displayWorks);
 
@@ -326,10 +335,15 @@ function createModal(works) {
           }
         })
 
+        //deuxième then à refaire
+        // suppression des travaux
+        // comment retirer un travail du tableau
+
         .catch((error) => console.log(error))
     })
 
-    //HOVER IMAGES GALERIE MODALE (récupéré en capture d'écran)
+//R2CUPERER !!!
+//HOVER IMAGES GALERIE MODALE (récupéré en capture d'écran)
     // let iconeFleche = document.createElement("i");
     // iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
     // divGalerie.appendChild(iconeFleche);
@@ -349,8 +363,12 @@ function createModal(works) {
   boutonAjoutPhoto.setAttribute("id", "ajoutphoto");
   boutonAjoutPhoto.setAttribute("type", "submit");
   boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");
+  //Clic pour changer la version de modale
   boutonAjoutPhoto.addEventListener('click', event => {
-    modale.replaceChild(modaleVersion2, modaleVersion1);
+    createModalForm();
+    // replace mettre appel modale V2 à la place, createmodalformulaire
+    //pas de besoin de replace
+    // modale.replaceChild(modaleVersion2, modaleVersion1);
   });
   modaleVersion1.appendChild(boutonAjoutPhoto);
 
@@ -362,8 +380,16 @@ function createModal(works) {
   modaleVersion1.appendChild(lienSupprimerGalerie);
 }
 
-// FENETRE MODALE AJOUTER UNE PHOTO
 
+// FENETRE MODALE AJOUTER UNE PHOTO
+//FONCTION POUR CREER LA MODALE AVEC LE FORMULAIRE POUR AJOUTER UN PROJET
+//VOIR CREATION NOUVELLE MODALE
+//rien dans la parenthèse, pas de paramètre
+function createModalForm(){
+  //vider la page
+  document.getElementById('modale').innerHTML = "";
+  //rappel au début
+  // document.getElementById("modaleVersion2");
 
 let modaleVersion2 = document.createElement("div");
 modaleVersion2.setAttribute("class", "modal");
@@ -540,56 +566,13 @@ hr2.setAttribute("class", "hr2-modale");
 formAjoutProjet.appendChild(hr2);
 
 // BOUTON VALIDER FORMULAIRE (désactivé par défaut)
+// ACTIVATION DU BOUTON VALIDER DU FORMULAIRE
 let inputNouveauProjet = document.createElement("input");
 inputNouveauProjet.setAttribute("id", "boutonpasactif");
 inputNouveauProjet.setAttribute("type", "submit");
 inputNouveauProjet.setAttribute("value", "Valider");
 formAjoutProjet.appendChild(inputNouveauProjet);
 
-
-
-// inputNouveauProjet.setAttribute("disabled", "true");
-
-// function activerBouton () {
-// let requiredInputs = document.querySelectorAll('input[required]');
-// let requiredSelect = document.querySelector('select[required]');
-// if (requiredInputs === null ||requiredSelect === null)
-// {
-// console.log(requiredInputs + requiredSelect);
-
-// }
-// // ACTIVATION DU BOUTON VALIDER DU FORMULAIRE
-// else {
-// console.log(requiredInputs + requiredSelect);
-// inputNouveauProjet.setAttribute("id", "submit");
-// inputNouveauProjet.setAttribute("disabled", "false");
-// }
-//   }
-
-// function end_form()
-// {
-// var champ_obligatoire = ['image', 'titre', 'categorie'];
-// var champ_plein = true;
-// for (var i=0; i<3; h++)
-// {
-//     valeur = document.getElementById(champ_obligatoire[i]).value;
-//     if( (valeur.length == 0) || (valeur == "") || (valeur == "NULL") )
-//     {
-//         champ_plein = false;
-//     }
-// }
-
-// if (champ_plein)
-// {console.log("Tous les champs sont remplis !");
-// document.getElementById('boutonpasactif').disabled = false;
-
-// }
-// else
-// {
-//   console.log("Tous les champs ne sont pas remplis");
-// document.getElementById('boutonpasactif').disabled = true;
-// }
-// }
 
 //CREATION NOUVEAU PROJET sans rechargement de la page (callback?)
 
@@ -622,26 +605,29 @@ inputNouveauProjet.addEventListener('click', event => {
     // 5) REPONSE AVEC AJOUT NOUVEAU PROJET sans recharger la page
     .then((response) => {
       if (response.ok) {
-        console.log()
-
-        // FONCTION CALLBACK CREATION NOUVEAU PROJET
-        // function callbackWorks(callback) { callback(works); }
-        // callbackWorks(displayWorks);
-       
         return response.json();
       }
-      // else { alert("Nouveau projet refusé. Tous les champs doivent être remplis.") }
+      else { alert("Nouveau projet refusé. Tous les champs doivent être remplis.") }
     })
 
     .then((work)=>{
-      // modale.style.display = "none";
-      // document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-      // alert("Nouveau projet accepté !");
-console.log(work);
-console.log(works);
+      alert("Nouveau projet accepté !");
+      //array.prototype.push
+      works.push(work);
+      //rappel fonction avec nouveau projet
+      displayWorks(works);
+      modale.style.display = "none";
+      document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
+     
+      //vider le formulaire (reset???)/remettre nouvelle v2
+      //reload
+      // document.getElementById("gallery").innerHTML ="";
+// console.log(work);
+// console.log(works);
     })
     .catch((error) => console.log(error))
 })
+}
 
 
 
