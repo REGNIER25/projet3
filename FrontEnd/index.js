@@ -1,21 +1,21 @@
-// CONSTANTE POUR LA GALERIE DES TRAVAUX DANS LE HTML
+// CONSTANTE POUR LA GALERIE DES TRAVAUX
 const gallery = document.getElementById("gallery");
 
-// CONSTANTE POUR LES FILTRES DANS LE HTML
+// CONSTANTE POUR LES FILTRES
 const filtres = document.getElementById("filtres");
 
-// CONSTANTE POUR LE BANDEAU NOIR DANS LE HTML
+// CONSTANTE POUR LE BANDEAU NOIR
 const bandeau = document.getElementById("bandeau");
 
-// CONSTANTE POUR LE LIEN LOGIN/LOGOUT DANS LE HTML
+// CONSTANTE POUR LE LIEN LOGIN/LOGOUT
 const log = document.getElementById("log");
 
-// CONSTANTES POUR LES LIENS MODIFIER DANS LE HTML
+// CONSTANTES POUR LES LIENS MODIFIER
 const modifier1 = document.getElementById("modifier1");
 const modifier2 = document.getElementById("modifier2");
 const modifier3 = document.getElementById("modifier3");
 
-// CONSTANTE POUR LA MODALE DANS LE HTML
+// CONSTANTE POUR LA MODALE
 const modale = document.getElementById("modale");
 
 // CONSTANTE POUR LE TOKEN
@@ -26,13 +26,17 @@ const responseWorks = await fetch("http://localhost:5678/api/works");
 let works = await responseWorks.json();
 displayWorks(works);
 
+// VOIR POUR LE NON RECHARGEMENT POUR SUPPRIMER TRAVAUX
+// // ligne 28
+// // /id Projet
+
+//FONCTION POUR RECUPERER LES TRAVAUX
 function displayWorks(works) {
-  document.getElementById("gallery").innerHTML = "";
-  //création variable pour un projet avec la boucle for ... of ...
+document.getElementById("gallery").innerHTML = "";
+
+//BOUCLE POUR LA CREATION DES VARIABLES POUR LES TRAVAUX
   for (let work of works) {
     let figure = document.createElement("figure");
-
-    // Rajout attribut data- pour avoir un sélecteur permettant de filtrer les travaux
     figure.setAttribute("data-categoryid", work.categoryId)
     let img = document.createElement("img");
     img.setAttribute("src", work.imageUrl);
@@ -41,14 +45,9 @@ function displayWorks(works) {
     let figcaption = document.createElement("figcaption");
     figcaption.innerHTML = work.title;
     figure.appendChild(figcaption);
-    gallery.appendChild(figure);
-  }
-}
+    gallery.appendChild(figure);}}
 
-//Méthode pour récupérer les catégories (données) avec liaison avec le backend
-
-//await avant fetch et response
-//async avant fonction
+//RECUPERATION DES CATEGORIES
 const responseCategories = await fetch("http://localhost:5678/api/categories");
 const categories = await responseCategories.json();
 createFilters(categories);
@@ -66,48 +65,28 @@ function createFilters(categories) {
   filtres.appendChild(buttonAll);
   buttonAll.addEventListener('click', event => { filtering(0) });
 
-  //BOUCLE POUR RECUPERER LES CATEGORIES
+  //BOUCLE POUR RECUPERER LES CATEGORIES AVEC LES BOUTONS ASSOCIES
   for (let category of categories) {
-
-    //CREATION DES BOUTONS CATEGORIES
     let buttonCategories = document.createElement("button");
     buttonCategories.setAttribute("class", "filtre");
     buttonCategories.setAttribute("type", "button");
     buttonCategories.setAttribute("id", category.id);
     buttonCategories.setAttribute("name", category.name);
     buttonCategories.setAttribute("value", category.name);
-
-    // Sélection de buttonCategories (HTML) pour récupérer les category.name et générer les 3 boutons
     buttonCategories.innerHTML = category.name;
     filtres.appendChild(buttonCategories);
-
-    //Méthode pour détecter le clic sur les filtres et récupérer le category.id de la catégorie
-    buttonCategories.addEventListener('click', event => { filtering(category.id) });
-  }
-}
-
+    buttonCategories.addEventListener('click', event => { filtering(category.id) });}}
 
 // FONCTION DE FILTRAGE DES TRAVAUX PAR CATEGORIES
 function filtering(categoryID) {
-  if (categoryID == 0) {//continue après réponse
-    console.log("script filtres en cours");
-    let figuresToShow = gallery.querySelectorAll(`figure`);
-    for (let figureToShow of figuresToShow) {
-      //intégration CSS display:block; en JS pour afficher
-      figureToShow.style.display = "block";
-    }
-  }
+  if (categoryID == 0) {
+  let figuresToShow = gallery.querySelectorAll(`figure`);
+  for (let figureToShow of figuresToShow) {figureToShow.style.display = "block";}}
   else {
-    // Création variable figuresToShow 
-    //pour afficher par défaut toutes les figures dans le DOM avec gallery.querySelectorAll
-    let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
-    for (let figureToShow of figuresToShow) {
-      //intégration CSS display:block; en JS pour afficher
-      figureToShow.style.display = "block";}
-
-    //not pour sélectionner les figures des catégories non voulues
-    let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
-    for (let figure of figures) { figure.style.display = "none"; }}}
+  let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
+  for (let figureToShow of figuresToShow) {figureToShow.style.display = "block";}
+  let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
+  for (let figure of figures) { figure.style.display = "none"; }}}
 
 //LOGIN
 let login = document.createElement("a");
@@ -210,18 +189,15 @@ document.body.style.backgroundColor = "rgba(0, 0, 0, 0.3)";});
 
 // FERMETURE DE LA MODALE SI CLIC EN DEHORS
 document.addEventListener("mouseup", function (event) {
-  let cible = document.getElementById("modale");
-  if (!cible.contains(event.target)) {
-    modale.style.display = "none";
-    document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";}})
+let cible = document.getElementById("modale");
+if (!cible.contains(event.target)) {
+modale.style.display = "none";
+document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";}})
 
 // CREATION MODALE
 
-//function appelée pour faire apparaître les projets dans la modale
-//async function createModal(works)
-
+// FONCTION POUR CREER LA MODALE AVEC LA GALERIE DES PROJETS
 function createModal(works) {
-  //cliquer pour l'ouvrir sur bandeau noir et titre projet (modifier/éditer)
   document.getElementById("modale").innerHTML = "";
   let modaleVersion1 = document.createElement("div");
   modale.appendChild(modaleVersion1);
@@ -270,11 +246,11 @@ function createModal(works) {
     divGalerie.appendChild(modalImg);
     divGalerie.appendChild(pEditer);
 
-    // SUPPRIMER UN PROJET sans rechargement de la page (callback?)
+    // SUPPRIMER UN PROJET
 
     // 1) DETECTION DU CLIC SUR LA CORBEILLE
     iconePanier.addEventListener("click", (e) => {
-      console.log(e.currentTarget.getAttribute("data-id"));
+    console.log(e.currentTarget.getAttribute("data-id"));
 
       // 2-3) RECUPERATION DE L'ID DU PROJET POUR LE SERVEUR ("data-id")
       let workId = e.currentTarget.getAttribute("data-id");
@@ -282,39 +258,23 @@ function createModal(works) {
 
       // 4) ENVOI DE L'ID DU PROJET A SUPPRIMER AU SERVEUR
       fetch(`http://localhost:5678/api/works/${workId}`,
-        {
-          method: 'DELETE',
-          headers: { 'Authorization': `Bearer ${token}`, },
-        })
+      {method: 'DELETE',
+       headers: { 'Authorization': `Bearer ${token}`, }, })
 
         // 5) TRAITEMENT DE LA REPONSE ET DES ERREURS
-
         .then((response) => {
           if (response.ok) {
-            
-            // FONCTION CALLBACK SUPPRESSION PROJET
-            // function callbackSupprim(callback) { callback(works); }
-            // callbackSupprim(displayWorks);
-
             e.preventDefault();
-            alert("Projet (" + workTitle + ") n° " + workId + " supprimé !");
-          }
+            alert("Projet (" + workTitle + ") n° " + workId + " supprimé !");}
+          else {alert("Projet (" + workTitle + ") n° " + workId + " non supprimé !");
+            console.log("réponse du serveur :" + response.status);}})
 
-          else {
-            alert("Projet (" + workTitle + ") n° " + workId + " non supprimé !");
-            console.log("réponse du serveur :" + response.status);
-          }
-        })
+//         //deuxième THEN à refaire
+//         // suppression des travaux
+//         // comment retirer un travail du tableau
+// VOIR CREATION PROJET
 
-        .catch((error) => console.log(error))
-    })
-
-    //HOVER IMAGES GALERIE MODALE (récupéré en capture d'écran)
-    // let iconeFleche = document.createElement("i");
-    // iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
-    // divGalerie.appendChild(iconeFleche);
-    // span.appendChild(iconeFleche);
-    // divGalerie.appendChild(span);
+        .catch((error) => console.log(error))})
 
     modalGalerie.appendChild(divGalerie);}
 
@@ -329,7 +289,7 @@ function createModal(works) {
   boutonAjoutPhoto.setAttribute("type", "submit");
   boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");
 
-  //LIEN VERS LA FENETRE AJOUTER UNE PHOTO
+  //CLIC VERS LA FENETRE AJOUTER UNE PHOTO
   boutonAjoutPhoto.addEventListener('click', event => {createModalForm();});
   modaleVersion1.appendChild(boutonAjoutPhoto);
 
@@ -341,10 +301,11 @@ function createModal(works) {
   modaleVersion1.appendChild(lienSupprimerGalerie);}
 
 // FENETRE MODALE AJOUTER UNE PHOTO
+
+// FONCTION DE CREATION DE LA FENETRE MODALE POUR AJOUTER UN PROJET
 function createModalForm() {
 document.getElementById('modale').innerHTML = "";
 let modaleVersion2 = document.createElement("div");
-
 document.getElementById('modale').appendChild(modaleVersion2);
 modaleVersion2.setAttribute("class", "modal");
 
@@ -416,48 +377,26 @@ modaleVersion2.setAttribute("class", "modal");
   inputPhoto.setAttribute("accept", ".png, .jpg, .jpeg");
   inputPhoto.setAttribute("name", "image");
   inputPhoto.setAttribute("id", "image");
-// inputPhoto.classList.add("bouton-ajouter-photo");
   inputPhoto.setAttribute("class", "file-input-button");
-// size : un nombre qui représente la taille du fichier en octets.
   inputPhoto.setAttribute("max-size", "4000000");
-//opacity pour cacher l'input par défaut
   inputPhoto.style.opacity = "0";
   champPhoto.appendChild(inputPhoto);
 
 // PREVISUALISATION DE L'IMAGE
-// listener sur input pour ajouter et modifier style d'une image
   inputPhoto.addEventListener('change', function (event) {
-    // pour lire le fichier choisi (un seul ici)
     let newReader = new FileReader();
-    // viser le fichier avec target
     let file = event.target.files[0];
-    // si fichier existe (un seul ici)
     if (file) {
-      // création de l'image téléchargée
       let imageUpload = document.createElement("img");
-      // Récupérer la source de l'image
       imageUpload.setAttribute("src", URL.createObjectURL(file));
       imageUpload.setAttribute("class", "imageUpload");
-      // ajouter l'image téléchargée (création espace)
       imageUpload.classList.add('image-load');
-      // Affichez l'image choisie dans la modale
-      //vider la div de l'input
-      // champPhoto.innerHTML=" ";
-      //cacher tous les autres éléments avec display:none; icone, bouton et et texte
       iImage.style.display = "none";
       boutonAjouterPhoto.style.display = "none";
       pFormatsphoto.style.display = "none";
+      champPhoto.appendChild(imageUpload);};});
 
-      // création div pour afficher l'image
-      champPhoto.appendChild(imageUpload);
-
-      // relier image à la div pour remplacer son ancien contenu
-      // divImageForm.appendChild(imageUpload);
-      // méthode pour lire le contenu du fichier choisi
-      // newReader.readAsDataURL(file);
-    };});
-
-// CHAMP TITRE OBLIGATOIRE
+// CHAMP TITRE
   let labelTitre = document.createElement("label");
   labelTitre.setAttribute("for", "titre");
   labelTitre.setAttribute("class", "label-titre");
@@ -507,11 +446,14 @@ modaleVersion2.setAttribute("class", "modal");
   formAjoutProjet.appendChild(hr2);
 
 // BOUTON VALIDER FORMULAIRE (désactivé par défaut)
+// // ACTIVATION DU BOUTON VALIDER DU FORMULAIRE
   let inputNouveauProjet = document.createElement("input");
   inputNouveauProjet.setAttribute("id", "boutonpasactif");
   inputNouveauProjet.setAttribute("type", "submit");
   inputNouveauProjet.setAttribute("value", "Valider");
   formAjoutProjet.appendChild(inputNouveauProjet);
+
+  //CREATION NOUVEAU PROJET
 
 // 1) DETECTION DU CLIC
 // 2) RECUPERATION DES TROIS VALEURS DU FORMULAIRE
@@ -521,347 +463,42 @@ modaleVersion2.setAttribute("class", "modal");
     const tabloSubmitProjet2 = {
       image: document.getElementById("image").files[0],
       title: document.getElementById("titre").value,
-      category: parseInt(document.getElementById("categorie").value)
-    }
+      category: parseInt(document.getElementById("categorie").value)}
 
-    // 3) FORMATER VALEURS POUR ENVOI AU SERVEUR (FormData)
-    let tabloSubmitProjet = new FormData(document.getElementById("formulaire-ajout-projet"));
-    console.log(tabloSubmitProjet);
+// 3) FORMATER VALEURS POUR ENVOI AU SERVEUR (FormData)
+let tabloSubmitProjet = new FormData(document.getElementById("formulaire-ajout-projet"));
 
     // 4) ENVOI DES DONNEES AU SERVEUR
     fetch('http://localhost:5678/api/works',
-        {
-          method: 'POST', headers:
-              {
-                "accept": "application/json",
-                'Authorization': `Bearer ${token}`,
-              },
-          'body': tabloSubmitProjet
-        })
+        {method: 'POST', headers:
+        {"accept": "application/json",
+        'Authorization': `Bearer ${token}`,},
+        'body': tabloSubmitProjet})
 
-        // 5) REPONSE AVEC AJOUT NOUVEAU PROJET sans recharger la page
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-          else { alert("Nouveau projet refusé. Tous les champs doivent être remplis.") }
-        })
+        // 5) REPONSE AVEC AJOUT NOUVEAU PROJET
+        .then((response) => {if (response.ok) {return response.json();}
+        else {alert("Nouveau projet refusé ! Tous les champs doivent être remplis.")}})
 
         .then((work)=>{
-          alert("Nouveau projet accepté !");
-
-          works.push(work);
-          displayWorks(works);
-
           modale.style.display = "none";
           document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-        })
-        .catch((error) => console.log(error))
-  })
-}
+          works.push(work);
+          displayWorks(works);})
+
+        .catch((error) => console.log(error))})}
 
 
 
-// // RECUPERATION DES TRAVAUX
-
-// const responseWorks = await fetch("http://localhost:5678/api/works");
-// // let works pour pouvoir modifier au lieu de constante dans tableau
-// let works = await responseWorks.json();
-// displayWorks(works);
-// // ligne 28
-// // /id Projet
-// // display works
-
-// function displayWorks(works) {
-//   //vider au début de la fonction
-//   document.getElementById("gallery").innerHTML = "";
-//   //création variable pour un projet avec la boucle for ... of ...
-//   for (let work of works) {
-//     let figure = document.createElement("figure");
-
-//     // Rajout attribut data- pour avoir un sélecteur permettant de filtrer les travaux
-//     figure.setAttribute("data-categoryid", work.categoryId)
-//     let img = document.createElement("img");
-//     img.setAttribute("src", work.imageUrl);
-//     img.setAttribute("alt", work.title);
-//     figure.appendChild(img);
-//     let figcaption = document.createElement("figcaption");
-//     figcaption.innerHTML = work.title;
-//     figure.appendChild(figcaption);
-//     gallery.appendChild(figure);}}
-
-// //Méthode pour récupérer les catégories (données) avec liaison avec le backend
-// //await avant fetch et response
-// //async avant fonction
-// const responseCategories = await fetch("http://localhost:5678/api/categories");
-// const categories = await responseCategories.json();
-
-// // appel de la fonction
-// createFilters(categories);
-
-// // const responseWorks = await fetch("http://localhost:5678/api/works");
-// // // let works pour pouvoir modifier au lieu de constante dans tableau
-// // let works = await responseWorks.json();
-// // displayWorks(works);
-// // // ligne 28
-// // // /id Projet
-// // // display works
-
-//   for (let category of categories) {
-//     // Sélection de buttonCategories (HTML) pour récupérer les category.name et générer les 3 boutons
-//     buttonCategories.innerHTML = category.name;
-//     filtres.appendChild(buttonCategories);
-
-//     //Méthode pour détecter le clic sur les filtres et récupérer le category.id de la catégorie
-//     buttonCategories.addEventListener('click', event => { filtering(category.id) });
-//   }}
-
-// // FONCTION DE FILTRAGE DES TRAVAUX PAR CATEGORIES
-// function filtering(categoryID) {
-//   if (categoryID == 0) {//continue après réponse
-//     console.log("script filtres en cours");
-//     let figuresToShow = gallery.querySelectorAll(`figure`);
-//     for (let figureToShow of figuresToShow) {
-//       //intégration CSS display:block; en JS pour afficher
-//       figureToShow.style.display = "block";}}
-//   else {
-//     // Création variable figuresToShow 
-//     //pour afficher par défaut toutes les figures dans le DOM avec gallery.querySelectorAll
-//     let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
-//     for (let figureToShow of figuresToShow) {
-//       //intégration CSS display:block; en JS pour afficher
-//       figureToShow.style.display = "block";}
-
-//     //not pour sélectionner les figures des catégories non voulues
-//     let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
-//     for (let figure of figures) { figure.style.display = "none"; }
-//   }}
 
 
-// // OUVERTURE DE LA MODALE
-// modifier3.appendChild(divModifier3);
-// modifier3.addEventListener('click', event => {
-//   createModal(works);
-//   modale.style.display = "block";
-//   document.body.style.backgroundColor = "rgba(0, 0, 0, 0.3)";});
-
-// // CREATION MODALE
-// //function appelée pour faire apparaître les projets dans la modale
-// //async function createModal(works)
-
-// //FONCTION POUR CREER LA MODALE AVEC LA GALERIE DES PROJETS
-
-// function createModal(works) {
-//   //cliquer pour l'ouvrir sur bandeau noir et titre projet (modifier/éditer)
-//   document.getElementById("modale").innerHTML = "";
-//   let modaleVersion1 = document.createElement("div");
-//   modale.appendChild(modaleVersion1);
-//   modale.setAttribute("class", "modal");
-//   let pCroixModale = document.createElement("p");
-//   pCroixModale.setAttribute("class", "croix");
-//   pCroixModale.textContent = "X";
-//   modaleVersion1.appendChild(pCroixModale);
-
-//   //BOUCLE POUR RECUPERER LES TRAVAUX DANS LA GALERIE DE LA MODALE
-//   for (let work of works) {
-//     let divGalerie = document.createElement("div");
-//     divGalerie.setAttribute("class", "bloc-galerie-modale");
-//     divGalerie.setAttribute("data-id", work.id);
-//     let modalImg = document.createElement("img");
-//     modalImg.setAttribute("src", work.imageUrl);
-//     modalImg.setAttribute("alt", work.title);
-//     let pEditer = document.createElement("p");
-//     pEditer.textContent = "éditer";
-
-//     // SUPPRIMER UN PROJET sans rechargement de la page (callback?)
-
-//     // 1) DETECTION DU CLIC SUR LA CORBEILLE
-//     iconePanier.addEventListener("click", (e) => {
-//       console.log(e.currentTarget.getAttribute("data-id"));
-
-//       // 2-3) RECUPERATION DE L'ID DU PROJET POUR LE SERVEUR ("data-id")
-//       let workId = e.currentTarget.getAttribute("data-id");
-//       let workTitle = e.currentTarget.getAttribute("data-title");
-
-//       // 4) ENVOI DE L'ID DU PROJET A SUPPRIMER AU SERVEUR
-//       fetch(`http://localhost:5678/api/works/${workId}`,
-//         {method: 'DELETE',
-//           headers: { 'Authorization': `Bearer ${token}`, },})
-
-//         // 5) TRAITEMENT DE LA REPONSE ET DES ERREURS
-//         .then((response) => {
-//           if (response.ok) {
-//              // FONCTION CALLBACK SUPPRESSION PROJET
-//             // function callbackSupprim(callback) { callback(works); }
-//             // callbackSupprim(displayWorks);
-
-//             e.preventDefault();
-//             alert("Projet (" + workTitle + ") n° " + workId + " supprimé !");}
-
-//           else {
-//             alert("Projet (" + workTitle + ") n° " + workId + " non supprimé !");
-//             console.log("réponse du serveur :" + response.status);
-//           }
-//         })
-
-//         //deuxième then à refaire
-//         // suppression des travaux
-//         // comment retirer un travail du tableau
-//         .catch((error) => console.log(error))})
-
-// //R2CUPERER !!!
-// //HOVER IMAGES GALERIE MODALE (récupéré en capture d'écran)
-//     // let iconeFleche = document.createElement("i");
-//     // iconeFleche.setAttribute("class", "fa-solid fa-arrows-up-down-left-right");
-//     // divGalerie.appendChild(iconeFleche);
-//     // span.appendChild(iconeFleche);
-//     // divGalerie.appendChild(span);
-//     modalGalerie.appendChild(divGalerie);
-//   }
-
-//   //Clic pour changer la version de modale
-//   boutonAjoutPhoto.addEventListener('click', event => {
-//     createModalForm();
-//     console.log("cliqué");
-//     // replace mettre appel modale V2 à la place, createmodalformulaire
-//     //pas de besoin de replace
-//     // modale.replaceChild(modaleVersion2, modaleVersion1);});
-//   modaleVersion1.appendChild(boutonAjoutPhoto);
-
-// // FENETRE MODALE AJOUTER UNE PHOTO
-
-// //VOIR CREATION NOUVELLE MODALE
-// //rien dans la parenthèse, pas de paramètre
-// function createModalForm(){console.log("ajouter un projet");
-//   //vider la page
-// document.getElementById("modale").innerHTML = "";
-  
-// //FONCTION POUR CREER LA MODALE AVEC LE FORMULAIRE POUR AJOUTER UN PROJET
-// let modaleVersion2 = document.createElement("div");
-// modaleVersion2.setAttribute("id", "modaleVersion2");
-// modaleVersion2.setAttribute("class", "modal");
-// //rappel au début
-// document.getElementById("modaleVersion2");
-
-// // INPUT PHOTO
-// let inputPhoto = document.createElement("input");
-// inputPhoto.setAttribute("required", "required");
-// inputPhoto.setAttribute("type", "file");
-// inputPhoto.setAttribute("accept", ".png, .jpg, .jpeg");
-// inputPhoto.setAttribute("name", "image");
-// inputPhoto.setAttribute("id", "image");
-// // inputPhoto.classList.add("bouton-ajouter-photo");
-// inputPhoto.setAttribute("class", "file-input-button");
-// // size : un nombre qui représente la taille du fichier en octets.
-// inputPhoto.setAttribute("max-size", "4000000");
-// //opacity pour cacher l'input par défaut
-// inputPhoto.style.opacity = "0";
-// champPhoto.appendChild(inputPhoto);
-
-// // PREVISUALISATION DE L'IMAGE
-// // listener sur input pour ajouter et modifier style d'une image
-// inputPhoto.addEventListener('change', function (event) {
-//   // pour lire le fichier choisi (un seul ici)
-//   let newReader = new FileReader();
-//   // viser le fichier avec target
-//   let file = event.target.files[0];
-//   // si fichier existe (un seul ici)
-//   if (file) {
-//     // création de l'image téléchargée
-//     let imageUpload = document.createElement("img");
-//     // Récupérer la source de l'image
-//     imageUpload.setAttribute("src", URL.createObjectURL(file));
-//     imageUpload.setAttribute("class", "imageUpload");
-//     // ajouter l'image téléchargée (création espace)
-//     imageUpload.classList.add('image-load');
-//     // Affichez l'image choisie dans la modale
-//     //vider la div de l'input
-//     // champPhoto.innerHTML=" ";
-//     //cacher tous les autres éléments avec display:none; icone, bouton et et texte
-//     iImage.style.display = "none";
-//     boutonAjouterPhoto.style.display = "none";
-//     pFormatsphoto.style.display = "none";
-//     // création div pour afficher l'image
-//     champPhoto.appendChild(imageUpload);
-//     // relier image à la div pour remplacer son ancien contenu
-//     // divImageForm.appendChild(imageUpload);
-//     // méthode pour lire le contenu du fichier choisi
-//     // newReader.readAsDataURL(file);};});
 
 
-// //CHAMP CATEGORIES
-// createFilters(categories)
-// console.log(categories)
-// {
-//   let labelCategories = document.createElement("label");
-//   labelCategories.setAttribute("for", "categorie");
-//   labelCategories.setAttribute("class", "label-categorie");
-//   labelCategories.textContent = "Catégorie";
-//   formAjoutProjet.appendChild(labelCategories);
-//   let select = document.createElement("select");
-//   select.setAttribute("name", "category");
-//   select.setAttribute("id", "categorie");
-//   select.setAttribute("class", "champ-categorie");
-//   select.setAttribute("required", "required");
 
-// // BOUTON VALIDER FORMULAIRE (désactivé par défaut)
-// // ACTIVATION DU BOUTON VALIDER DU FORMULAIRE
-// let inputNouveauProjet = document.createElement("input");
-// inputNouveauProjet.setAttribute("id", "boutonpasactif");
-// inputNouveauProjet.setAttribute("type", "submit");
-// inputNouveauProjet.setAttribute("value", "Valider");
-// formAjoutProjet.appendChild(inputNouveauProjet);
 
-// //CREATION NOUVEAU PROJET sans rechargement de la page (callback?)
-// // 1) DETECTION DU CLIC
-// // 2) RECUPERATION DES TROIS VALEURS DU FORMULAIRE
-// inputNouveauProjet.addEventListener('click', event => {
-//   console.log("Bouton de validation cliqué !");
-//   event.preventDefault();
-//   const tabloSubmitProjet2 = {
-//     image: document.getElementById("image").files[0],
-//     title: document.getElementById("titre").value,
-//     category: parseInt(document.getElementById("categorie").value)}
 
-//   // 3) FORMATER VALEURS POUR ENVOI AU SERVEUR (FormData)
-//   let tabloSubmitProjet = new FormData(document.getElementById("formulaire-ajout-projet"));
-//   console.log(tabloSubmitProjet);
 
-//   // 4) ENVOI DES DONNEES AU SERVEUR
-//   fetch('http://localhost:5678/api/works',
-//     {
-//       method: 'POST', headers:
-//       {
-//         "accept": "application/json",
-//         'Authorization': `Bearer ${token}`,
-//       },
-//       'body': tabloSubmitProjet
-//     })
 
-//     // 5) REPONSE AVEC AJOUT NOUVEAU PROJET sans recharger la page
-//     .then((response) => {
-//       if (response.ok) {
-//         return response.json();}
-//       else { alert("Nouveau projet refusé. Tous les champs doivent être remplis.") }
-//     })
 
-//     .then((work)=>{
-//       alert("Nouveau projet accepté !");
-//       //array.prototype.push
-//       works.push(work);
-//       //rappel fonction avec nouveau projet
-//       displayWorks(works);
-//       modale.style.display = "none";
-//       document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-     
-//       //vider le formulaire (reset???)/remettre nouvelle v2
-//       //reload
-//       // document.getElementById("gallery").innerHTML ="";
-// // console.log(work);
-// // console.log(works);})
-//     .catch((error) => console.log(error))
-// })
-// }
 
 
 

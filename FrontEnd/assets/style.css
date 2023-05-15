@@ -765,9 +765,10 @@ footer nav ul {
 
 
 /* bouton formulaire désactivé */
-#boutonpasactif {
+#boutonpasactif:disabled {
+	cursor:not-allowed;
 	color: white;
-	background-color: #1D6154;
+	background-color: #A7A7A7;
 	border-color: 1px solid #A7A7A7;
 	display: flex;
 	margin: auto;
@@ -784,19 +785,16 @@ footer nav ul {
 	text-align: center;
 	color: #FFFFFF;
 }
-#boutonpasactif:invalid{
-	cursor:not-allowed;
-	background-color: #A7A7A7;
-	opacity: 0.5;
-
-}
 
 
-
-
-/* hover bouton formulaire
+/* hover bouton formulaire */
 #boutonpasactif:hover {
 	background-color: #1D6154;
 	color: white;
-} */
+}
+
+#boutonpasactif:active{
+	background-color: #1D6154;
+	color: white;
+}
 
