@@ -26,10 +26,6 @@ const responseWorks = await fetch("http://localhost:5678/api/works");
 let works = await responseWorks.json();
 displayWorks(works);
 
-// VOIR POUR LE NON RECHARGEMENT POUR SUPPRIMER TRAVAUX
-// // ligne 28
-// // /id Projet
-
 //FONCTION POUR RECUPERER LES TRAVAUX
 function displayWorks(works) {
 document.getElementById("gallery").innerHTML = "";
@@ -264,15 +260,15 @@ function createModal(works) {
         // 5) TRAITEMENT DE LA REPONSE ET DES ERREURS
         .then((response) => {
           if (response.ok) {
-            e.preventDefault();
-            alert("Projet (" + workTitle + ") n° " + workId + " supprimé !");}
+            alert("Projet (" + workTitle + ") n° " + workId + " supprimé !");
+            return response.json();
+            }
           else {alert("Projet (" + workTitle + ") n° " + workId + " non supprimé !");
             console.log("réponse du serveur :" + response.status);}})
 
-//         //deuxième THEN à refaire
-//         // suppression des travaux
-//         // comment retirer un travail du tableau
-// VOIR CREATION PROJET
+ .then((work)=>{
+   works.shift(work);
+   displayWorks(works);})
 
         .catch((error) => console.log(error))})
 
@@ -445,11 +441,10 @@ modaleVersion2.setAttribute("class", "modal");
   hr2.setAttribute("class", "hr2-modale");
   formAjoutProjet.appendChild(hr2);
 
-// BOUTON VALIDER FORMULAIRE (désactivé par défaut)
-// // ACTIVATION DU BOUTON VALIDER DU FORMULAIRE
+// BOUTON VALIDER FORMULAIRE
   let inputNouveauProjet = document.createElement("input");
-  inputNouveauProjet.setAttribute("id", "boutonpasactif");
   inputNouveauProjet.setAttribute("type", "submit");
+  inputNouveauProjet.setAttribute("id", "boutonpasactif");
   inputNouveauProjet.setAttribute("value", "Valider");
   formAjoutProjet.appendChild(inputNouveauProjet);
 
@@ -476,12 +471,14 @@ let tabloSubmitProjet = new FormData(document.getElementById("formulaire-ajout-p
         'body': tabloSubmitProjet})
 
         // 5) REPONSE AVEC AJOUT NOUVEAU PROJET
-        .then((response) => {if (response.ok) {return response.json();}
+        .then((response) => {if (response.ok) {
+          alert("Nouveau projet accepté !");
+          modale.style.display = "none";
+          document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
+          return response.json();}
         else {alert("Nouveau projet refusé ! Tous les champs doivent être remplis.")}})
 
         .then((work)=>{
-          modale.style.display = "none";
-          document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
           works.push(work);
           displayWorks(works);})
 
