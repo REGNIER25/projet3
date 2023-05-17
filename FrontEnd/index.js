@@ -1,3 +1,6 @@
+//
+async function init(){
+
 // CONSTANTE POUR LA GALERIE DES TRAVAUX
 const gallery = document.getElementById("gallery");
 
@@ -28,9 +31,9 @@ displayWorks(works);
 
 //FONCTION POUR RECUPERER LES TRAVAUX
 function displayWorks(works) {
-document.getElementById("gallery").innerHTML = "";
+  document.getElementById("gallery").innerHTML = "";
 
-//BOUCLE POUR LA CREATION DES VARIABLES POUR LES TRAVAUX
+  //BOUCLE POUR LA CREATION DES VARIABLES POUR LES TRAVAUX
   for (let work of works) {
     let figure = document.createElement("figure");
     figure.setAttribute("data-categoryid", work.categoryId)
@@ -41,7 +44,9 @@ document.getElementById("gallery").innerHTML = "";
     let figcaption = document.createElement("figcaption");
     figcaption.innerHTML = work.title;
     figure.appendChild(figcaption);
-    gallery.appendChild(figure);}}
+    gallery.appendChild(figure);
+  }
+}
 
 //RECUPERATION DES CATEGORIES
 const responseCategories = await fetch("http://localhost:5678/api/categories");
@@ -71,18 +76,23 @@ function createFilters(categories) {
     buttonCategories.setAttribute("value", category.name);
     buttonCategories.innerHTML = category.name;
     filtres.appendChild(buttonCategories);
-    buttonCategories.addEventListener('click', event => { filtering(category.id) });}}
+    buttonCategories.addEventListener('click', event => { filtering(category.id) });
+  }
+}
 
 // FONCTION DE FILTRAGE DES TRAVAUX PAR CATEGORIES
 function filtering(categoryID) {
   if (categoryID == 0) {
-  let figuresToShow = gallery.querySelectorAll(`figure`);
-  for (let figureToShow of figuresToShow) {figureToShow.style.display = "block";}}
+    let figuresToShow = gallery.querySelectorAll(`figure`);
+    for (let figureToShow of figuresToShow) { figureToShow.style.display = "block"; }
+  }
   else {
-  let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
-  for (let figureToShow of figuresToShow) {figureToShow.style.display = "block";}
-  let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
-  for (let figure of figures) { figure.style.display = "none"; }}}
+    let figuresToShow = gallery.querySelectorAll(`figure[data-categoryid="${categoryID}"]`);
+    for (let figureToShow of figuresToShow) { figureToShow.style.display = "block"; }
+    let figures = gallery.querySelectorAll(`figure:not([data-categoryid="${categoryID}"])`);
+    for (let figure of figures) { figure.style.display = "none"; }
+  }
+}
 
 //LOGIN
 let login = document.createElement("a");
@@ -100,16 +110,18 @@ logout.style.display = "none";
 
 // CONNEXION
 if (localStorage.getItem('token')) {
-login.style.display = "none";
-logout.style.display = "block";}
+  login.style.display = "none";
+  logout.style.display = "block";
+}
 
 // DECONNEXION
 logout.addEventListener("click", (e) => {
-localStorage.removeItem("token", token);
-console.log("token : " + token);
-login.style.display = "block";
-document.location.href = "index.html";
-e.preventDefault();})
+  localStorage.removeItem("token", token);
+  console.log("token : " + token);
+  login.style.display = "block";
+  document.location.href = "index.html";
+  e.preventDefault();
+})
 
 // MASQUER FILTRES
 if (localStorage.getItem('token')) { filtres.style.display = "none"; }
@@ -179,16 +191,19 @@ if (token === null) { divModifier3.style.display = "none"; }
 
 // OUVERTURE DE LA MODALE
 modifier3.addEventListener('click', event => {
-createModal(works);
-modale.style.display = "block";
-document.body.style.backgroundColor = "rgba(0, 0, 0, 0.3)";});
+  createModal(works);
+  modale.style.display = "block";
+  document.body.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+});
 
 // FERMETURE DE LA MODALE SI CLIC EN DEHORS
 document.addEventListener("mouseup", function (event) {
-let cible = document.getElementById("modale");
-if (!cible.contains(event.target)) {
-modale.style.display = "none";
-document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";}})
+  let cible = document.getElementById("modale");
+  if (!cible.contains(event.target)) {
+    modale.style.display = "none";
+    document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
+  }
+})
 
 // CREATION MODALE
 
@@ -205,8 +220,9 @@ function createModal(works) {
 
   // FERMETURE DE LA MODALE SI CLIC SUR LA CROIX
   pCroixModale.addEventListener('click', event => {
-  modale.style.display = "none";
-  document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";});
+    modale.style.display = "none";
+    document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
+  });
 
   // TITRE FENETRE MODALE GALERIE PHOTO
   let titreGalerie = document.createElement("h3");
@@ -246,7 +262,7 @@ function createModal(works) {
 
     // 1) DETECTION DU CLIC SUR LA CORBEILLE
     iconePanier.addEventListener("click", (e) => {
-    console.log(e.currentTarget.getAttribute("data-id"));
+      console.log(e.currentTarget.getAttribute("data-id"));
 
       // 2-3) RECUPERATION DE L'ID DU PROJET POUR LE SERVEUR ("data-id")
       let workId = e.currentTarget.getAttribute("data-id");
@@ -254,25 +270,36 @@ function createModal(works) {
 
       // 4) ENVOI DE L'ID DU PROJET A SUPPRIMER AU SERVEUR
       fetch(`http://localhost:5678/api/works/${workId}`,
-      {method: 'DELETE',
-       headers: { 'Authorization': `Bearer ${token}`, }, })
+        {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}`, },
+        })
 
         // 5) TRAITEMENT DE LA REPONSE ET DES ERREURS
         .then((response) => {
           if (response.ok) {
             alert("Projet (" + workTitle + ") n° " + workId + " supprimé !");
-            return response.json();
-            }
-          else {alert("Projet (" + workTitle + ") n° " + workId + " non supprimé !");
-            console.log("réponse du serveur :" + response.status);}})
+          }
+          else {
+            alert("Projet (" + workTitle + ") n° " + workId + " non supprimé !");
+            console.log("réponse du serveur :" + response.status);
+          }
+        })
 
- .then((work)=>{
-   works.shift(work);
-   displayWorks(works);})
+        .then(() => {
+          let workIndex=works.indexOf(work);
+          works.splice(workIndex,1);
+          console.log(works)
+          displayWorks(works);
+          createModal(works) 
 
-        .catch((error) => console.log(error))})
+        })
 
-    modalGalerie.appendChild(divGalerie);}
+        .catch((error) => console.log(error))
+    })
+
+    modalGalerie.appendChild(divGalerie);
+  }
 
   //HR (TRAIT)
   let hr = document.createElement("hr");
@@ -286,7 +313,7 @@ function createModal(works) {
   boutonAjoutPhoto.setAttribute("value", "Ajouter une photo");
 
   //CLIC VERS LA FENETRE AJOUTER UNE PHOTO
-  boutonAjoutPhoto.addEventListener('click', event => {createModalForm();});
+  boutonAjoutPhoto.addEventListener('click', event => { createModalForm(); });
   modaleVersion1.appendChild(boutonAjoutPhoto);
 
   // LIEN "Supprimer la galerie"
@@ -294,45 +321,48 @@ function createModal(works) {
   lienSupprimerGalerie.setAttribute("class", "supprimergalerie");
   lienSupprimerGalerie.setAttribute("href", "#");
   lienSupprimerGalerie.textContent = "Supprimer la galerie";
-  modaleVersion1.appendChild(lienSupprimerGalerie);}
+  modaleVersion1.appendChild(lienSupprimerGalerie);
+}
 
 // FENETRE MODALE AJOUTER UNE PHOTO
 
 // FONCTION DE CREATION DE LA FENETRE MODALE POUR AJOUTER UN PROJET
 function createModalForm() {
-document.getElementById('modale').innerHTML = "";
-let modaleVersion2 = document.createElement("div");
-document.getElementById('modale').appendChild(modaleVersion2);
-modaleVersion2.setAttribute("class", "modal");
+  document.getElementById('modale').innerHTML = "";
+  let modaleVersion2 = document.createElement("div");
+  document.getElementById('modale').appendChild(modaleVersion2);
+  modaleVersion2.setAttribute("class", "modal");
 
-// FLECHE POUR RETOUR A LA FENETRE PRECEDENTE
+  // FLECHE POUR RETOUR A LA FENETRE PRECEDENTE
   let divFlecheCroix = document.createElement("div");
   divFlecheCroix.setAttribute("class", "divFlecheCroix");
   modaleVersion2.appendChild(divFlecheCroix);
   let pFleche = document.createElement("p");
   pFleche.textContent = "←";
   pFleche.addEventListener('click', event => {
-  event.preventDefault();
-  createModal(works);});
+    event.preventDefault();
+    createModal(works);
+  });
   divFlecheCroix.appendChild(pFleche);
 
-// FERMETURE DE LA MODALE SI CLIC SUR LA CROIX
+  // FERMETURE DE LA MODALE SI CLIC SUR LA CROIX
   let pCroix = document.createElement("p");
   pCroix.setAttribute("class", "croix");
   pCroix.textContent = "X";
   pCroix.addEventListener('click', event => {
-  modale.style.display = "none";
-  document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-  event.preventDefault();});
+    modale.style.display = "none";
+    document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
+    event.preventDefault();
+  });
   divFlecheCroix.appendChild(pCroix);
 
-//TITRE FENETRE MODALE AJOUTER UNE PHOTO
+  //TITRE FENETRE MODALE AJOUTER UNE PHOTO
   let titreAjoutPhoto = document.createElement("h3");
   titreAjoutPhoto.setAttribute("class", "titre-modale");
   titreAjoutPhoto.textContent = "Ajout photo";
   modaleVersion2.appendChild(titreAjoutPhoto);
 
-//FORMULAIRE AJOUTER UNE PHOTO
+  //FORMULAIRE AJOUTER UNE PHOTO
   let formAjoutProjet = document.createElement("form");
   formAjoutProjet.setAttribute("id", "formulaire-ajout-projet");
   formAjoutProjet.setAttribute("enctype", "multipart/form-data");
@@ -340,12 +370,12 @@ modaleVersion2.setAttribute("class", "modal");
   formAjoutProjet.setAttribute("method", "post");
   modaleVersion2.appendChild(formAjoutProjet);
 
-// CHAMP PHOTO
+  // CHAMP PHOTO
   let champPhoto = document.createElement("div")
   champPhoto.setAttribute("class", "uploader-image");
   formAjoutProjet.appendChild(champPhoto);
 
-// ICONE IMAGE
+  // ICONE IMAGE
   let iImage = document.createElement("i");
   iImage.setAttribute("class", "fa-sharp fa-regular fa-image");
   let spanImage = document.createElement("i");
@@ -353,20 +383,20 @@ modaleVersion2.setAttribute("class", "modal");
   spanImage.appendChild(iImage);
   champPhoto.appendChild(spanImage);
 
-// BOUTON "+ Ajouter photo"
+  // BOUTON "+ Ajouter photo"
   let boutonAjouterPhoto = document.createElement("button");
   boutonAjouterPhoto.setAttribute("class", "bouton-ajouter-photo");
   boutonAjouterPhoto.textContent = "+ Ajouter photo";
   boutonAjouterPhoto.classList.add("file-input-button");
   champPhoto.appendChild(boutonAjouterPhoto);
 
-// PARAGRAPHE "jpg, png : 4mo max"
+  // PARAGRAPHE "jpg, png : 4mo max"
   let pFormatsphoto = document.createElement("p");
   pFormatsphoto.textContent = "jpg, png : 4mo max";
   pFormatsphoto.setAttribute("class", "sous-titre-image");
   champPhoto.appendChild(pFormatsphoto);
 
-// INPUT PHOTO
+  // INPUT PHOTO
   let inputPhoto = document.createElement("input");
   inputPhoto.setAttribute("required", "required");
   inputPhoto.setAttribute("type", "file");
@@ -378,7 +408,7 @@ modaleVersion2.setAttribute("class", "modal");
   inputPhoto.style.opacity = "0";
   champPhoto.appendChild(inputPhoto);
 
-// PREVISUALISATION DE L'IMAGE
+  // PREVISUALISATION DE L'IMAGE
   inputPhoto.addEventListener('change', function (event) {
     let newReader = new FileReader();
     let file = event.target.files[0];
@@ -390,9 +420,11 @@ modaleVersion2.setAttribute("class", "modal");
       iImage.style.display = "none";
       boutonAjouterPhoto.style.display = "none";
       pFormatsphoto.style.display = "none";
-      champPhoto.appendChild(imageUpload);};});
+      champPhoto.appendChild(imageUpload);
+    };
+  });
 
-// CHAMP TITRE
+  // CHAMP TITRE
   let labelTitre = document.createElement("label");
   labelTitre.setAttribute("for", "titre");
   labelTitre.setAttribute("class", "label-titre");
@@ -406,9 +438,10 @@ modaleVersion2.setAttribute("class", "modal");
   inputTitre.setAttribute("class", "champ-titre");
   formAjoutProjet.appendChild(inputTitre);
 
-//CHAMP CATEGORIES
+  //CHAMP CATEGORIES
   createFilters(categories)
-  {let labelCategories = document.createElement("label");
+  {
+    let labelCategories = document.createElement("label");
     labelCategories.setAttribute("for", "categorie");
     labelCategories.setAttribute("class", "label-categorie");
     labelCategories.textContent = "Catégorie";
@@ -434,14 +467,16 @@ modaleVersion2.setAttribute("class", "modal");
       optionCategories.setAttribute("value", parseInt(category.id));
       optionCategories.innerHTML = category.name;
       select.appendChild(optionCategories);
-      formAjoutProjet.appendChild(select);}}
+      formAjoutProjet.appendChild(select);
+    }
+  }
 
-//HR (TRAIT FENETRE MODALE FORMULAIRE)
+  //HR (TRAIT FENETRE MODALE FORMULAIRE)
   let hr2 = document.createElement("hr");
   hr2.setAttribute("class", "hr2-modale");
   formAjoutProjet.appendChild(hr2);
 
-// BOUTON VALIDER FORMULAIRE
+  // BOUTON VALIDER FORMULAIRE
   let inputNouveauProjet = document.createElement("input");
   inputNouveauProjet.setAttribute("type", "submit");
   inputNouveauProjet.setAttribute("id", "boutonpasactif");
@@ -450,41 +485,53 @@ modaleVersion2.setAttribute("class", "modal");
 
   //CREATION NOUVEAU PROJET
 
-// 1) DETECTION DU CLIC
-// 2) RECUPERATION DES TROIS VALEURS DU FORMULAIRE
+  // 1) DETECTION DU CLIC
+  // 2) RECUPERATION DES TROIS VALEURS DU FORMULAIRE
   inputNouveauProjet.addEventListener('click', event => {
     console.log("Bouton de validation cliqué !");
     event.preventDefault();
     const tabloSubmitProjet2 = {
       image: document.getElementById("image").files[0],
       title: document.getElementById("titre").value,
-      category: parseInt(document.getElementById("categorie").value)}
+      category: parseInt(document.getElementById("categorie").value)
+    }
 
-// 3) FORMATER VALEURS POUR ENVOI AU SERVEUR (FormData)
-let tabloSubmitProjet = new FormData(document.getElementById("formulaire-ajout-projet"));
+    // 3) FORMATER VALEURS POUR ENVOI AU SERVEUR (FormData)
+    let tabloSubmitProjet = new FormData(document.getElementById("formulaire-ajout-projet"));
 
     // 4) ENVOI DES DONNEES AU SERVEUR
     fetch('http://localhost:5678/api/works',
-        {method: 'POST', headers:
-        {"accept": "application/json",
-        'Authorization': `Bearer ${token}`,},
-        'body': tabloSubmitProjet})
+      {
+        method: 'POST', headers:
+        {
+          "accept": "application/json",
+          'Authorization': `Bearer ${token}`,
+        },
+        'body': tabloSubmitProjet
+      })
 
-        // 5) REPONSE AVEC AJOUT NOUVEAU PROJET
-        .then((response) => {if (response.ok) {
+      // 5) REPONSE AVEC AJOUT NOUVEAU PROJET
+      .then((response) => {
+        if (response.ok) {
           alert("Nouveau projet accepté !");
           modale.style.display = "none";
           document.body.style.backgroundColor = "rgba(0, 0, 0, 0)";
-          return response.json();}
-        else {alert("Nouveau projet refusé ! Tous les champs doivent être remplis.")}})
+          return response.json();
+        }
+        else { alert("Nouveau projet refusé ! Tous les champs doivent être remplis.") }
+      })
 
-        .then((work)=>{
-          works.push(work);
-          displayWorks(works);})
+      .then((work) => {
+        works.push(work);
+        displayWorks(works);
+      })
 
-        .catch((error) => console.log(error))})}
+      .catch((error) => console.log(error))
+  })
+}
+}
 
-
+init();
 
 
 
