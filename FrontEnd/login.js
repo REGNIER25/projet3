@@ -18,7 +18,7 @@ boutonValider.onclick = async function (event) {
     body: JSON.stringify(tabloSubmit)
   });
 
-  // //5) Traitement de la réponse
+  // 5) Traitement de la réponse
   // Si bonne combinaison, création localStorage 
   //avec stockage du token et redirection vers l'accueil
   if (response.ok === true) {

@@ -465,7 +465,7 @@ footer nav ul {
 	right: 0;
 	left: 0;
 	width: 630px;
-	max-height: 100%;
+	max-height: 800px;
 	padding: 20px;
 	justify-content: center;
 	align-items: center;
@@ -603,7 +603,7 @@ footer nav ul {
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-	width: 230px;
+	/* width: 230px; */
 	height: 36px;
 }
 
@@ -703,8 +703,7 @@ footer nav ul {
 	height: 50px;
 	display: flex;
 	margin: auto;
-	align-self: center;
-	justify-content: center;
+	justify-content: left;
 	font-family: 'Work Sans';
 	font-style: normal;
 	font-weight: 400;
@@ -712,6 +711,7 @@ footer nav ul {
 	line-height: 16px;
 	color: #444444;
 	padding-left: 15px;
+	text-align: left;
 }
 
 /* champ categorie */
@@ -771,8 +771,6 @@ footer nav ul {
 	font-weight: 700;
 	color: white;
 	background-color: #A7A7A7;
-	border-color: 1px solid #A7A7A7;
-	
 	border-radius: 60px;
 	margin: auto;
 	width: 180px;
